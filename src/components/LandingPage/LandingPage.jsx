@@ -3,6 +3,7 @@ import './LandingPage.css';
 import ravi from '../../assets/img/team/Ravi.jpg';
 import shubham from '../../assets/img/team/Shubham.jpeg';
 import './navBarScroll';
+import brochure from '../../assets/Learning-sage.pdf';
 
 class LandingPage extends Component {
     render() {
@@ -100,6 +101,13 @@ class LandingPage extends Component {
                                     <h3 className="mb-3">Meet Industry experts</h3>
                                     <p className="text-muted mb-0">Interactions with industry experts to gain deeper insight</p>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="container" style={{ marginTop: "45px" }}>
+                        <div className="row">
+                            <div className="col-lg-12 text-center">
+                                <a className="btn btn-primary btn-xl js-scroll-trigger" href={brochure} download>Download Brochure</a>
                             </div>
                         </div>
                     </div>
