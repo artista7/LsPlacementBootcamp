@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import './LandingPage.css';
-// import img1 from '../../assets/img/portfolio/fullsize/1.jpg';
-// import img2 from '../../assets/img/portfolio/fullsize/2.jpg';
-// import img3 from '../../assets/img/portfolio/fullsize/3.jpg';
-// import img4 from '../../assets/img/portfolio/fullsize/4.jpg';
-// import img5 from '../../assets/img/portfolio/fullsize/5.jpg';
-// import img6 from '../../assets/img/portfolio/fullsize/6.jpg';
 import ravi from '../../assets/img/team/Ravi.jpg';
 import shubham from '../../assets/img/team/Shubham.jpeg';
+import './navBarScroll';
 
 class LandingPage extends Component {
     render() {
@@ -16,9 +10,10 @@ class LandingPage extends Component {
             <div>
                 <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
                     <div className="container">
-                        <a className="js-scroll-trigger" style={{ color: "white", fontWeight: "bold" }} href="#page-top">Learning-Sage</a>
-                        <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
+                        <a className="js-scroll-trigger" id="logo" style={{ color: "white", fontWeight: "bold", fontSize: "18px" }} href="#page-top">Learning-Sage</a>
+                        <button className="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                            {/* <span className="navbar-toggler-icon"></span> */}
+                            <a className="js-scroll-trigger" id="logo" style={{ color: "#F05F40", fontWeight: "bold", fontSize: "18px" }} href="#page-top">Learning-Sage</a>
                         </button>
                         <div className="collapse navbar-collapse" id="navbarResponsive">
                             <ul className="navbar-nav ml-auto">
@@ -28,9 +23,6 @@ class LandingPage extends Component {
                                 <li className="nav-item">
                                     <a className="nav-link js-scroll-trigger" href="#about">About us</a>
                                 </li>
-                                {/* <li className="nav-item">
-                                    <a className="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>
-                                </li> */}
                                 <li className="nav-item">
                                     <a className="nav-link js-scroll-trigger" href="#contact">Contact us</a>
                                 </li>
@@ -48,7 +40,7 @@ class LandingPage extends Component {
                                 </h1>
                                 <hr />
                                 <div className="col-lg-8 mx-auto">
-                                    <p className="text-faded mb-5">We help students transition from student life to professional life by imparting necessary education to bridge industry/college skill gap</p>
+                                    <p className="mb-5">We help students transition from student life to professional life by imparting necessary education to bridge industry/college skill gap</p>
                                     <a className="btn btn-primary btn-xl js-scroll-trigger" href="#services">Find Out More</a>
                                 </div>
                             </div>
@@ -113,105 +105,6 @@ class LandingPage extends Component {
                     </div>
                 </section>
 
-                {/* <section className="p-0" id="portfolio">
-                    <div className="container-fluid p-0">
-                        <div className="row no-gutters popup-gallery">
-                            <div className="col-lg-4 col-sm-6">
-                                <a className="portfolio-box">
-                                    <img className="img-fluid" src={img1} alt="" />
-                                    <div className="portfolio-box-caption">
-                                        <div className="portfolio-box-caption-content">
-                                            <div className="project-category text-faded">
-                                                Category
-                  </div>
-                                            <div className="project-name">
-                                                Project Name
-                  </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div className="col-lg-4 col-sm-6">
-                                <a className="portfolio-box">
-                                    <img className="img-fluid" src={img2} alt="" />
-                                    <div className="portfolio-box-caption">
-                                        <div className="portfolio-box-caption-content">
-                                            <div className="project-category text-faded">
-                                                Category
-                  </div>
-                                            <div className="project-name">
-                                                Project Name
-                  </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div className="col-lg-4 col-sm-6">
-                                <a className="portfolio-box">
-                                    <img className="img-fluid" src={img3} alt="" />
-                                    <div className="portfolio-box-caption">
-                                        <div className="portfolio-box-caption-content">
-                                            <div className="project-category text-faded">
-                                                Category
-                  </div>
-                                            <div className="project-name">
-                                                Project Name
-                  </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div className="col-lg-4 col-sm-6">
-                                <a className="portfolio-box">
-                                    <img className="img-fluid" src={img4} alt="" />
-                                    <div className="portfolio-box-caption">
-                                        <div className="portfolio-box-caption-content">
-                                            <div className="project-category text-faded">
-                                                Category
-                  </div>
-                                            <div className="project-name">
-                                                Project Name
-                  </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div className="col-lg-4 col-sm-6">
-                                <a className="portfolio-box">
-                                    <img className="img-fluid" src={img5} alt="" />
-                                    <div className="portfolio-box-caption">
-                                        <div className="portfolio-box-caption-content">
-                                            <div className="project-category text-faded">
-                                                Category
-                  </div>
-                                            <div className="project-name">
-                                                Project Name
-                  </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div className="col-lg-4 col-sm-6">
-                                <a className="portfolio-box">
-                                    <img className="img-fluid" src={img6} alt="" />
-                                    <div className="portfolio-box-caption">
-                                        <div className="portfolio-box-caption-content">
-                                            <div className="project-category text-faded">
-                                                Category
-                  </div>
-                                            <div className="project-name">
-                                                Project Name
-                  </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </section> */}
-
-
-
                 <section className="bg-dark text-white" style={{ backgroundColor: "white" }} id="about">
                     <div className="container">
                         <div className="row">
@@ -219,9 +112,9 @@ class LandingPage extends Component {
                                 <h2 className="section-heading">Our Team</h2>
                                 <hr className="light my-4" />
                                 <div className="row">
-                                    <div className="col-sm-4" style={{ textAlign: "left" }}>
+                                    <div className="col-sm-4">
                                         <div className="service-box mt-5 mx-auto">
-                                            <img src={ravi} height="230" width="223px" style={{ borderRadius: "1.5%" }}></img>
+                                            <img src={ravi} height="230" width="223px" style={{ borderRadius: "1.5%" }} alt="Ravi Ranjan is missing"></img>
                                             <div style={{ marginTop: "10px", fontSize: "25px" }}>Ravi Ranjan</div>
                                             <div style={{ marginTop: "5px", fontSize: "15px" }}>Co-Founder</div>
                                             <p style={{ marginTop: "5px", fontSize: "15px" }}>An Alumni of IITD & a big-data expert, he is currently pursuing his MBA from IIM A</p>
@@ -229,9 +122,9 @@ class LandingPage extends Component {
                                     </div>
 
                                     <div className="col-sm-4"></div>
-                                    <div className="col-sm-4" style={{ textAlign: "left" }}>
+                                    <div className="col-sm-4">
                                         <div className="service-box mt-5 mx-auto">
-                                            <img src={shubham} height="230" width="223px" style={{ borderRadius: "1.5%" }}></img>
+                                            <img src={shubham} height="230" width="223px" style={{ borderRadius: "1.5%" }} alt="Shubham is missing"></img>
                                             <div style={{ marginTop: "10px", fontSize: "25px" }}>Shubham Gupta</div>
                                             <div style={{ marginTop: "5px", fontSize: "15px" }}>Co-Founder</div>
                                             <p style={{ marginTop: "5px", fontSize: "15px" }}>An Alumni of IITD & an ex-citi employee he likes solving problems with technology</p>

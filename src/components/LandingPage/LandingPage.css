@@ -151,6 +151,18 @@ img::-moz-selection {
   #mainNav .navbar-nav > li.nav-item > a.nav-link:focus:hover {
     color: #fff;
   }
+  .fixed-top.scrolled {
+    background-color: #fff !important;
+    transition: background-color 500ms linear;
+  }
+  .scrolled #logo {
+    color: #F05F40 !important;
+    transition: color 500ms linear;
+  }
+  .scrolled .nav-link {
+    color: black !important;
+    transition: color 500ms linear;
+  }
   #mainNav.navbar-shrink {
     border-bottom: 1px solid rgba(33, 37, 41, 0.1);
     background-color: #fff;
