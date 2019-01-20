@@ -1,0 +1,7 @@
+release/v0.0.2
+
+Improvements
+- Added relevant keywords
+- Fixed brochure team
+
+Fixes

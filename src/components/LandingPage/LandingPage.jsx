@@ -117,7 +117,7 @@ class LandingPage extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-8 mx-auto text-center">
-                                <h2 className="section-heading">Our Team</h2>
+                                <h2 className="section-heading">About us</h2>
                                 <hr className="light my-4" />
                                 <div className="row">
                                     <div className="col-sm-4">
