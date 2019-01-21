@@ -167,7 +167,7 @@ class LandingPage extends Component {
                                 </p>
                             </a>
                             <a href="https://www.linkedin.com/company/learning-sage" target="_blank" rel="noopener noreferrer" className="col-lg-4 mr-auto text-center">
-                                <i class="fa fa-linkedin fa-3x mb-3 sr-contact-2"></i>
+                                <i className="fa fa-linkedin fa-3x mb-3 sr-contact-2"></i>
                                 <p>
                                     linkedin
                                 </p>

@@ -1,7 +1,10 @@
 release/v0.0.2
 
-Improvements
+Enhancements
+- Added amplify client
+- Added multiple environments config
+- Implemented graphQl-react-redux flow
 - Added relevant keywords
-- Fixed brochure team
 
 Fixes
+- Fixed brochure team
