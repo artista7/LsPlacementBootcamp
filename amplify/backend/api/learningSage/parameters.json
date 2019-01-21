@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "learningSage",
+    "schemaGraphql": "s3://learning-sage-20190122020457-deployment/amplify-appsync-files/schema.graphql.1548103226179",
+    "ResolverBucket": "learning-sage-20190122020457-deployment",
+    "ResolverRootKey": "amplify-appsync-files",
+    "DeploymentTimestamp": "1548103226179"
+}

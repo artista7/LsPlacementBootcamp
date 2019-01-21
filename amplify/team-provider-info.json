@@ -1,0 +1,14 @@
+{
+    "localShub": {
+        "awscloudformation": {
+            "AuthRoleName": "learning-sage-20190122020457-authRole",
+            "UnauthRoleArn": "arn:aws:iam::227484579606:role/learning-sage-20190122020457-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::227484579606:role/learning-sage-20190122020457-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "learning-sage-20190122020457-deployment",
+            "UnauthRoleName": "learning-sage-20190122020457-unauthRole",
+            "StackName": "learning-sage-20190122020457",
+            "StackId": "arn:aws:cloudformation:us-west-2:227484579606:stack/learning-sage-20190122020457/0c721110-1dbc-11e9-a8e1-023fb47a8466"
+        }
+    }
+}

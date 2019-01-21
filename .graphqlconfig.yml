@@ -1,0 +1,16 @@
+projects:
+  learningSage:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - src/graphql/**/*.js
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: javascript
+        generatedFileName: ''
+        docsFilePath: src/graphql
+        graphQLApiId: 5pe4upyl6zdajlnesvurn42c5q
+      endpoints:
+        prod: >-
+          https://3jqetazqyfdjfp63qgdx73egbu.appsync-api.us-west-2.amazonaws.com/graphql
