@@ -9,11 +9,11 @@ import history from './history';
 /* Configuring Amplify*/
 import aws_config from "./aws-exports";
 import Amplify from 'aws-amplify';
+/*Configure redux */
 import { Provider } from "react-redux";
 import configureStore from './store/configureStore';
 
 Amplify.configure(aws_config);
-
 const store = configureStore()
 
 class App extends Component {

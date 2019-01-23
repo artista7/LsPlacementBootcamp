@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/toDoActions';
+import { withAuthenticator } from 'aws-amplify-react';
 
 // create a component
 class ToDo extends React.Component {
@@ -47,5 +48,11 @@ function mapDispatchToProps(dispatch) {
 }
 ToDo.propTypes = {
 };
+
+
+var includeGreetings;
+
 //make this component available to the app
-export default connect(mapStateToProps, mapDispatchToProps)(ToDo);
+export default withAuthenticator(connect(mapStateToProps, mapDispatchToProps)(ToDo),
+    includeGreetings = true
+);

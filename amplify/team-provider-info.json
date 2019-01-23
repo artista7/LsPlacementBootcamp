@@ -9,6 +9,11 @@
             "UnauthRoleName": "learning-sage-20190122020457-unauthRole",
             "StackName": "learning-sage-20190122020457",
             "StackId": "arn:aws:cloudformation:us-west-2:227484579606:stack/learning-sage-20190122020457/0c721110-1dbc-11e9-a8e1-023fb47a8466"
+        },
+        "categories": {
+            "auth": {
+                "cognito": {}
+            }
         }
     }
 }
