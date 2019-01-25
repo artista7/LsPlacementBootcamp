@@ -1,9 +1,10 @@
 release/v0.0.2
 
 Enhancements
-- Added amplify client
-- Added multiple environments config
-- Implemented graphQl-react-redux flow
+- Configured multiple environments using 'aws-amplify/cli@multienv'
+- Added 'aws-amplify' a js library for Auth(cognito) and Api(Appsync)
+- Added Sign In/Sign Out flow in the app
+- Configured graphQL-react-redux flow
 - Added relevant keywords
 
 Fixes

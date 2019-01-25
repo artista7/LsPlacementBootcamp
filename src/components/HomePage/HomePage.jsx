@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/toDoActions';
-import { withAuthenticator } from 'aws-amplify-react';
 import { Auth } from 'aws-amplify';
+import { withAuthenticator } from 'aws-amplify-react';
 
 // create a component
 class HomePage extends React.Component {
