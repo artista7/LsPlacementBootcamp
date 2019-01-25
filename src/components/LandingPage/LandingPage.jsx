@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import './LandingPage.css';
 import ravi from '../../assets/img/team/Ravi.jpg';
 import shubham from '../../assets/img/team/Shubham.jpeg';
@@ -18,6 +19,10 @@ class LandingPage extends Component {
                         </button>
                         <div className="collapse navbar-collapse" id="navbarResponsive">
                             <ul className="navbar-nav ml-auto">
+                                <li className="nav-item">
+                                    <Link className="nav-link js-scroll-trigger" to="/login">Login</Link>
+                                    {/* <a className="nav-link js-scroll-trigger" href="">Login</a> */}
+                                </li>
                                 <li className="nav-item">
                                     <a className="nav-link js-scroll-trigger" href="#services">Services</a>
                                 </li>
