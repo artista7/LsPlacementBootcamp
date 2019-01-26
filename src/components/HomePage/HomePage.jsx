@@ -6,10 +6,12 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/toDoActions';
 import { Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
-/* sidebar*/
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
-import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+/*styled components */
 import styled from 'styled-components';
+import Sidebar from '../Sidebar/Sidebar';
+import Breadcrumbs from '../Common/Breadcrumbs';
+import * as constants from '../../constants/constants';
+
 const Main = styled.main`
     position: relative;
     overflow: hidden;
@@ -24,17 +26,34 @@ class HomePage extends React.Component {
         super(props, context);
 
         this.state = {
-            //selected: 'home',
-            expanded: false
+            expanded: false,
+            pageTitle: {
+                'home': 'Home',
+                'devices': ['Devices'],
+                'reports': ['Reports'],
+                'settings/policies': ['Settings', 'Policies'],
+                'settings/network': ['Settings', 'Network']
+            },
+            selected: 'home'
         };
 
         this.createToDo = this.createToDo.bind(this);
+        this.onSelect = this.onSelect.bind(this);
         this.onToggle = this.onToggle.bind(this);
         this.signOut = this.signOut.bind(this);
     }
 
     createToDo() {
         this.props.actions.createTodo({ name: "test", description: "test" })
+    }
+
+    onSelect(selected) {
+        if (selected == constants.SIGN_OUT) {
+            this.signOut();
+        }
+        else {
+            this.setState({ selected: selected })
+        }
     }
 
     onToggle(expanded) {
@@ -58,32 +77,12 @@ class HomePage extends React.Component {
     }
 
     render() {
-        const { expanded } = this.state;
+        const { expanded, pageTitle, selected } = this.state;
         return (
             <div>
-                <SideNav onToggle={this.onToggle}>
-                    <SideNav.Toggle />
-                    <SideNav.Nav defaultSelected="home">
-                        <NavItem eventKey="home">
-                            <NavIcon>
-                                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
-                            </NavIcon>
-                            <NavText>
-                                Home
-                            </NavText>
-                        </NavItem>
-                        <NavItem eventKey="devices">
-                            <NavIcon>
-                                <i className="fa fa-fw fa-trash" style={{ fontSize: '1.75em' }} />
-                            </NavIcon>
-                            <NavText>
-                                Devices
-                        </NavText>
-                        </NavItem>
-                    </SideNav.Nav>
-                </SideNav>
+                <Sidebar onSelect={this.onSelect} onToggle={this.onToggle} selected={selected}></Sidebar>
                 <Main expanded={expanded}>
-                    <button onClick={this.signOut}>Sign Out</button>
+                    <Breadcrumbs pageTitle={pageTitle} selected={selected}></Breadcrumbs>
                     <button onClick={this.createToDo}>Create To Do</button>
                     {this.props.toDos.map(toDo => {
                         return <div key={toDo.id}>{toDo.name} - {toDo.id}</div>

@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@trendmicro/react-breadcrumbs": "^0.5.5",
     "@trendmicro/react-sidenav": "^0.4.5",
     "aws-amplify": "^1.1.19",
     "aws-amplify-react": "^2.3.0",
     "bootstrap": "^4.2.1",
+    "classnames": "^2.2.6",
+    "ensure-array": "^1.0.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "react": "^16.7.0",
