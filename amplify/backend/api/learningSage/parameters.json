@@ -1,0 +1,13 @@
+{
+    "AppSyncApiName": "learningSage",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authcognito",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "schemaGraphql": "s3://learning-sage-20190122020457-deployment/amplify-appsync-files/schema.graphql.1548191098194",
+    "ResolverBucket": "learning-sage-20190122020457-deployment",
+    "ResolverRootKey": "amplify-appsync-files",
+    "DeploymentTimestamp": "1548191098194"
+}
