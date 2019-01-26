@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/toDoActions';
 import { Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
+import { Switch, Route, Redirect } from "react-router-dom";
 /*styled components */
 import styled from 'styled-components';
 import Sidebar from '../Sidebar/Sidebar';
@@ -29,6 +30,7 @@ class HomePage extends React.Component {
             expanded: false,
             pageTitle: {
                 'home': 'Home',
+                'cv': 'CV Evaluation',
                 'devices': ['Devices'],
                 'reports': ['Reports'],
                 'settings/policies': ['Settings', 'Policies'],
@@ -51,8 +53,10 @@ class HomePage extends React.Component {
         if (selected == constants.SIGN_OUT) {
             this.signOut();
         }
-        else {
+        const to = '/' + selected;
+        if (this.props.location.pathname !== to) {
             this.setState({ selected: selected })
+            this.props.history.push(to);
         }
     }
 
@@ -70,6 +74,17 @@ class HomePage extends React.Component {
 
     componentDidMount() {
         this.props.actions.listTodos();
+        var selected = this.props.history.location.pathname;
+        if (selected == "" || selected == "/") {
+            this.setState({
+                selected: 'home'
+            });
+        }
+        else {
+            this.setState({
+                selected: selected.substring(1)
+            });
+        }
     }
 
     componentWillUnmount() {
@@ -83,6 +98,12 @@ class HomePage extends React.Component {
                 <Sidebar onSelect={this.onSelect} onToggle={this.onToggle} selected={selected}></Sidebar>
                 <Main expanded={expanded}>
                     <Breadcrumbs pageTitle={pageTitle} selected={selected}></Breadcrumbs>
+                    <Switch>
+                        <Route path="/" exact component={props => <div>home</div>} />
+                        <Route exact path="/cv" component={props => <div>cv</div>} />
+                        <Route path="/settings/*" component={props => <div>settings</div>} />
+                        <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
+                    </Switch>
                     <button onClick={this.createToDo}>Create To Do</button>
                     {this.props.toDos.map(toDo => {
                         return <div key={toDo.id}>{toDo.name} - {toDo.id}</div>
@@ -107,6 +128,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 HomePage.propTypes = {
+    history: PropTypes.object,
+    location: PropTypes.object,
     updateStateVariable: PropTypes.func.isRequired
 };
 

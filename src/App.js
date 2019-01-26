@@ -48,8 +48,7 @@ class App extends Component {
               <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
             </Switch>}
             {authState == "signedIn" && <Switch>
-              <Route exact path="/" render={() => (<HomePage updateStateVariable={this.updateStateVariable}></HomePage>)}></Route>
-              <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
+              <Route exact path="*" render={({ history, location }) => (<HomePage history={history} location={location} updateStateVariable={this.updateStateVariable}></HomePage>)}></Route>
             </Switch>}
           </div>
         </Router>

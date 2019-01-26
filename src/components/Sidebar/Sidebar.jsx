@@ -20,6 +20,14 @@ const Sidebar = ({ onSelect, onToggle, selected }) => {
                         Home
                 </NavText>
                 </NavItem>
+                <NavItem eventKey="cv">
+                    <NavIcon>
+                        <i className="fa fa-fw fa-file" style={{ fontSize: '1.75em' }} />
+                    </NavIcon>
+                    <NavText>
+                        CV Evaluation
+                </NavText>
+                </NavItem>
                 <NavItem eventKey="settings">
                     <NavIcon>
                         <i className="fa fa-fw fa-cogs" style={{ fontSize: '1.5em', verticalAlign: 'middle' }} />
@@ -40,7 +48,7 @@ const Sidebar = ({ onSelect, onToggle, selected }) => {
                 </NavItem>
                 <NavItem eventKey={constants.SIGN_OUT}>
                     <NavIcon>
-                        <i className="fa fa-fw fa-sign-out" style={{ fontSize: '1.75em' }} />
+                        <i className="fa fa-fw fa-times" style={{ fontSize: '1.75em' }} />
                     </NavIcon>
                     <NavText>
                         Sign Out
