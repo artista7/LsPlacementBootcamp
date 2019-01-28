@@ -12,6 +12,8 @@ import styled from 'styled-components';
 import Sidebar from '../Sidebar/Sidebar';
 import Breadcrumbs from '../Common/Breadcrumbs';
 import * as constants from '../../constants/constants';
+/*Child components */
+import ManageCVReview from './CVReview/ManageCVReview';
 
 const Main = styled.main`
     position: relative;
@@ -73,7 +75,7 @@ class HomePage extends React.Component {
     }
 
     componentDidMount() {
-        this.props.actions.listTodos();
+        //this.props.actions.listTodos();
         var selected = this.props.history.location.pathname;
         if (selected == "" || selected == "/") {
             this.setState({
@@ -96,18 +98,18 @@ class HomePage extends React.Component {
         return (
             <div>
                 <Sidebar onSelect={this.onSelect} onToggle={this.onToggle} selected={selected}></Sidebar>
-                <Main expanded={expanded}>
+                <Main expanded={expanded} style={{ height: "100vh", overflowY: "scroll" }}>
                     <Breadcrumbs pageTitle={pageTitle} selected={selected}></Breadcrumbs>
                     <Switch>
                         <Route path="/" exact component={props => <div>home</div>} />
-                        <Route exact path="/cv" component={props => <div>cv</div>} />
+                        <Route exact path="/cv" component={props => <ManageCVReview></ManageCVReview>} />
                         <Route path="/settings/*" component={props => <div>settings</div>} />
                         <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
                     </Switch>
-                    <button onClick={this.createToDo}>Create To Do</button>
+                    {/* <button onClick={this.createToDo}>Create To Do</button>
                     {this.props.toDos.map(toDo => {
                         return <div key={toDo.id}>{toDo.name} - {toDo.id}</div>
-                    })}
+                    })} */}
                 </Main>
             </div>
         );
