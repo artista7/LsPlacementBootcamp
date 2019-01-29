@@ -78,46 +78,26 @@
 				}
 			}
 		},
-		"apilearningSage": {
+		"authcognitols": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190122020457-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190130020530-deployment/amplify-cfn-templates/auth/cognitols-cloudformation-template.yml",
 				"Parameters": {
-					"AppSyncApiName": "learningSage",
-					"AuthCognitoUserPoolId": {
-						"Fn::GetAtt": [
-							"authcognito",
-							"Outputs.UserPoolId"
-						]
-					},
-					"schemaGraphql": "s3://learning-sage-20190122020457-deployment/amplify-appsync-files/schema.graphql.1548449675370",
-					"ResolverBucket": "learning-sage-20190122020457-deployment",
-					"ResolverRootKey": "amplify-appsync-files",
-					"DeploymentTimestamp": "1548449675370",
-					"env": "localShub"
-				}
-			}
-		},
-		"authcognito": {
-			"Type": "AWS::CloudFormation::Stack",
-			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190122020457-deployment/amplify-cfn-templates/auth/cognito-cloudformation-template.yml",
-				"Parameters": {
-					"identityPoolName": "identityPool_ls",
-					"allowUnauthenticatedIdentities": true,
+					"identityPoolName": "idpoolls",
+					"allowUnauthenticatedIdentities": false,
 					"thirdPartyAuth": false,
-					"lambdaLogPolicy": "cognito_lambda_log_policy",
-					"openIdLambdaRoleName": "cognito_openid_lambda_role",
-					"openIdRolePolicy": "cognito_openid_pass_role_policy",
-					"openIdLambdaIAMPolicy": "cognito_openid_lambda_iam_policy",
-					"openIdLogPolicy": "cognito_openid_lambda_log_policy",
-					"userPoolName": "userPool_ls",
+					"lambdaLogPolicy": "cognitols_lambda_log_policy",
+					"openIdLambdaRoleName": "cognitols_openid_lambda_role",
+					"openIdRolePolicy": "cognitols_openid_pass_role_policy",
+					"openIdLambdaIAMPolicy": "cognitols_openid_lambda_iam_policy",
+					"openIdLogPolicy": "cognitols_openid_lambda_log_policy",
+					"userPoolName": "userpoolls",
 					"autoVerifiedAttributes": "phone_number",
 					"mfaConfiguration": "OFF",
 					"mfaTypes": "SMS Text Message",
-					"roleName": "cognito_sns-role",
-					"roleExternalId": "cognito_role_external_id",
-					"policyName": "cognito-sns-policy",
+					"roleName": "cognitols_sns-role",
+					"roleExternalId": "cognitols_role_external_id",
+					"policyName": "cognitols-sns-policy",
 					"smsAuthenticationMessage": "Your authentication code is {####}",
 					"smsVerificationMessage": "Your verification code is {####}",
 					"emailVerificationSubject": "Your verification code",
@@ -125,22 +105,23 @@
 					"defaultPasswordPolicy": true,
 					"passwordPolicyMinLength": "6",
 					"passwordPolicyCharacters": "",
-					"requiredAttributes": "email,phone_number",
-					"userpoolClientName": "cognito_app_client",
+					"requiredAttributes": "email,name,phone_number",
+					"userpoolClientName": "cognitols_app_client",
 					"userpoolClientGenerateSecret": true,
-					"userpoolClientRefreshTokenValidity": "15",
-					"userpoolClientReadAttributes": "birthdate,email,name,phone_number,picture,profile,email_verified,phone_number_verified",
-					"mfaLambdaRole": "cognito_totp_lambda_role",
-					"mfaLambdaLogPolicy": "cognito_totp_lambda_log_policy",
-					"mfaPassRolePolicy": "cognito_totp_pass_role_policy",
-					"mfaLambdaIAMPolicy": "cognito_totp_lambda_iam_policy",
-					"userpoolClientLambdaRole": "cognito_userpoolclient_lambda_role",
-					"userpoolClientLogPolicy": "cognito_userpoolclient_lambda_log_policy",
-					"userpoolClientLambdaPolicy": "cognito_userpoolclient_lambda_iam_policy",
+					"userpoolClientRefreshTokenValidity": "10",
+					"userpoolClientReadAttributes": "email,name,phone_number",
+					"mfaLambdaRole": "cognitols_totp_lambda_role",
+					"mfaLambdaLogPolicy": "cognitols_totp_lambda_log_policy",
+					"mfaPassRolePolicy": "cognitols_totp_pass_role_policy",
+					"mfaLambdaIAMPolicy": "cognitols_totp_lambda_iam_policy",
+					"userpoolClientLambdaRole": "cognitols_userpoolclient_lambda_role",
+					"userpoolClientLogPolicy": "cognitols_userpoolclient_lambda_log_policy",
+					"userpoolClientLambdaPolicy": "cognitols_userpoolclient_lambda_iam_policy",
 					"userpoolClientSetAttributes": true,
 					"useDefault": "manual",
 					"authSelections": "identityPoolAndUserPool",
-					"resourceName": "cognito",
+					"resourceName": "cognitols",
+					"userpoolClientWriteAttributes": "email,name,phone_number",
 					"authRoleName": {
 						"Ref": "AuthRoleName"
 					},
@@ -159,8 +140,47 @@
 							"Arn"
 						]
 					},
-					"userpoolClientWriteAttributes": "birthdate,name,picture,profile,email,phone_number",
-					"env": "localShub"
+					"env": "local"
+				}
+			}
+		},
+		"apiapils": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190130020530-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"Parameters": {
+					"AppSyncApiName": "apils",
+					"AuthCognitoUserPoolId": {
+						"Fn::GetAtt": [
+							"authcognitols",
+							"Outputs.UserPoolId"
+						]
+					},
+					"schemaGraphql": "s3://learning-sage-20190130020530-deployment/amplify-appsync-files/schema.graphql.1548794317405",
+					"ResolverBucket": "learning-sage-20190130020530-deployment",
+					"ResolverRootKey": "amplify-appsync-files",
+					"DeploymentTimestamp": "1548794317405",
+					"env": "local"
+				}
+			}
+		},
+		"storages3ls": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190130020530-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
+				"Parameters": {
+					"bucketName": "s3bucketls",
+					"authPolicyName": "s3_amplify_629a7835",
+					"unauthPolicyName": "s3_amplify_629a7835",
+					"authRoleName": {
+						"Ref": "AuthRoleName"
+					},
+					"unauthRoleName": {
+						"Ref": "UnauthRoleName"
+					},
+					"authPermissions": "rw",
+					"unauthPermissions": "",
+					"env": "local"
 				}
 			}
 		}

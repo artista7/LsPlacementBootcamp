@@ -1,16 +1,22 @@
 {
+	"auth": {
+		"cognitols": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	},
 	"api": {
-		"learningSage": {
+		"apils": {
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {
-				"securityType": "API_KEY"
+				"securityType": "AMAZON_COGNITO_USER_POOLS"
 			}
 		}
 	},
-	"auth": {
-		"cognito": {
-			"service": "Cognito",
+	"storage": {
+		"s3ls": {
+			"service": "S3",
 			"providerPlugin": "awscloudformation"
 		}
 	}

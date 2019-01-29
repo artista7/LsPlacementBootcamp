@@ -1,18 +1,18 @@
 {
-    "localShub": {
+    "local": {
         "awscloudformation": {
-            "AuthRoleName": "learning-sage-20190122020457-authRole",
-            "UnauthRoleArn": "arn:aws:iam::227484579606:role/learning-sage-20190122020457-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::227484579606:role/learning-sage-20190122020457-authRole",
+            "AuthRoleName": "learning-sage-20190130020530-authRole",
+            "UnauthRoleArn": "arn:aws:iam::227484579606:role/learning-sage-20190130020530-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::227484579606:role/learning-sage-20190130020530-authRole",
             "Region": "us-west-2",
-            "DeploymentBucketName": "learning-sage-20190122020457-deployment",
-            "UnauthRoleName": "learning-sage-20190122020457-unauthRole",
-            "StackName": "learning-sage-20190122020457",
-            "StackId": "arn:aws:cloudformation:us-west-2:227484579606:stack/learning-sage-20190122020457/0c721110-1dbc-11e9-a8e1-023fb47a8466"
+            "DeploymentBucketName": "learning-sage-20190130020530-deployment",
+            "UnauthRoleName": "learning-sage-20190130020530-unauthRole",
+            "StackName": "learning-sage-20190130020530",
+            "StackId": "arn:aws:cloudformation:us-west-2:227484579606:stack/learning-sage-20190130020530/78e74690-2405-11e9-9163-0a95c68a7df8"
         },
         "categories": {
             "auth": {
-                "cognito": {}
+                "cognitols": {}
             }
         }
     }
