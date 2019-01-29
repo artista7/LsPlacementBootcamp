@@ -1,0 +1,4 @@
+/*Hiding annotations layer*/
+.react-pdf__Page__annotations{
+    display: none
+}

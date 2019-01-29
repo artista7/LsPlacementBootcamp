@@ -1,15 +1,19 @@
 //import libraries
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+/*React-pdf configuration */
 import { Document, Page, pdfjs } from 'react-pdf';
+// import 'react-pdf/dist/Page/AnnotationLayer.css';
+import './CVReview.css';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 // create a component
-const CVReview = ({ handleselectedFile, numPages, onDocumentLoad, pageNumber, selectedFile, shufflePage }) => {
+const CVReview = ({ cvReview, handleselectedFile, numPages, onDocumentLoad, pageNumber, selectedFile, shufflePage }) => {
     return (
         <div>
             <div className="row">
                 <div className="col-sm-12 col-lg-6">
+                    <p>Status: {cvReview.status}</p>
                     <form action="/action_page.php">
                         <p>Upload CV:</p>
                         <div className="custom-file mb-3">
@@ -41,6 +45,7 @@ const CVReview = ({ handleselectedFile, numPages, onDocumentLoad, pageNumber, se
 };
 
 CVReview.propTypes = {
+    cvReview: PropTypes.object.isRequired,
     handleselectedFile: PropTypes.func.isRequired,
     numPages: PropTypes.number,
     onDocumentLoad: PropTypes.func,

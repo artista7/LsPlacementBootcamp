@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../../actions/toDoActions';
 import CVReview from './CVReview';
+import { CVReviewStatusListObject } from '../../../constants/constants';
 
 // create a component
 class ManageCVReview extends React.Component {
@@ -12,6 +13,7 @@ class ManageCVReview extends React.Component {
         super(props, context);
 
         this.state = {
+            cvReview: { status: CVReviewStatusListObject.draft },
             loaded: 0,
             numPages: null,
             pageNumber: 1,
@@ -31,7 +33,7 @@ class ManageCVReview extends React.Component {
     }
 
     onDocumentLoad(numPages) {
-        this.setState({ numPages: numPages.numPages });
+        this.setState({ numPages: numPages.numPages, pageNumber: 1 });
     }
 
     shufflePage(forward) {
@@ -50,6 +52,7 @@ class ManageCVReview extends React.Component {
     render() {
         return (
             <CVReview
+                cvReview={this.state.cvReview}
                 numPages={this.state.numPages}
                 onDocumentLoad={this.onDocumentLoad}
                 pageNumber={this.state.pageNumber}
