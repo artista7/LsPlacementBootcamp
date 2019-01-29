@@ -1,4 +1,9 @@
+.react-pdf__message{
+    text-align: center
+}
+
 /*Hiding annotations layer*/
 .react-pdf__Page__annotations{
     display: none
 }
+

@@ -26,7 +26,7 @@ const CVReview = ({ cvReview, handleselectedFile, numPages, onDocumentLoad, page
                         </div>
                     </form>
                 </div>
-                <div className="col-sm-12 col-lg-6" style={{ borderLeft: "1px solid black", overflowY: "scroll", height: "calc(100vh - 60px)" }}>
+                <div className="col-sm-12 col-lg-6" style={{ borderLeft: "1px #e6e6e6 solid", overflowY: "scroll", height: "calc(100vh - 60px)" }}>
                     <Document
                         file={selectedFile}
                         onLoadSuccess={onDocumentLoad}

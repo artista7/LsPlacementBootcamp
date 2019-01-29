@@ -22,7 +22,7 @@ const Sidebar = ({ onSelect, onToggle, selected }) => {
                 </NavItem>
                 <NavItem eventKey="cv">
                     <NavIcon>
-                        <i className="fa fa-fw fa-file" style={{ fontSize: '1.75em' }} />
+                        <i className="fa fa-fw fa-file-text-o" style={{ fontSize: '1.75em' }} />
                     </NavIcon>
                     <NavText>
                         CV Evaluation
