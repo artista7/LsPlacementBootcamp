@@ -1,2 +1,2 @@
 export const SIGN_OUT = 'sign_out';
-export const CVReviewStatusListObject = { draft: "Draft" }
+export const CVReviewStatus = { draft: "Draft", submitted: "Submitted", underReview: "Under Review", complete: "Complete" }

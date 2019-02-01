@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../../actions/toDoActions';
 import CVReview from './CVReview';
-import { CVReviewStatusListObject } from '../../../constants/constants';
+import { CVReviewStatus } from '../../../constants/constants';
 
 // create a component
 class ManageCVReview extends React.Component {
@@ -13,7 +13,7 @@ class ManageCVReview extends React.Component {
         super(props, context);
 
         this.state = {
-            cvReview: { status: CVReviewStatusListObject.draft },
+            cvReview: { status: CVReviewStatus.draft },
             loaded: 0,
             numPages: null,
             pageNumber: 1,

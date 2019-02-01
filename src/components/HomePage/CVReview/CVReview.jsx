@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 /*React-pdf configuration */
 import { Document, Page, pdfjs } from 'react-pdf';
+import { CVReviewStatus } from '../../../constants/constants';
 // import 'react-pdf/dist/Page/AnnotationLayer.css';
 import './CVReview.css';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -14,7 +15,8 @@ const CVReview = ({ cvReview, handleselectedFile, numPages, onDocumentLoad, page
             <div className="row">
                 <div className="col-sm-12 col-lg-6">
                     <p>Status: {cvReview.status}</p>
-                    <form action="/action_page.php">
+                    {/* Showing form in draft or submitted state only */}
+                    {(cvReview.status == CVReviewStatus.draft || cvReview.status == CVReviewStatus.submitted) && <form action="/action_page.php">
                         <p>Upload CV:</p>
                         <div className="custom-file mb-3">
                             <input type="file" className="custom-file-input" id="uploadCV" accept="application/pdf" name="uploadCV" onChange={handleselectedFile} />
@@ -22,22 +24,28 @@ const CVReview = ({ cvReview, handleselectedFile, numPages, onDocumentLoad, page
                         </div>
 
                         <div className="mt-3" style={{ textAlign: "center" }}>
-                            <button type="submit" className="btn btn-primary">Submit</button>
+                            <button type="submit" className="btn btn-primary">{cvReview.status == CVReviewStatus.draft ? "Submit" : "Update"}</button>
                         </div>
-                    </form>
+                    </form>}
+                    {/* Showing comments in completed review */}
+                    {cvReview.status == CVReviewStatus.complete && <div style={{ textAlign: "center" }}>Comments Recieved</div>}
                 </div>
                 <div className="col-sm-12 col-lg-6" style={{ borderLeft: "1px #e6e6e6 solid", overflowY: "scroll", height: "calc(100vh - 60px)" }}>
-                    <Document
-                        file={selectedFile}
-                        onLoadSuccess={onDocumentLoad}
-                    >
-                        <Page pageNumber={pageNumber} />
-                    </Document>
-                    {numPages > 1 && <p style={{ textAlign: "center" }}>
-                        <i className="fa fa-angle-left link-button fa-in-circle" style={{ marginRight: "5px" }} onClick={() => shufflePage(0)}></i>
-                        Page {pageNumber} of {numPages}
-                        <i className="fa fa-angle-right link-button fa-in-circle" style={{ marginLeft: "5px" }} onClick={() => shufflePage(1)}></i>
-                    </p>}
+                    <div id='pagePicker'>
+                        {numPages > 1 && <p style={{ textAlign: "center" }}>
+                            <i className="fa fa-angle-left link-button fa-in-circle" style={{ marginRight: "5px" }} onClick={() => shufflePage(0)}></i>
+                            Page {pageNumber} of {numPages}
+                            <i className="fa fa-angle-right link-button fa-in-circle" style={{ marginLeft: "5px" }} onClick={() => shufflePage(1)}></i>
+                        </p>}
+                    </div>
+                    <div style={{ border: '1px solid #e6e6e6', marginBottom: "15px" }}>
+                        <Document
+                            file={selectedFile}
+                            onLoadSuccess={onDocumentLoad}
+                        >
+                            <Page pageNumber={pageNumber} />
+                        </Document>
+                    </div>
                 </div>
             </div>
         </div>
