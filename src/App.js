@@ -13,6 +13,9 @@ import Amplify from 'aws-amplify';
 /*Configure redux */
 import { Provider } from "react-redux";
 import configureStore from './store/configureStore';
+/*Styles */
+import 'react-circular-progressbar/dist/styles.css';
+import 'react-notifications/lib/notifications.css';
 
 Amplify.configure(aws_config);
 
