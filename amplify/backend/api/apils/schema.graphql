@@ -1,5 +1,16 @@
-type Todo @model {
+type CvReview @model {
+  comments: String
+  createdAt: AWSTimestamp
   id: ID!
-  name: String!
-  description: String
+  lastUpdatedAt: AWSTimestamp
+  lastUpdatedBy: String
+  reviwedBy: String
+  status: CvReviewStatus
+  userId: String!
+}
+
+enum CvReviewStatus{
+  submitted
+  underReview
+  reviewCompleted
 }

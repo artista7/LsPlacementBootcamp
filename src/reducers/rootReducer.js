@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import toDoReducer from './toDoReducer';
+import cvReviewReducer from './cvReviewReducer';
 
 const rootReducer = combineReducers({
-    toDoReducer
+    cvReviewReducer
 });
 
 export default rootReducer;

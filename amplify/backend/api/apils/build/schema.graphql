@@ -1,7 +1,18 @@
-type Todo {
+type CvReview {
+  comments: String
+  createdAt: AWSTimestamp
   id: ID!
-  name: String!
-  description: String
+  lastUpdatedAt: AWSTimestamp
+  lastUpdatedBy: String
+  reviwedBy: String
+  status: CvReviewStatus
+  userId: String!
+}
+
+enum CvReviewStatus {
+  submitted
+  underReview
+  reviewCompleted
 }
 
 enum ModelSortDirection {
@@ -9,8 +20,8 @@ enum ModelSortDirection {
   DESC
 }
 
-type ModelTodoConnection {
-  items: [Todo]
+type ModelCvReviewConnection {
+  items: [CvReview]
   nextToken: String
 }
 
@@ -69,44 +80,58 @@ input ModelBooleanFilterInput {
   eq: Boolean
 }
 
-input ModelTodoFilterInput {
+input ModelCvReviewFilterInput {
+  comments: ModelStringFilterInput
+  createdAt: ModelIntFilterInput
   id: ModelIDFilterInput
-  name: ModelStringFilterInput
-  description: ModelStringFilterInput
-  and: [ModelTodoFilterInput]
-  or: [ModelTodoFilterInput]
-  not: ModelTodoFilterInput
+  lastUpdatedAt: ModelIntFilterInput
+  lastUpdatedBy: ModelStringFilterInput
+  reviwedBy: ModelStringFilterInput
+  userId: ModelStringFilterInput
+  and: [ModelCvReviewFilterInput]
+  or: [ModelCvReviewFilterInput]
+  not: ModelCvReviewFilterInput
 }
 
 type Query {
-  getTodo(id: ID!): Todo
-  listTodos(filter: ModelTodoFilterInput, limit: Int, nextToken: String): ModelTodoConnection
+  getCvReview(id: ID!): CvReview
+  listCvReviews(filter: ModelCvReviewFilterInput, limit: Int, nextToken: String): ModelCvReviewConnection
 }
 
-input CreateTodoInput {
+input CreateCvReviewInput {
+  comments: String
+  createdAt: AWSTimestamp
   id: ID
-  name: String!
-  description: String
+  lastUpdatedAt: AWSTimestamp
+  lastUpdatedBy: String
+  reviwedBy: String
+  status: CvReviewStatus
+  userId: String!
 }
 
-input UpdateTodoInput {
+input UpdateCvReviewInput {
+  comments: String
+  createdAt: AWSTimestamp
   id: ID!
-  name: String
-  description: String
+  lastUpdatedAt: AWSTimestamp
+  lastUpdatedBy: String
+  reviwedBy: String
+  status: CvReviewStatus
+  userId: String
 }
 
-input DeleteTodoInput {
+input DeleteCvReviewInput {
   id: ID
 }
 
 type Mutation {
-  createTodo(input: CreateTodoInput!): Todo
-  updateTodo(input: UpdateTodoInput!): Todo
-  deleteTodo(input: DeleteTodoInput!): Todo
+  createCvReview(input: CreateCvReviewInput!): CvReview
+  updateCvReview(input: UpdateCvReviewInput!): CvReview
+  deleteCvReview(input: DeleteCvReviewInput!): CvReview
 }
 
 type Subscription {
-  onCreateTodo: Todo @aws_subscribe(mutations: ["createTodo"])
-  onUpdateTodo: Todo @aws_subscribe(mutations: ["updateTodo"])
-  onDeleteTodo: Todo @aws_subscribe(mutations: ["deleteTodo"])
+  onCreateCvReview: CvReview @aws_subscribe(mutations: ["createCvReview"])
+  onUpdateCvReview: CvReview @aws_subscribe(mutations: ["updateCvReview"])
+  onDeleteCvReview: CvReview @aws_subscribe(mutations: ["deleteCvReview"])
 }

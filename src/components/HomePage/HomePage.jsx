@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../../actions/toDoActions';
+import * as actions from '../../actions/cvReviewActions';
 import { Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -41,14 +41,9 @@ class HomePage extends React.Component {
             selected: 'home'
         };
 
-        this.createToDo = this.createToDo.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.onToggle = this.onToggle.bind(this);
         this.signOut = this.signOut.bind(this);
-    }
-
-    createToDo() {
-        this.props.actions.createTodo({ name: "test", description: "test" })
     }
 
     onSelect(selected) {
@@ -68,14 +63,12 @@ class HomePage extends React.Component {
 
     signOut() {
         Auth.signOut().then(data => {
-            //this.props.updateStateVariable();
         }).catch(err => {
             console.log(err);
         });
     }
 
     componentDidMount() {
-        //this.props.actions.listTodos();
         var selected = this.props.history.location.pathname;
         if (selected == "" || selected == "/") {
             this.setState({
@@ -106,10 +99,6 @@ class HomePage extends React.Component {
                         <Route path="/settings/*" component={props => <div>settings</div>} />
                         <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
                     </Switch>
-                    {/* <button onClick={this.createToDo}>Create To Do</button>
-                    {this.props.toDos.map(toDo => {
-                        return <div key={toDo.id}>{toDo.name} - {toDo.id}</div>
-                    })} */}
                 </Main>
             </div>
         );
@@ -117,9 +106,8 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    let toDos = state.toDoReducer.toDos;
     return {
-        toDos: toDos
+        state: state
     };
 }
 

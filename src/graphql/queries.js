@@ -1,24 +1,34 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
-export const getTodo = `query GetTodo($id: ID!) {
-  getTodo(id: $id) {
+export const getCvReview = `query GetCvReview($id: ID!) {
+  getCvReview(id: $id) {
+    comments
+    createdAt
     id
-    name
-    description
+    lastUpdatedAt
+    lastUpdatedBy
+    reviwedBy
+    status
+    userId
   }
 }
 `;
-export const listTodos = `query ListTodos(
-  $filter: ModelTodoFilterInput
+export const listCvReviews = `query ListCvReviews(
+  $filter: ModelCvReviewFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listCvReviews(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
+      comments
+      createdAt
       id
-      name
-      description
+      lastUpdatedAt
+      lastUpdatedBy
+      reviwedBy
+      status
+      userId
     }
     nextToken
   }

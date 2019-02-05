@@ -1,3 +1,3 @@
 export default {
-    toDos: []
+    cvReviews: []
 };

@@ -1,27 +1,42 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
-export const onCreateTodo = `subscription OnCreateTodo {
-  onCreateTodo {
+export const onCreateCvReview = `subscription OnCreateCvReview {
+  onCreateCvReview {
+    comments
+    createdAt
     id
-    name
-    description
+    lastUpdatedAt
+    lastUpdatedBy
+    reviwedBy
+    status
+    userId
   }
 }
 `;
-export const onUpdateTodo = `subscription OnUpdateTodo {
-  onUpdateTodo {
+export const onUpdateCvReview = `subscription OnUpdateCvReview {
+  onUpdateCvReview {
+    comments
+    createdAt
     id
-    name
-    description
+    lastUpdatedAt
+    lastUpdatedBy
+    reviwedBy
+    status
+    userId
   }
 }
 `;
-export const onDeleteTodo = `subscription OnDeleteTodo {
-  onDeleteTodo {
+export const onDeleteCvReview = `subscription OnDeleteCvReview {
+  onDeleteCvReview {
+    comments
+    createdAt
     id
-    name
-    description
+    lastUpdatedAt
+    lastUpdatedBy
+    reviwedBy
+    status
+    userId
   }
 }
 `;

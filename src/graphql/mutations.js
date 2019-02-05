@@ -1,27 +1,42 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
-export const createTodo = `mutation CreateTodo($input: CreateTodoInput!) {
-  createTodo(input: $input) {
+export const createCvReview = `mutation CreateCvReview($input: CreateCvReviewInput!) {
+  createCvReview(input: $input) {
+    comments
+    createdAt
     id
-    name
-    description
+    lastUpdatedAt
+    lastUpdatedBy
+    reviwedBy
+    status
+    userId
   }
 }
 `;
-export const updateTodo = `mutation UpdateTodo($input: UpdateTodoInput!) {
-  updateTodo(input: $input) {
+export const updateCvReview = `mutation UpdateCvReview($input: UpdateCvReviewInput!) {
+  updateCvReview(input: $input) {
+    comments
+    createdAt
     id
-    name
-    description
+    lastUpdatedAt
+    lastUpdatedBy
+    reviwedBy
+    status
+    userId
   }
 }
 `;
-export const deleteTodo = `mutation DeleteTodo($input: DeleteTodoInput!) {
-  deleteTodo(input: $input) {
+export const deleteCvReview = `mutation DeleteCvReview($input: DeleteCvReviewInput!) {
+  deleteCvReview(input: $input) {
+    comments
+    createdAt
     id
-    name
-    description
+    lastUpdatedAt
+    lastUpdatedBy
+    reviwedBy
+    status
+    userId
   }
 }
 `;
