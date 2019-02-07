@@ -5,10 +5,11 @@ export const onCreateCvReview = `subscription OnCreateCvReview {
   onCreateCvReview {
     comments
     createdAt
+    fileName
     id
     lastUpdatedAt
     lastUpdatedBy
-    reviwedBy
+    reviewedBy
     status
     userId
   }
@@ -18,10 +19,11 @@ export const onUpdateCvReview = `subscription OnUpdateCvReview {
   onUpdateCvReview {
     comments
     createdAt
+    fileName
     id
     lastUpdatedAt
     lastUpdatedBy
-    reviwedBy
+    reviewedBy
     status
     userId
   }
@@ -31,10 +33,11 @@ export const onDeleteCvReview = `subscription OnDeleteCvReview {
   onDeleteCvReview {
     comments
     createdAt
+    fileName
     id
     lastUpdatedAt
     lastUpdatedBy
-    reviwedBy
+    reviewedBy
     status
     userId
   }

@@ -5,10 +5,11 @@ export const getCvReview = `query GetCvReview($id: ID!) {
   getCvReview(id: $id) {
     comments
     createdAt
+    fileName
     id
     lastUpdatedAt
     lastUpdatedBy
-    reviwedBy
+    reviewedBy
     status
     userId
   }
@@ -23,10 +24,11 @@ export const listCvReviews = `query ListCvReviews(
     items {
       comments
       createdAt
+      fileName
       id
       lastUpdatedAt
       lastUpdatedBy
-      reviwedBy
+      reviewedBy
       status
       userId
     }

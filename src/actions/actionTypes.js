@@ -1,2 +1,5 @@
+//cvReview actions
 export const LIST_CVREVIEWS_SUCCESS = "LIST_CVREVIEWS_SUCCESS";
 export const CREATE_CVREVIEW_SUCCESS = "CREATE_CVREVIEW_SUCCESS";
+//userInfo actions
+export const UPDATE_USER_INFO = "UPDATE_USER_INFO";

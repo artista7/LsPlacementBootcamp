@@ -38,7 +38,6 @@ class App extends Component {
     })
   }
 
-
   render() {
     var authState = localStorage.getItem("amplify-authenticator-authState");
     return (

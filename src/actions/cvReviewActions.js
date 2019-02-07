@@ -5,8 +5,8 @@ import { createCvReview } from '../graphql/mutations';
 
 export function _createCvReview(cvReview) {
     return function (dispatch) {
-        return API.graphql(graphqlOperation(createCvReview, { input: cvReview })).then(cvReview => {
-            dispatch(_createCvReviewSuccess(cvReview));
+        return API.graphql(graphqlOperation(createCvReview, { input: cvReview })).then(response => {
+            dispatch(_createCvReviewSuccess(response.data.createCvReview));
         }).catch(error => {
             console.log(error);
         })

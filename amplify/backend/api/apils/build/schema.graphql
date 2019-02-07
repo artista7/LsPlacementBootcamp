@@ -1,10 +1,11 @@
 type CvReview {
   comments: String
   createdAt: AWSTimestamp
+  fileName: String
   id: ID!
   lastUpdatedAt: AWSTimestamp
   lastUpdatedBy: String
-  reviwedBy: String
+  reviewedBy: String
   status: CvReviewStatus
   userId: String!
 }
@@ -83,10 +84,11 @@ input ModelBooleanFilterInput {
 input ModelCvReviewFilterInput {
   comments: ModelStringFilterInput
   createdAt: ModelIntFilterInput
+  fileName: ModelStringFilterInput
   id: ModelIDFilterInput
   lastUpdatedAt: ModelIntFilterInput
   lastUpdatedBy: ModelStringFilterInput
-  reviwedBy: ModelStringFilterInput
+  reviewedBy: ModelStringFilterInput
   userId: ModelStringFilterInput
   and: [ModelCvReviewFilterInput]
   or: [ModelCvReviewFilterInput]
@@ -101,10 +103,11 @@ type Query {
 input CreateCvReviewInput {
   comments: String
   createdAt: AWSTimestamp
+  fileName: String
   id: ID
   lastUpdatedAt: AWSTimestamp
   lastUpdatedBy: String
-  reviwedBy: String
+  reviewedBy: String
   status: CvReviewStatus
   userId: String!
 }
@@ -112,10 +115,11 @@ input CreateCvReviewInput {
 input UpdateCvReviewInput {
   comments: String
   createdAt: AWSTimestamp
+  fileName: String
   id: ID!
   lastUpdatedAt: AWSTimestamp
   lastUpdatedBy: String
-  reviwedBy: String
+  reviewedBy: String
   status: CvReviewStatus
   userId: String
 }

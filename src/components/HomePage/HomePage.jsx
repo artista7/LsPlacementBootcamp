@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../../actions/cvReviewActions';
+import * as userInfoActions from '../../actions/userInfoActions';
 import { Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -69,6 +69,12 @@ class HomePage extends React.Component {
     }
 
     componentDidMount() {
+        //adding current loggedin user data to redux state, this take time - some operations requiring user data might get affected
+        Auth.currentUserInfo().then(data => {
+            this.props.userInfoActions._updateUserInfo(data);
+        }).catch(err => {
+            debugger;
+        });
         var selected = this.props.history.location.pathname;
         if (selected == "" || selected == "/") {
             this.setState({
@@ -113,7 +119,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(actions, dispatch)
+        userInfoActions: bindActionCreators(userInfoActions, dispatch)
     };
 }
 

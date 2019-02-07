@@ -3,10 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../../../actions/toDoActions';
+import * as cvReviewActions from '../../../actions/cvReviewActions';
 import CVReview from './CVReview';
 import { CVReviewStatus } from '../../../constants/constants';
-import { Storage } from 'aws-amplify';
+import { Auth, Storage } from 'aws-amplify';
 import { NotificationManager } from 'react-notifications';
 
 // create a component
@@ -15,7 +15,7 @@ class ManageCVReview extends React.Component {
         super(props, context);
 
         this.state = {
-            cvReview: { status: CVReviewStatus.draft },
+            cvReview: { id: null, userId: null, createdAt: null, lastUpdatedAt: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null },
             isS3Uploading: false,
             loaded: 0,
             numPages: null,
@@ -24,7 +24,7 @@ class ManageCVReview extends React.Component {
             selectedFile: null
         }
 
-        this.handleSelectedFile = this.handleSelectedFile.bind(this);
+        this.handleFileUpload = this.handleFileUpload.bind(this);
         this.onDocumentLoad = this.onDocumentLoad.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.setIsS3Uploading = this.setIsS3Uploading.bind(this);
@@ -32,12 +32,13 @@ class ManageCVReview extends React.Component {
         this.shufflePage = this.shufflePage.bind(this);
     }
 
-    handleSelectedFile(event) {
+    handleFileUpload(event) {
         var selectedFile = event.target.files[0];
         if (selectedFile.size && selectedFile.size < 5242880) {
             this.setState({
                 loaded: 0,
-                selectedFile: event.target.files[0]
+                cvReview: Object.assign({}, this.state.cvReview, { fileName: selectedFile.name != undefined ? selectedFile.name : "" }),
+                selectedFile: selectedFile
             })
         }
         else {
@@ -53,7 +54,9 @@ class ManageCVReview extends React.Component {
         try {
             this.setIsS3Uploading(true);
             var setPercent = this.setPercent;
-            Storage.put('cv.pdf', this.state.selectedFile, {
+            var s3FileName = this.state.selectedFile.name != undefined ? +(new Date) + '_' + this.state.selectedFile.name : '';
+            let userId = this.props.userInfo.id != undefined ? this.props.userInfo.id : "";  //need to handle case when userId is not retrieved
+            Storage.put(s3FileName, this.state.selectedFile, {
                 level: 'protected',
                 contentType: 'application/pdf',
                 progressCallback(progress) {
@@ -61,13 +64,25 @@ class ManageCVReview extends React.Component {
                 }
             })
                 .then(result => {
+                    //This code should trigger through lambda while adding cv into s3 for ml stuff
+                    //add cvReview into dynamo table
+                    let createCvReviewInput = {
+                        comments: "none",
+                        createdAt: +(new Date),
+                        fileName: this.state.selectedFile.name,
+                        lastUpdatedAt: +(new Date),
+                        lastUpdatedBy: userId,
+                        reviewedBy: "none",
+                        status: "submitted",
+                        userId: userId
+                    }
+                    this.props.cvReviewActions._createCvReview(createCvReviewInput);
                     this.setIsS3Uploading(false);
                 })
                 .catch(err => {
                     this.setIsS3Uploading(false);
                     console.log(err);
                 });
-
         }
         catch (err) {
             alert("debugger" + err);
@@ -99,11 +114,17 @@ class ManageCVReview extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.setState({
+            cvReview: this.props.cvReview
+        });
+    }
+
     render() {
         return (
             <CVReview
                 cvReview={this.state.cvReview}
-                handleSelectedFile={this.handleSelectedFile}
+                handleFileUpload={this.handleFileUpload}
                 isS3Uploading={this.state.isS3Uploading}
                 numPages={this.state.numPages}
                 onDocumentLoad={this.onDocumentLoad}
@@ -118,14 +139,18 @@ class ManageCVReview extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
+    let cvReview = { id: null, userId: null, createdAt: null, lastUpdatedAt: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null };
+    let userInfo = state.userInfoReducer.userInfo;
+    //override cvReview from redux state
     return {
-        state: state
+        cvReview: cvReview,
+        userInfo: userInfo
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(actions, dispatch)
+        cvReviewActions: bindActionCreators(cvReviewActions, dispatch)
     };
 }
 ManageCVReview.propTypes = {

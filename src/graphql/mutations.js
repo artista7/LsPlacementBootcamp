@@ -5,10 +5,11 @@ export const createCvReview = `mutation CreateCvReview($input: CreateCvReviewInp
   createCvReview(input: $input) {
     comments
     createdAt
+    fileName
     id
     lastUpdatedAt
     lastUpdatedBy
-    reviwedBy
+    reviewedBy
     status
     userId
   }
@@ -18,10 +19,11 @@ export const updateCvReview = `mutation UpdateCvReview($input: UpdateCvReviewInp
   updateCvReview(input: $input) {
     comments
     createdAt
+    fileName
     id
     lastUpdatedAt
     lastUpdatedBy
-    reviwedBy
+    reviewedBy
     status
     userId
   }
@@ -31,10 +33,11 @@ export const deleteCvReview = `mutation DeleteCvReview($input: DeleteCvReviewInp
   deleteCvReview(input: $input) {
     comments
     createdAt
+    fileName
     id
     lastUpdatedAt
     lastUpdatedBy
-    reviwedBy
+    reviewedBy
     status
     userId
   }

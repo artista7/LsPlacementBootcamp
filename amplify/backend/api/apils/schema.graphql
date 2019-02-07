@@ -1,10 +1,11 @@
 type CvReview @model {
   comments: String
   createdAt: AWSTimestamp
+  fileName: String
   id: ID!
   lastUpdatedAt: AWSTimestamp
   lastUpdatedBy: String
-  reviwedBy: String
+  reviewedBy: String
   status: CvReviewStatus
   userId: String!
 }

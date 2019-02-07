@@ -8,31 +8,57 @@ import './CVReview.css';
 /*circular progressbar */
 import CircularProgressbar from 'react-circular-progressbar';
 import { NotificationContainer } from 'react-notifications';
+import { Formik, ErrorMessage, Form } from 'formik';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 // create a component
-const CVReview = ({ cvReview, handleSelectedFile, isS3Uploading, numPages, onDocumentLoad, onSubmit, pageNumber, percent, selectedFile, shufflePage }) => {
+const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onDocumentLoad, onSubmit, pageNumber, percent, selectedFile, shufflePage }) => {
     return (
         <div>
             <NotificationContainer />
             <div className="row">
+                {/* Left panel - Form */}
                 <div className="col-sm-12 col-lg-6">
                     <p>Status: {cvReview.status}</p>
                     {/* Showing form in draft or submitted state only */}
                     {(cvReview.status == CVReviewStatus.draft || cvReview.status == CVReviewStatus.submitted) && <div>
                         <p>Upload CV:</p>
-                        <div className="custom-file mb-3">
-                            <input type="file" className="custom-file-input" id="uploadCV" accept="application/pdf" name="uploadCV" onChange={handleSelectedFile} />
-                            <label className="custom-file-label" htmlFor="uploadCV">{selectedFile != undefined ? selectedFile.name : "Choose file"}</label>
-                        </div>
+                        <Formik
+                            enableReinitialize
+                            initialValues={cvReview}
+                            validate={(values) => {
+                                let errors = {};
+                                if (!values.fileName)
+                                    errors.fileName = 'Upload CV!';
 
-                        <div className="mt-3" style={{ textAlign: "center" }}>
-                            <button onClick={() => onSubmit()} className="btn btn-primary">{cvReview.status == CVReviewStatus.draft ? "Submit" : "Update"}</button>
-                        </div>
+                                return errors;
+                            }}
+                            onSubmit={onSubmit}>
+                            {props => {
+                                const { values, touched, errors, dirty, isSubmitting, handleChange, handleBlur, handleReset } = props;
+                                return (
+                                    <Form>
+                                        <div className="custom-file mb-3">
+                                            <input type="file" className="custom-file-input" id="fileName" name="fileName" accept="application/pdf" onChange={e => { handleFileUpload(e) }} />
+                                            <label className="custom-file-label" htmlFor="fileName">{selectedFile != undefined ? selectedFile.name : "Choose file"}</label>
+                                            <ErrorMessage name="fileName">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
+                                        </div>
+
+                                        <div className="mt-3" style={{ textAlign: "center" }}>
+                                            <button type="submit" disabled={isSubmitting} className="btn btn-primary">{cvReview.status == CVReviewStatus.draft ? "Submit" : "Update"}</button>
+                                        </div>
+                                        {/* <div id="debug">
+                                            {JSON.stringify(values)}
+                                        </div> */}
+                                    </Form>
+                                );
+                            }}
+                        </Formik>
                     </div>}
                     {/* Showing comments in completed review */}
                     {cvReview.status == CVReviewStatus.complete && <div style={{ textAlign: "center" }}>Comments Recieved</div>}
                 </div>
+                {/* Right panel - CV View */}
                 <div className="col-sm-12 col-lg-6" style={{ borderLeft: "1px #e6e6e6 solid", overflowY: "scroll", height: "calc(100vh - 60px)" }}>
                     <div id='pagePicker'>
                         {numPages > 1 && <p style={{ textAlign: "center" }}>
@@ -77,7 +103,7 @@ const CVReview = ({ cvReview, handleSelectedFile, isS3Uploading, numPages, onDoc
 
 CVReview.propTypes = {
     cvReview: PropTypes.object.isRequired,
-    handleSelectedFile: PropTypes.func.isRequired,
+    handleFileUpload: PropTypes.func.isRequired,
     isS3Uploading: PropTypes.bool.isRequired,
     numPages: PropTypes.number,
     onDocumentLoad: PropTypes.func,
