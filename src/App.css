@@ -19,3 +19,13 @@
   font-style: italic;
   padding-left: 10px;
 }
+
+.pageCenter{
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  width: 100px;
+  margin-left: -50px;
+  margin-top: -50px;
+}

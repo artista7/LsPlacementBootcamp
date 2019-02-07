@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 /* sideNavbar*/
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import * as constants from '../../constants/constants';
+import * as constants from '../../../constants/constants';
 
 // create a component
 const Sidebar = ({ onSelect, onToggle, selected }) => {

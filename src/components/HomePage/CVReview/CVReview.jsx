@@ -7,7 +7,6 @@ import { CVReviewStatus } from '../../../constants/constants';
 import './CVReview.css';
 /*circular progressbar */
 import CircularProgressbar from 'react-circular-progressbar';
-import { NotificationContainer } from 'react-notifications';
 import { Formik, ErrorMessage, Form } from 'formik';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -15,7 +14,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onDocumentLoad, onSubmit, pageNumber, percent, selectedFile, shufflePage }) => {
     return (
         <div>
-            <NotificationContainer />
             <div className="row">
                 {/* Left panel - Form */}
                 <div className="col-sm-12 col-lg-6">
@@ -68,7 +66,7 @@ const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onDocum
                         </p>}
                     </div>
                     <div style={{ border: '1px solid #e6e6e6', marginBottom: "15px" }}>
-                        <div id="s3Progressbar">
+                        <div className="pageCenter">
                             {isS3Uploading && <CircularProgressbar
                                 percentage={percent}
                                 text={`${percent}%`}
