@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { CVReviewStatus } from '../../../constants/constants';
 import './CVReview.css';
-/*circular progressbar */
-import CircularProgressbar from 'react-circular-progressbar';
+/*Loader */
+import Loader from 'react-loader-spinner'
 import { Formik, ErrorMessage, Form } from 'formik';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 // create a component
-const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onDocumentLoad, onSubmit, pageNumber, percent, selectedFile, shufflePage }) => {
+const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onDocumentLoad, onSubmit, pageNumber, selectedFile, shufflePage }) => {
     return (
         <div>
             <div className="row">
@@ -67,23 +67,9 @@ const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onDocum
                     </div>
                     <div style={{ border: '1px solid #e6e6e6', marginBottom: "15px" }}>
                         <div className="pageCenter">
-                            {isS3Uploading && <CircularProgressbar
-                                percentage={percent}
-                                text={`${percent}%`}
-                                background
-                                backgroundPadding={6}
-                                styles={{
-                                    background: {
-                                        fill: 'rgb(204, 80, 74)',
-                                    },
-                                    text: {
-                                        fill: '#fff',
-                                    },
-                                    path: {
-                                        stroke: '#fff',
-                                    },
-                                    trail: { stroke: 'transparent' },
-                                }}
+                            {isS3Uploading && <Loader
+                                type="Triangle"
+                                color="rgb(204,80,74)"
                             />}
                         </div>
                         <Document
@@ -107,7 +93,6 @@ CVReview.propTypes = {
     onDocumentLoad: PropTypes.func,
     onSubmit: PropTypes.func.isRequired,
     pageNumber: PropTypes.number,
-    percent: PropTypes.number.isRequired,
     selectedFile: PropTypes.object,
     shufflePage: PropTypes.func.isRequired
 };

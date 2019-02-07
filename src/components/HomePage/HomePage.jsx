@@ -85,7 +85,7 @@ class HomePage extends React.Component {
             this.setInitializing(false);
             this.props.userInfoActions._updateUserInfo(data);
         }).catch(err => {
-            this.setInitializing(true);
+            this.setInitializing(false);
             NotificationManager.error('Error fetching user data', 'Error!', 2000);
         });
     }
@@ -106,6 +106,14 @@ class HomePage extends React.Component {
 
     componentWillUnmount() {
         this.props.updateStateVariable();
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        //preventing re-render of child components on redux state change
+        if (JSON.stringify(nextProps.state) != JSON.stringify(this.props.state)) {
+            return false;
+        }
+        return true;
     }
 
     render() {

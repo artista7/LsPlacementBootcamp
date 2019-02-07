@@ -39,7 +39,7 @@ class ManageCVReview extends React.Component {
                 loaded: 0,
                 cvReview: Object.assign({}, this.state.cvReview, { fileName: selectedFile.name != undefined ? selectedFile.name : "" }),
                 selectedFile: selectedFile
-            })
+            });
         }
         else {
             NotificationManager.warning('File size exceeds 5Mb', 'Warning!', 2000);
@@ -114,10 +114,13 @@ class ManageCVReview extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.setState({
-            cvReview: this.props.cvReview
-        });
+    componentDidUpdate(prevProps, prevState) {
+        //updating state on cvReview in redux state changes
+        if (JSON.stringify(prevProps.cvReview) != JSON.stringify(this.props.cvReview)) {
+            this.setState({
+                cvReview: this.props.cvReview
+            })
+        }
     }
 
     render() {
@@ -130,7 +133,6 @@ class ManageCVReview extends React.Component {
                 onDocumentLoad={this.onDocumentLoad}
                 onSubmit={this.onSubmit}
                 pageNumber={this.state.pageNumber}
-                percent={this.state.percent}
                 selectedFile={this.state.selectedFile}
                 shufflePage={this.shufflePage}>
             </CVReview>
@@ -139,7 +141,7 @@ class ManageCVReview extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    let cvReview = { id: null, userId: null, createdAt: null, lastUpdatedAt: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null };
+    let cvReview = state.cvReviewReducer.length > 0 ? state.cvReviewReducer[0] : { id: null, userId: null, createdAt: null, lastUpdatedAt: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null };
     let userInfo = state.userInfoReducer.userInfo;
     //override cvReview from redux state
     return {
