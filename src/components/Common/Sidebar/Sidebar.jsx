@@ -20,12 +20,12 @@ const Sidebar = ({ onSelect, onToggle, selected }) => {
                         Home
                 </NavText>
                 </NavItem>
-                <NavItem eventKey="cv">
+                <NavItem eventKey="cvReviews">
                     <NavIcon>
                         <i className="fa fa-fw fa-file-text-o" style={{ fontSize: '1.75em' }} />
                     </NavIcon>
                     <NavText>
-                        CV Evaluation
+                        CV Review
                 </NavText>
                 </NavItem>
                 <NavItem eventKey="settings">

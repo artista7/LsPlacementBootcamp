@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userInfoActions from '../../actions/userInfoActions';
+import * as cvReviewActions from '../../actions/cvReviewActions';
 import { Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -12,9 +13,10 @@ import styled from 'styled-components';
 import Sidebar from '../Common/Sidebar/Sidebar';
 import Breadcrumbs from '../Common/Breadcrumbs';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
-import Loader from 'react-loader-spinner'
+import Loader from 'react-loader-spinner';
 import * as constants from '../../constants/constants';
 /*Child components */
+import CVReviewList from './CVReview/CVReviewList';
 import ManageCVReview from './CVReview/ManageCVReview';
 
 const Main = styled.main`
@@ -35,7 +37,7 @@ class HomePage extends React.Component {
             isInitializing: false,
             pageTitle: {
                 'home': 'Home',
-                'cv': 'CV Evaluation',
+                'cvReviews': 'CV Review(s)',
                 'devices': ['Devices'],
                 'reports': ['Reports'],
                 'settings/policies': ['Settings', 'Policies'],
@@ -46,6 +48,8 @@ class HomePage extends React.Component {
 
         this.onSelect = this.onSelect.bind(this);
         this.onToggle = this.onToggle.bind(this);
+        this.loadUserCvReviews = this.loadUserCvReviews.bind(this);
+        this.loadUserInfo = this.loadUserInfo.bind(this);
         this.setInitializing = this.setInitializing.bind(this);
         this.signOut = this.signOut.bind(this);
     }
@@ -65,6 +69,27 @@ class HomePage extends React.Component {
         this.setState({ expanded: expanded });
     };
 
+    loadUserCvReviews() {
+        //WORK - cvReview of current user should be loaded
+        //this.setInitializing(true);
+        this.props.cvReviewActions._listCvReviews().then(data => {
+            this.setInitializing(false);
+        }).catch(error => {
+            this.setInitializing(false);
+        });
+    }
+
+    loadUserInfo() {
+        Auth.currentUserInfo().then(data => {
+            //this.setInitializing(false);
+            this.props.userInfoActions._updateUserInfo(data);
+            this.loadUserCvReviews();
+        }).catch(err => {
+            this.setInitializing(false);
+            NotificationManager.error('Error fetching user data', 'Error!', 2000);
+        });
+    }
+
     setInitializing(bool) {
         this.setState({
             isInitializing: bool == true ? true : false
@@ -81,13 +106,7 @@ class HomePage extends React.Component {
     componentWillMount() {
         //adding current loggedin user data to redux state, this take time - some operations requiring user data might get affected
         this.setInitializing(true);
-        Auth.currentUserInfo().then(data => {
-            this.setInitializing(false);
-            this.props.userInfoActions._updateUserInfo(data);
-        }).catch(err => {
-            this.setInitializing(false);
-            NotificationManager.error('Error fetching user data', 'Error!', 2000);
-        });
+        this.loadUserInfo();
     }
 
     componentDidMount() {
@@ -95,6 +114,11 @@ class HomePage extends React.Component {
         if (selected == "" || selected == "/") {
             this.setState({
                 selected: 'home'
+            });
+        }
+        else if (selected.indexOf("cvReview") != -1) {
+            this.setState({
+                selected: 'cvReviews'
             });
         }
         else {
@@ -129,8 +153,10 @@ class HomePage extends React.Component {
                 <Main expanded={expanded} style={{ height: "100vh", overflowY: "scroll" }}>
                     <Breadcrumbs pageTitle={pageTitle} selected={selected}></Breadcrumbs>
                     <Switch>
-                        <Route path="/" exact component={props => <div>home</div>} />
-                        <Route exact path="/cv" component={props => <ManageCVReview></ManageCVReview>} />
+                        <Route path="/" exact component={props => <div></div>} />
+                        <Route exact path="/cvReviews" component={props => <CVReviewList></CVReviewList>} />
+                        <Route exact path="/cvReview" component={props => <ManageCVReview></ManageCVReview>} />
+                        <Route exact path="/cvReview/:id" component={props => <ManageCVReview></ManageCVReview>} />
                         <Route path="/settings/*" component={props => <div>settings</div>} />
                         <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
                     </Switch>
@@ -148,7 +174,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        userInfoActions: bindActionCreators(userInfoActions, dispatch)
+        userInfoActions: bindActionCreators(userInfoActions, dispatch),
+        cvReviewActions: bindActionCreators(cvReviewActions, dispatch)
     };
 }
 

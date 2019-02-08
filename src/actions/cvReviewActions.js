@@ -7,8 +7,8 @@ export function _createCvReview(cvReview) {
     return function (dispatch) {
         return API.graphql(graphqlOperation(createCvReview, { input: cvReview })).then(response => {
             dispatch(_createCvReviewSuccess(response.data.createCvReview));
-        }).catch(error => {
-            console.log(error);
+        }).catch(response => {
+            console.log(response);
         })
     }
 }
@@ -21,6 +21,8 @@ export function _listCvReviews() {
     return function (dispatch) {
         return API.graphql(graphqlOperation(listCvReviews)).then(response => {
             dispatch(_listCvReviewsSuccess(response.data.listCvReviews.items))
+        }).catch(response => {
+            console.log(response);
         })
     }
 }
