@@ -11,7 +11,7 @@ import { Formik, ErrorMessage, Form } from 'formik';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 // create a component
-const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onCancel, onDocumentLoad, onSubmit, pageNumber, selectedFile, shufflePage }) => {
+const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onCancel, onDocumentLoad, onSubmit, pageNumber, selectedFile, shufflePage, cvUrl }) => {
     return (
         <div>
             <div className="row">
@@ -74,7 +74,7 @@ const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onCance
                             />}
                         </div>
                         <Document
-                            file={selectedFile}
+                            file={cvUrl || selectedFile}
                             onLoadSuccess={onDocumentLoad}
                         >
                             <Page pageNumber={pageNumber} />
@@ -96,7 +96,8 @@ CVReview.propTypes = {
     onSubmit: PropTypes.func.isRequired,
     pageNumber: PropTypes.number,
     selectedFile: PropTypes.object,
-    shufflePage: PropTypes.func.isRequired
+    shufflePage: PropTypes.func.isRequired,
+    cvUrl: PropTypes.string.isRequired
 };
 //make this component available to the app
 export default CVReview;

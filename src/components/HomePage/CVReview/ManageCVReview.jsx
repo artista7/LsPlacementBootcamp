@@ -8,6 +8,7 @@ import CVReview from './CVReview';
 import { CVReviewStatus } from '../../../constants/constants';
 import { Auth, Storage } from 'aws-amplify';
 import { NotificationManager } from 'react-notifications';
+import _ from 'lodash';
 
 // create a component
 class ManageCVReview extends React.Component {
@@ -21,7 +22,8 @@ class ManageCVReview extends React.Component {
             numPages: null,
             pageNumber: 1,
             percent: 0,
-            selectedFile: null
+            selectedFile: null,
+            cvUrl: ""
         }
 
         this.handleFileUpload = this.handleFileUpload.bind(this);
@@ -30,6 +32,7 @@ class ManageCVReview extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.redirectToRoute = this.redirectToRoute.bind(this);
         this.setCvReview = this.setCvReview.bind(this);
+        this.setCvUrl = this.setCvUrl.bind(this);
         this.setIsS3Uploading = this.setIsS3Uploading.bind(this);
         this.setPercent = this.setPercent.bind(this);
         this.shufflePage = this.shufflePage.bind(this);
@@ -79,7 +82,7 @@ class ManageCVReview extends React.Component {
                         comments: "none",
                         createdAt: +(new Date),
                         createdBy: userId,
-                        fileName: this.state.selectedFile.name,
+                        fileName: s3FileName,
                         lastUpdatedAt: +(new Date),
                         lastUpdatedBy: userId,
                         reviewedBy: "none",
@@ -112,6 +115,12 @@ class ManageCVReview extends React.Component {
         })
     }
 
+    setCvUrl(cvUrl) {
+        this.setState({
+            cvUrl: cvUrl
+        })
+    }
+
     setIsS3Uploading(bool) {
         this.setState({
             isS3Uploading: bool == true ? true : false
@@ -139,6 +148,24 @@ class ManageCVReview extends React.Component {
 
     componentDidMount() {
         this.setCvReview(this.props.cvReview);
+
+        var fileName = this.props.cvReview.fileName;
+        if (!_.isEmpty(fileName)) {
+            var setPercent = this.setPercent;
+            var setCvUrl = this.setCvUrl;
+            Storage.get(fileName, {
+                level: 'protected',
+                contentType: 'application/pdf',
+                progressCallback(progress) {
+                    setPercent(Math.floor(progress.loaded * 100 / progress.total));
+                }
+            }).then(result => {
+                setCvUrl(result);
+            }).catch(error => {
+                NotificationManager.error("Can't fetch cv preview", "Error", 2000);
+                console.log(error)
+            });
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -162,7 +189,8 @@ class ManageCVReview extends React.Component {
                 onSubmit={this.onSubmit}
                 pageNumber={this.state.pageNumber}
                 selectedFile={this.state.selectedFile}
-                shufflePage={this.shufflePage}>
+                shufflePage={this.shufflePage}
+                cvUrl={this.state.cvUrl}>
             </CVReview>
         );
     }
