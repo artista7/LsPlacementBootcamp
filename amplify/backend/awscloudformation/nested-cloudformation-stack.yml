@@ -156,10 +156,10 @@
 							"Outputs.UserPoolId"
 						]
 					},
-					"schemaGraphql": "s3://learning-sage-20190130020530-deployment/amplify-appsync-files/schema.graphql.1549521210200",
+					"schemaGraphql": "s3://learning-sage-20190130020530-deployment/amplify-appsync-files/schema.graphql.1549653247580",
 					"ResolverBucket": "learning-sage-20190130020530-deployment",
 					"ResolverRootKey": "amplify-appsync-files",
-					"DeploymentTimestamp": "1549521210200",
+					"DeploymentTimestamp": "1549653247580",
 					"env": "local"
 				}
 			}

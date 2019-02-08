@@ -1,13 +1,13 @@
 type CvReview {
   comments: String
   createdAt: AWSTimestamp
+  createdBy: String!
   fileName: String
   id: ID!
   lastUpdatedAt: AWSTimestamp
   lastUpdatedBy: String
   reviewedBy: String
   status: CvReviewStatus
-  userId: String!
 }
 
 enum CvReviewStatus {
@@ -84,12 +84,12 @@ input ModelBooleanFilterInput {
 input ModelCvReviewFilterInput {
   comments: ModelStringFilterInput
   createdAt: ModelIntFilterInput
+  createdBy: ModelStringFilterInput
   fileName: ModelStringFilterInput
   id: ModelIDFilterInput
   lastUpdatedAt: ModelIntFilterInput
   lastUpdatedBy: ModelStringFilterInput
   reviewedBy: ModelStringFilterInput
-  userId: ModelStringFilterInput
   and: [ModelCvReviewFilterInput]
   or: [ModelCvReviewFilterInput]
   not: ModelCvReviewFilterInput
@@ -103,25 +103,25 @@ type Query {
 input CreateCvReviewInput {
   comments: String
   createdAt: AWSTimestamp
+  createdBy: String!
   fileName: String
   id: ID
   lastUpdatedAt: AWSTimestamp
   lastUpdatedBy: String
   reviewedBy: String
   status: CvReviewStatus
-  userId: String!
 }
 
 input UpdateCvReviewInput {
   comments: String
   createdAt: AWSTimestamp
+  createdBy: String
   fileName: String
   id: ID!
   lastUpdatedAt: AWSTimestamp
   lastUpdatedBy: String
   reviewedBy: String
   status: CvReviewStatus
-  userId: String
 }
 
 input DeleteCvReviewInput {

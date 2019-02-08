@@ -15,7 +15,7 @@ class ManageCVReview extends React.Component {
         super(props, context);
 
         this.state = {
-            cvReview: { id: null, userId: null, createdAt: null, lastUpdatedAt: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null },
+            cvReview: { id: null, createdBy: null, createdAt: null, lastUpdatedAt: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null },
             isS3Uploading: false,
             loaded: 0,
             numPages: null,
@@ -25,8 +25,11 @@ class ManageCVReview extends React.Component {
         }
 
         this.handleFileUpload = this.handleFileUpload.bind(this);
+        this.onCancel = this.onCancel.bind(this);
         this.onDocumentLoad = this.onDocumentLoad.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.redirectToRoute = this.redirectToRoute.bind(this);
+        this.setCvReview = this.setCvReview.bind(this);
         this.setIsS3Uploading = this.setIsS3Uploading.bind(this);
         this.setPercent = this.setPercent.bind(this);
         this.shufflePage = this.shufflePage.bind(this);
@@ -46,6 +49,11 @@ class ManageCVReview extends React.Component {
         }
     }
 
+    onCancel(event) {
+        event.preventDefault();
+        this.redirectToRoute('/cvReviews');
+    }
+
     onDocumentLoad(numPages) {
         this.setState({ numPages: numPages.numPages, pageNumber: 1 });
     }
@@ -54,6 +62,7 @@ class ManageCVReview extends React.Component {
         try {
             this.setIsS3Uploading(true);
             var setPercent = this.setPercent;
+            var redirectToRoute = this.redirectToRoute;
             var s3FileName = this.state.selectedFile.name != undefined ? +(new Date) + '_' + this.state.selectedFile.name : '';
             let userId = this.props.userInfo.id != undefined ? this.props.userInfo.id : "";  //need to handle case when userId is not retrieved
             Storage.put(s3FileName, this.state.selectedFile, {
@@ -69,14 +78,18 @@ class ManageCVReview extends React.Component {
                     let createCvReviewInput = {
                         comments: "none",
                         createdAt: +(new Date),
+                        createdBy: userId,
                         fileName: this.state.selectedFile.name,
                         lastUpdatedAt: +(new Date),
                         lastUpdatedBy: userId,
                         reviewedBy: "none",
-                        status: "submitted",
-                        userId: userId
-                    }
-                    this.props.cvReviewActions._createCvReview(createCvReviewInput);
+                        status: "submitted"
+                    };
+
+                    this.props.cvReviewActions._createCvReview(createCvReviewInput).then(response => {
+                        redirectToRoute('/cvReviews');
+                    }).catch(response => {
+                    });
                     this.setIsS3Uploading(false);
                 })
                 .catch(err => {
@@ -87,6 +100,16 @@ class ManageCVReview extends React.Component {
         catch (err) {
             alert("debugger" + err);
         }
+    }
+
+    redirectToRoute(route) {
+        this.props.history.push(route);
+    }
+
+    setCvReview(cvReview) {
+        this.setState({
+            cvReview: cvReview
+        })
     }
 
     setIsS3Uploading(bool) {
@@ -114,6 +137,10 @@ class ManageCVReview extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.setCvReview(this.props.cvReview);
+    }
+
     componentDidUpdate(prevProps, prevState) {
         //updating state on cvReview in redux state changes
         if (JSON.stringify(prevProps.cvReview) != JSON.stringify(this.props.cvReview)) {
@@ -130,6 +157,7 @@ class ManageCVReview extends React.Component {
                 handleFileUpload={this.handleFileUpload}
                 isS3Uploading={this.state.isS3Uploading}
                 numPages={this.state.numPages}
+                onCancel={this.onCancel}
                 onDocumentLoad={this.onDocumentLoad}
                 onSubmit={this.onSubmit}
                 pageNumber={this.state.pageNumber}
@@ -140,9 +168,24 @@ class ManageCVReview extends React.Component {
     }
 }
 
+function getCvReviewById(cvReviews, id) {
+    const cvReview = cvReviews.filter(cvReview => cvReview.id == id);
+    if (cvReview) { return cvReview[0]; }
+    return null;
+}
+
 function mapStateToProps(state, ownProps) {
-    let cvReview = state.cvReviewReducer.length > 0 ? state.cvReviewReducer[0] : { id: null, userId: null, createdAt: null, lastUpdatedAt: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null };
-    let userInfo = state.userInfoReducer.userInfo;
+    var cvReviewId = null;
+    if (ownProps.match && ownProps.match.params.id != undefined) {
+        cvReviewId = ownProps.match.params.id;
+    }
+
+    let cvReview = { id: null, createdBy: null, createdAt: null, lastUpdatedAt: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null };
+    if (cvReviewId && state.cvReviews && state.cvReviews.length > 0) {
+        cvReview = getCvReviewById(state.cvReviews, cvReviewId);
+    }
+
+    let userInfo = state.userInfo;
     //override cvReview from redux state
     return {
         cvReview: cvReview,

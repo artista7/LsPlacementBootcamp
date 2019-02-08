@@ -5,13 +5,13 @@ export const getCvReview = `query GetCvReview($id: ID!) {
   getCvReview(id: $id) {
     comments
     createdAt
+    createdBy
     fileName
     id
     lastUpdatedAt
     lastUpdatedBy
     reviewedBy
     status
-    userId
   }
 }
 `;
@@ -24,13 +24,13 @@ export const listCvReviews = `query ListCvReviews(
     items {
       comments
       createdAt
+      createdBy
       fileName
       id
       lastUpdatedAt
       lastUpdatedBy
       reviewedBy
       status
-      userId
     }
     nextToken
   }

@@ -11,6 +11,7 @@ const CVReviewTable = ({ cvReviewList }) => {
                 <tr>
                     <th>&nbsp;</th>
                     <th>Status</th>
+                    {/* <th>Created By</th> */}
                     <th>Created At</th>
                 </tr>
             </thead>
@@ -20,7 +21,8 @@ const CVReviewTable = ({ cvReviewList }) => {
                         <tr key={cvReview.id}>
                             <td><Link to={'/cvReview/' + cvReview.id}>View</Link></td>
                             <td>{cvReview.status}</td>
-                            <td>{new Date(cvReview.createdAt).toDateString()}</td>
+                            {/* <td>{cvReview.createdBy}</td> */}
+                            <td>{new Date(cvReview.createdAt).toLocaleString()}</td>
                         </tr>
                     )
                 })}

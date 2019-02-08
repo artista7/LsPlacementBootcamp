@@ -11,7 +11,7 @@ import { Formik, ErrorMessage, Form } from 'formik';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 // create a component
-const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onDocumentLoad, onSubmit, pageNumber, selectedFile, shufflePage }) => {
+const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onCancel, onDocumentLoad, onSubmit, pageNumber, selectedFile, shufflePage }) => {
     return (
         <div>
             <div className="row">
@@ -44,6 +44,7 @@ const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onDocum
 
                                         <div className="mt-3" style={{ textAlign: "center" }}>
                                             <button type="submit" disabled={isSubmitting} className="btn btn-primary">{cvReview.status == CVReviewStatus.draft ? "Submit" : "Update"}</button>
+                                            {/* <button className="btn btn-primary" onClick={onCancel}>Cancel</button> */}
                                         </div>
                                         {/* <div id="debug">
                                             {JSON.stringify(values)}
@@ -90,6 +91,7 @@ CVReview.propTypes = {
     handleFileUpload: PropTypes.func.isRequired,
     isS3Uploading: PropTypes.bool.isRequired,
     numPages: PropTypes.number,
+    onCancel: PropTypes.func.isRequired,
     onDocumentLoad: PropTypes.func,
     onSubmit: PropTypes.func.isRequired,
     pageNumber: PropTypes.number,

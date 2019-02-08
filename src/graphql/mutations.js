@@ -5,13 +5,13 @@ export const createCvReview = `mutation CreateCvReview($input: CreateCvReviewInp
   createCvReview(input: $input) {
     comments
     createdAt
+    createdBy
     fileName
     id
     lastUpdatedAt
     lastUpdatedBy
     reviewedBy
     status
-    userId
   }
 }
 `;
@@ -19,13 +19,13 @@ export const updateCvReview = `mutation UpdateCvReview($input: UpdateCvReviewInp
   updateCvReview(input: $input) {
     comments
     createdAt
+    createdBy
     fileName
     id
     lastUpdatedAt
     lastUpdatedBy
     reviewedBy
     status
-    userId
   }
 }
 `;
@@ -33,13 +33,13 @@ export const deleteCvReview = `mutation DeleteCvReview($input: DeleteCvReviewInp
   deleteCvReview(input: $input) {
     comments
     createdAt
+    createdBy
     fileName
     id
     lastUpdatedAt
     lastUpdatedBy
     reviewedBy
     status
-    userId
   }
 }
 `;

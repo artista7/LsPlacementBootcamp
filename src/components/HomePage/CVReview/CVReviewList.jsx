@@ -15,12 +15,12 @@ class CVReviewList extends React.Component {
             isInitializing: false
         }
 
-        this.redirectToCreateCVReviewPage = this.redirectToCreateCVReviewPage.bind(this);
+        this.redirectToRoute = this.redirectToRoute.bind(this);
         this.setInitializing = this.setInitializing.bind(this);
     }
 
-    redirectToCreateCVReviewPage() {
-        //redirect logic - history.push('/cvReview');
+    redirectToRoute(route) {
+        this.props.history.push(route);
     }
 
     setInitializing(bool) {
@@ -37,8 +37,8 @@ class CVReviewList extends React.Component {
                     type="submit"
                     value="Create Cv Review"
                     className="btn btn-primary"
-                    onClick={this.redirectToCreateCVReviewPage}></input>
-                <CVReviewTable cvReviewList={cvReviewList}></CVReviewTable>
+                    onClick={() => this.redirectToRoute('/cvReview')}></input>
+                {cvReviewList.length > 0 && <CVReviewTable cvReviewList={cvReviewList}></CVReviewTable>}
             </div>
         );
     }
@@ -46,7 +46,7 @@ class CVReviewList extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        cvReviewList: state.cvReviewReducer.cvReviews || []
+        cvReviewList: state.cvReviews || []
     };
 }
 

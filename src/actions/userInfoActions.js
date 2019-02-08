@@ -1,7 +1,7 @@
 import * as types from "./actionTypes";
 
-export function _updateUserInfo(userInfo) {
+export function _loadUserInfo(userInfo) {
     return function (dispatch) {
-        dispatch({ type: types.UPDATE_USER_INFO, userInfo })
+        dispatch({ type: types.LOAD_USER_INFO, userInfo })
     }
 }

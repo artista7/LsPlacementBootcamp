@@ -69,10 +69,10 @@ class HomePage extends React.Component {
         this.setState({ expanded: expanded });
     };
 
-    loadUserCvReviews() {
+    loadUserCvReviews(userId) {
         //WORK - cvReview of current user should be loaded
         //this.setInitializing(true);
-        this.props.cvReviewActions._listCvReviews().then(data => {
+        this.props.cvReviewActions._listCvReviews(userId).then(data => {
             this.setInitializing(false);
         }).catch(error => {
             this.setInitializing(false);
@@ -82,8 +82,9 @@ class HomePage extends React.Component {
     loadUserInfo() {
         Auth.currentUserInfo().then(data => {
             //this.setInitializing(false);
-            this.props.userInfoActions._updateUserInfo(data);
-            this.loadUserCvReviews();
+            this.props.userInfoActions._loadUserInfo(data);
+            var userId = data.id;
+            this.loadUserCvReviews(userId);
         }).catch(err => {
             this.setInitializing(false);
             NotificationManager.error('Error fetching user data', 'Error!', 2000);
@@ -134,10 +135,15 @@ class HomePage extends React.Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         //preventing re-render of child components on redux state change
-        if (JSON.stringify(nextProps.state) != JSON.stringify(this.props.state)) {
-            return false;
+        //component update on state changed
+        if (JSON.stringify(this.state) != JSON.stringify(nextState)) {
+            return true;
         }
-        return true;
+        //component update on router path change
+        if (this.props.location.pathname != nextProps.history.location.pathname) {
+            return true;
+        }
+        return false;
     }
 
     render() {
@@ -154,9 +160,9 @@ class HomePage extends React.Component {
                     <Breadcrumbs pageTitle={pageTitle} selected={selected}></Breadcrumbs>
                     <Switch>
                         <Route path="/" exact component={props => <div></div>} />
-                        <Route exact path="/cvReviews" component={props => <CVReviewList></CVReviewList>} />
-                        <Route exact path="/cvReview" component={props => <ManageCVReview></ManageCVReview>} />
-                        <Route exact path="/cvReview/:id" component={props => <ManageCVReview></ManageCVReview>} />
+                        <Route exact path="/cvReviews" component={props => <CVReviewList {...props}></CVReviewList>} />
+                        <Route exact path="/cvReview" component={props => <ManageCVReview {...props}></ManageCVReview>} />
+                        <Route exact path="/cvReview/:id" component={props => <ManageCVReview {...props}></ManageCVReview>} />
                         <Route path="/settings/*" component={props => <div>settings</div>} />
                         <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
                     </Switch>

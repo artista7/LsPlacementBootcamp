@@ -1,13 +1,13 @@
 type CvReview @model {
   comments: String
   createdAt: AWSTimestamp
+  createdBy: String!
   fileName: String
   id: ID!
   lastUpdatedAt: AWSTimestamp
   lastUpdatedBy: String
   reviewedBy: String
   status: CvReviewStatus
-  userId: String!
 }
 
 enum CvReviewStatus{
