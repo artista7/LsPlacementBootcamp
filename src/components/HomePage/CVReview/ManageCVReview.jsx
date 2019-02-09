@@ -67,7 +67,7 @@ class ManageCVReview extends React.Component {
             var setPercent = this.setPercent;
             var redirectToRoute = this.redirectToRoute;
             var s3FileName = this.state.selectedFile.name != undefined ? +(new Date) + '_' + this.state.selectedFile.name : '';
-            let username = this.props.userInfo.username != undefined ? this.props.userInfo.id : "";  //need to handle case when username is not retrieved
+            let username = this.props.userInfo.username != undefined ? this.props.userInfo.username : "";  //need to handle case when username is not retrieved
             Storage.put(s3FileName, this.state.selectedFile, {
                 level: 'protected',
                 contentType: 'application/pdf',
