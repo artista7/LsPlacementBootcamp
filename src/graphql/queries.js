@@ -41,8 +41,7 @@ export const getUser = `query GetUser($id: ID!) {
     cvReviewsTaken
     email
     groups
-    Id
-    name
+    id
     phone_number
     username
   }
@@ -58,8 +57,7 @@ export const listUsers = `query ListUsers(
       cvReviewsTaken
       email
       groups
-      Id
-      name
+      id
       phone_number
       username
     }

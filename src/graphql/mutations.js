@@ -48,8 +48,7 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
     cvReviewsTaken
     email
     groups
-    Id
-    name
+    id
     phone_number
     username
   }
@@ -60,8 +59,7 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
     cvReviewsTaken
     email
     groups
-    Id
-    name
+    id
     phone_number
     username
   }
@@ -72,8 +70,7 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
     cvReviewsTaken
     email
     groups
-    Id
-    name
+    id
     phone_number
     username
   }

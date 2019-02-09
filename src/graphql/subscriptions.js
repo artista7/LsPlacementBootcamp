@@ -48,8 +48,7 @@ export const onCreateUser = `subscription OnCreateUser {
     cvReviewsTaken
     email
     groups
-    Id
-    name
+    id
     phone_number
     username
   }
@@ -60,8 +59,7 @@ export const onUpdateUser = `subscription OnUpdateUser {
     cvReviewsTaken
     email
     groups
-    Id
-    name
+    id
     phone_number
     username
   }
@@ -72,8 +70,7 @@ export const onDeleteUser = `subscription OnDeleteUser {
     cvReviewsTaken
     email
     groups
-    Id
-    name
+    id
     phone_number
     username
   }

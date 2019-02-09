@@ -20,8 +20,7 @@ type User @model {
   cvReviewsTaken: Int
   email: AWSEmail
   groups: AWSJSON
-  Id: ID!
-  name: String
+  id: ID!
   phone_number: AWSPhone
   username: String
 }

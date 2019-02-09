@@ -156,10 +156,10 @@
 							"Outputs.UserPoolId"
 						]
 					},
-					"schemaGraphql": "s3://learning-sage-20190209152947-deployment/amplify-appsync-files/schema.graphql.1549706754546",
+					"schemaGraphql": "s3://learning-sage-20190209152947-deployment/amplify-appsync-files/schema.graphql.1549718243351",
 					"ResolverBucket": "learning-sage-20190209152947-deployment",
 					"ResolverRootKey": "amplify-appsync-files",
-					"DeploymentTimestamp": "1549706754546",
+					"DeploymentTimestamp": "1549718243351",
 					"env": "local"
 				}
 			}
@@ -180,6 +180,15 @@
 					},
 					"authPermissions": "rw",
 					"unauthPermissions": "",
+					"env": "local"
+				}
+			}
+		},
+		"functionfunctionls": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190209152947-deployment/amplify-cfn-templates/function/functionls-cloudformation-template.json",
+				"Parameters": {
 					"env": "local"
 				}
 			}
