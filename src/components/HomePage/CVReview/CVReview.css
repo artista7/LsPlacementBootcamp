@@ -6,3 +6,8 @@
 .react-pdf__Page__annotations{
     display: none
 }
+
+.btn-primary:disabled {
+    background-color: #F05F40;
+    border-color: #F05F40;
+}
