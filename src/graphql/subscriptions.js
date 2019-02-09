@@ -74,7 +74,7 @@ export const onCreateUser = `subscription OnCreateUser {
     groups
     id
     phone_number
-    pricingPlan
+    pricingPlanId
     username
   }
 }
@@ -86,7 +86,7 @@ export const onUpdateUser = `subscription OnUpdateUser {
     groups
     id
     phone_number
-    pricingPlan
+    pricingPlanId
     username
   }
 }
@@ -98,7 +98,7 @@ export const onDeleteUser = `subscription OnDeleteUser {
     groups
     id
     phone_number
-    pricingPlan
+    pricingPlanId
     username
   }
 }

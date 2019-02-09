@@ -28,7 +28,7 @@ type User {
   groups: AWSJSON
   id: ID!
   phone_number: AWSPhone
-  pricingPlan: String
+  pricingPlanId: String
   username: String
 }
 
@@ -219,7 +219,7 @@ input ModelUserFilterInput {
   groups: ModelStringFilterInput
   id: ModelIDFilterInput
   phone_number: ModelStringFilterInput
-  pricingPlan: ModelStringFilterInput
+  pricingPlanId: ModelStringFilterInput
   username: ModelStringFilterInput
   and: [ModelUserFilterInput]
   or: [ModelUserFilterInput]
@@ -232,7 +232,7 @@ input CreateUserInput {
   groups: AWSJSON
   id: ID
   phone_number: AWSPhone
-  pricingPlan: String
+  pricingPlanId: String
   username: String
 }
 
@@ -242,7 +242,7 @@ input UpdateUserInput {
   groups: AWSJSON
   id: ID!
   phone_number: AWSPhone
-  pricingPlan: String
+  pricingPlanId: String
   username: String
 }
 

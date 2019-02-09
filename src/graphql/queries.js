@@ -66,7 +66,7 @@ export const getUser = `query GetUser($id: ID!) {
     groups
     id
     phone_number
-    pricingPlan
+    pricingPlanId
     username
   }
 }
@@ -83,7 +83,7 @@ export const listUsers = `query ListUsers(
       groups
       id
       phone_number
-      pricingPlan
+      pricingPlanId
       username
     }
     nextToken

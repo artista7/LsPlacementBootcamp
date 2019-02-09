@@ -74,7 +74,7 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
     groups
     id
     phone_number
-    pricingPlan
+    pricingPlanId
     username
   }
 }
@@ -86,7 +86,7 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
     groups
     id
     phone_number
-    pricingPlan
+    pricingPlanId
     username
   }
 }
@@ -98,7 +98,7 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
     groups
     id
     phone_number
-    pricingPlan
+    pricingPlanId
     username
   }
 }
