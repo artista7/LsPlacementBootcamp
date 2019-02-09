@@ -28,12 +28,12 @@
 				"FunctionName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"functioncognito",
+						"cognitoFunction",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"functioncognito",
+									"cognitoFunction",
 									"-",
 									{
 										"Ref": "env"
@@ -60,7 +60,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "learning-sage-20190209152947-deployment",
-					"S3Key": "amplify-builds/functionls-1549714847-latest-build.zip"
+					"S3Key": "amplify-builds/cognitoFunction-1549721250-latest-build.zip"
 				}
 			}
 		},
@@ -70,12 +70,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"learningsageLambdaRole7b20c575",
+						"learningsageLambdaRolebc4a7eab",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"learningsageLambdaRole7b20c575",
+									"learningsageLambdaRolebc4a7eab",
 									"-",
 									{
 										"Ref": "env"

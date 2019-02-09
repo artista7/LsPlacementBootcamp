@@ -184,10 +184,10 @@
 				}
 			}
 		},
-		"functionfunctionls": {
+		"functioncognitoFunction": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190209152947-deployment/amplify-cfn-templates/function/functionls-cloudformation-template.json",
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190209152947-deployment/amplify-cfn-templates/function/cognitoFunction-cloudformation-template.json",
 				"Parameters": {
 					"env": "local"
 				}
