@@ -43,7 +43,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router history={history}>
-          <div>
+          <React.Fragment>
             {authState != "signedIn" && <Switch>
               <Route exact path="/" component={LandingPage}></Route>
               <Route exact path="/login" render={() => (<LoginPage updateStateVariable={this.updateStateVariable}></LoginPage>)}></Route>
@@ -52,7 +52,7 @@ class App extends Component {
             {authState == "signedIn" && <Switch>
               <Route exact path="*" render={({ history, location }) => (<HomePage history={history} location={location} updateStateVariable={this.updateStateVariable}></HomePage>)}></Route>
             </Switch>}
-          </div>
+          </React.Fragment>
         </Router>
       </Provider>
     );
