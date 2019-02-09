@@ -32,24 +32,28 @@ export const listCvReviews = `query ListCvReviews(
   }
 }
 `;
-export const getPricingPlans = `query GetPricingPlans($id: ID!) {
-  getPricingPlans(id: $id) {
+export const getPricingPlan = `query GetPricingPlan($id: ID!) {
+  getPricingPlan(id: $id) {
+    cvReviewsAllowed
+    id
     name
-    availableCvReviews
-    Price
+    price
+    weightage
   }
 }
 `;
-export const listPricingPlanss = `query ListPricingPlanss(
-  $filter: ModelpricingPlansFilterInput
+export const listPricingPlans = `query ListPricingPlans(
+  $filter: ModelpricingPlanFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listPricingPlanss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listPricingPlans(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
+      cvReviewsAllowed
+      id
       name
-      availableCvReviews
-      Price
+      price
+      weightage
     }
     nextToken
   }
@@ -62,6 +66,7 @@ export const getUser = `query GetUser($id: ID!) {
     groups
     id
     phone_number
+    pricingPlan
     username
   }
 }
@@ -78,6 +83,7 @@ export const listUsers = `query ListUsers(
       groups
       id
       phone_number
+      pricingPlan
       username
     }
     nextToken

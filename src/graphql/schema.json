@@ -77,7 +77,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "getPricingPlans",
+          "name" : "getPricingPlan",
           "description" : null,
           "args" : [ {
             "name" : "id",
@@ -95,20 +95,20 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "pricingPlans",
+            "name" : "pricingPlan",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "listPricingPlanss",
+          "name" : "listPricingPlans",
           "description" : null,
           "args" : [ {
             "name" : "filter",
             "description" : null,
             "type" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelpricingPlansFilterInput",
+              "name" : "ModelpricingPlanFilterInput",
               "ofType" : null
             },
             "defaultValue" : null
@@ -133,7 +133,7 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "ModelpricingPlansConnection",
+            "name" : "ModelpricingPlanConnection",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -727,9 +727,35 @@
         "possibleTypes" : null
       }, {
         "kind" : "OBJECT",
-        "name" : "pricingPlans",
+        "name" : "pricingPlan",
         "description" : null,
         "fields" : [ {
+          "name" : "cvReviewsAllowed",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
+            "ofType" : null
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
+          "name" : "id",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "ID",
+              "ofType" : null
+            }
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
           "name" : "name",
           "description" : null,
           "args" : [ ],
@@ -741,7 +767,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "availableCvReviews",
+          "name" : "price",
           "description" : null,
           "args" : [ ],
           "type" : {
@@ -752,7 +778,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "Price",
+          "name" : "weightage",
           "description" : null,
           "args" : [ ],
           "type" : {
@@ -769,7 +795,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "OBJECT",
-        "name" : "ModelpricingPlansConnection",
+        "name" : "ModelpricingPlanConnection",
         "description" : null,
         "fields" : [ {
           "name" : "items",
@@ -780,7 +806,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "OBJECT",
-              "name" : "pricingPlans",
+              "name" : "pricingPlan",
               "ofType" : null
             }
           },
@@ -804,10 +830,28 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "ModelpricingPlansFilterInput",
+        "name" : "ModelpricingPlanFilterInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
+          "name" : "cvReviewsAllowed",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelIntFilterInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "id",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelIDFilterInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
           "name" : "name",
           "description" : null,
           "type" : {
@@ -817,7 +861,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "availableCvReviews",
+          "name" : "price",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -826,7 +870,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "Price",
+          "name" : "weightage",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -842,7 +886,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelpricingPlansFilterInput",
+              "name" : "ModelpricingPlanFilterInput",
               "ofType" : null
             }
           },
@@ -855,7 +899,7 @@
             "name" : null,
             "ofType" : {
               "kind" : "INPUT_OBJECT",
-              "name" : "ModelpricingPlansFilterInput",
+              "name" : "ModelpricingPlanFilterInput",
               "ofType" : null
             }
           },
@@ -865,7 +909,7 @@
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
-            "name" : "ModelpricingPlansFilterInput",
+            "name" : "ModelpricingPlanFilterInput",
             "ofType" : null
           },
           "defaultValue" : null
@@ -1031,6 +1075,17 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
+          "name" : "pricingPlan",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
           "name" : "username",
           "description" : null,
           "args" : [ ],
@@ -1151,6 +1206,15 @@
           "defaultValue" : null
         }, {
           "name" : "phone_number",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelStringFilterInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "pricingPlan",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -1283,7 +1347,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "createPricingPlans",
+          "name" : "createPricingPlan",
           "description" : null,
           "args" : [ {
             "name" : "input",
@@ -1293,7 +1357,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "INPUT_OBJECT",
-                "name" : "CreatePricingPlansInput",
+                "name" : "CreatePricingPlanInput",
                 "ofType" : null
               }
             },
@@ -1301,13 +1365,13 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "pricingPlans",
+            "name" : "pricingPlan",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "updatePricingPlans",
+          "name" : "updatePricingPlan",
           "description" : null,
           "args" : [ {
             "name" : "input",
@@ -1317,7 +1381,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "INPUT_OBJECT",
-                "name" : "UpdatePricingPlansInput",
+                "name" : "UpdatePricingPlanInput",
                 "ofType" : null
               }
             },
@@ -1325,13 +1389,13 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "pricingPlans",
+            "name" : "pricingPlan",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "deletePricingPlans",
+          "name" : "deletePricingPlan",
           "description" : null,
           "args" : [ {
             "name" : "input",
@@ -1341,7 +1405,7 @@
               "name" : null,
               "ofType" : {
                 "kind" : "INPUT_OBJECT",
-                "name" : "DeletePricingPlansInput",
+                "name" : "DeletePricingPlanInput",
                 "ofType" : null
               }
             },
@@ -1349,7 +1413,7 @@
           } ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "pricingPlans",
+            "name" : "pricingPlan",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -1603,10 +1667,28 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "CreatePricingPlansInput",
+        "name" : "CreatePricingPlanInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
+          "name" : "cvReviewsAllowed",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "id",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "ID",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
           "name" : "name",
           "description" : null,
           "type" : {
@@ -1616,7 +1698,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "availableCvReviews",
+          "name" : "price",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -1625,7 +1707,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "Price",
+          "name" : "weightage",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -1639,10 +1721,32 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "UpdatePricingPlansInput",
+        "name" : "UpdatePricingPlanInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
+          "name" : "cvReviewsAllowed",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "id",
+          "description" : null,
+          "type" : {
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "ID",
+              "ofType" : null
+            }
+          },
+          "defaultValue" : null
+        }, {
           "name" : "name",
           "description" : null,
           "type" : {
@@ -1652,7 +1756,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "availableCvReviews",
+          "name" : "price",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -1661,7 +1765,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "Price",
+          "name" : "weightage",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -1675,7 +1779,7 @@
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
-        "name" : "DeletePricingPlansInput",
+        "name" : "DeletePricingPlanInput",
         "description" : null,
         "fields" : null,
         "inputFields" : [ {
@@ -1738,6 +1842,15 @@
           "type" : {
             "kind" : "SCALAR",
             "name" : "AWSPhone",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "pricingPlan",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
             "ofType" : null
           },
           "defaultValue" : null
@@ -1805,6 +1918,15 @@
           "type" : {
             "kind" : "SCALAR",
             "name" : "AWSPhone",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "pricingPlan",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
             "ofType" : null
           },
           "defaultValue" : null
@@ -1877,34 +1999,34 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "onCreatePricingPlans",
+          "name" : "onCreatePricingPlan",
           "description" : null,
           "args" : [ ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "pricingPlans",
+            "name" : "pricingPlan",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "onUpdatePricingPlans",
+          "name" : "onUpdatePricingPlan",
           "description" : null,
           "args" : [ ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "pricingPlans",
+            "name" : "pricingPlan",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "onDeletePricingPlans",
+          "name" : "onDeletePricingPlan",
           "description" : null,
           "args" : [ ],
           "type" : {
             "kind" : "OBJECT",
-            "name" : "pricingPlans",
+            "name" : "pricingPlan",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -1946,6 +2068,61 @@
         "inputFields" : null,
         "interfaces" : [ ],
         "enumValues" : null,
+        "possibleTypes" : null
+      }, {
+        "kind" : "INPUT_OBJECT",
+        "name" : "ModelBooleanFilterInput",
+        "description" : null,
+        "fields" : null,
+        "inputFields" : [ {
+          "name" : "ne",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Boolean",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "eq",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Boolean",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        } ],
+        "interfaces" : null,
+        "enumValues" : null,
+        "possibleTypes" : null
+      }, {
+        "kind" : "SCALAR",
+        "name" : "Boolean",
+        "description" : "Built-in Boolean",
+        "fields" : null,
+        "inputFields" : null,
+        "interfaces" : null,
+        "enumValues" : null,
+        "possibleTypes" : null
+      }, {
+        "kind" : "ENUM",
+        "name" : "ModelSortDirection",
+        "description" : null,
+        "fields" : null,
+        "inputFields" : null,
+        "interfaces" : null,
+        "enumValues" : [ {
+          "name" : "ASC",
+          "description" : null,
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
+          "name" : "DESC",
+          "description" : null,
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        } ],
         "possibleTypes" : null
       }, {
         "kind" : "INPUT_OBJECT",
@@ -2049,61 +2226,6 @@
         "inputFields" : null,
         "interfaces" : null,
         "enumValues" : null,
-        "possibleTypes" : null
-      }, {
-        "kind" : "INPUT_OBJECT",
-        "name" : "ModelBooleanFilterInput",
-        "description" : null,
-        "fields" : null,
-        "inputFields" : [ {
-          "name" : "ne",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Boolean",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "eq",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Boolean",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        } ],
-        "interfaces" : null,
-        "enumValues" : null,
-        "possibleTypes" : null
-      }, {
-        "kind" : "SCALAR",
-        "name" : "Boolean",
-        "description" : "Built-in Boolean",
-        "fields" : null,
-        "inputFields" : null,
-        "interfaces" : null,
-        "enumValues" : null,
-        "possibleTypes" : null
-      }, {
-        "kind" : "ENUM",
-        "name" : "ModelSortDirection",
-        "description" : null,
-        "fields" : null,
-        "inputFields" : null,
-        "interfaces" : null,
-        "enumValues" : [ {
-          "name" : "ASC",
-          "description" : null,
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        }, {
-          "name" : "DESC",
-          "description" : null,
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        } ],
         "possibleTypes" : null
       }, {
         "kind" : "OBJECT",
@@ -2910,23 +3032,6 @@
         "onFragment" : false,
         "onField" : false
       }, {
-        "name" : "deprecated",
-        "description" : null,
-        "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
-        "args" : [ {
-          "name" : "reason",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "String",
-            "ofType" : null
-          },
-          "defaultValue" : "\"No longer supported\""
-        } ],
-        "onOperation" : false,
-        "onFragment" : false,
-        "onField" : false
-      }, {
         "name" : "aws_publish",
         "description" : "Tells the service which subscriptions will be published to when this mutation is called. This directive is deprecated use @aws_susbscribe directive instead.",
         "locations" : [ "FIELD_DEFINITION" ],
@@ -2943,6 +3048,23 @@
             }
           },
           "defaultValue" : null
+        } ],
+        "onOperation" : false,
+        "onFragment" : false,
+        "onField" : false
+      }, {
+        "name" : "deprecated",
+        "description" : null,
+        "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
+        "args" : [ {
+          "name" : "reason",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
+          },
+          "defaultValue" : "\"No longer supported\""
         } ],
         "onOperation" : false,
         "onFragment" : false,

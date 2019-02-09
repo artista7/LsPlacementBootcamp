@@ -37,27 +37,33 @@ export const onDeleteCvReview = `subscription OnDeleteCvReview {
   }
 }
 `;
-export const onCreatePricingPlans = `subscription OnCreatePricingPlans {
-  onCreatePricingPlans {
+export const onCreatePricingPlan = `subscription OnCreatePricingPlan {
+  onCreatePricingPlan {
+    cvReviewsAllowed
+    id
     name
-    availableCvReviews
-    Price
+    price
+    weightage
   }
 }
 `;
-export const onUpdatePricingPlans = `subscription OnUpdatePricingPlans {
-  onUpdatePricingPlans {
+export const onUpdatePricingPlan = `subscription OnUpdatePricingPlan {
+  onUpdatePricingPlan {
+    cvReviewsAllowed
+    id
     name
-    availableCvReviews
-    Price
+    price
+    weightage
   }
 }
 `;
-export const onDeletePricingPlans = `subscription OnDeletePricingPlans {
-  onDeletePricingPlans {
+export const onDeletePricingPlan = `subscription OnDeletePricingPlan {
+  onDeletePricingPlan {
+    cvReviewsAllowed
+    id
     name
-    availableCvReviews
-    Price
+    price
+    weightage
   }
 }
 `;
@@ -68,6 +74,7 @@ export const onCreateUser = `subscription OnCreateUser {
     groups
     id
     phone_number
+    pricingPlan
     username
   }
 }
@@ -79,6 +86,7 @@ export const onUpdateUser = `subscription OnUpdateUser {
     groups
     id
     phone_number
+    pricingPlan
     username
   }
 }
@@ -90,6 +98,7 @@ export const onDeleteUser = `subscription OnDeleteUser {
     groups
     id
     phone_number
+    pricingPlan
     username
   }
 }

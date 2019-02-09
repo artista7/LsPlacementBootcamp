@@ -37,27 +37,33 @@ export const deleteCvReview = `mutation DeleteCvReview($input: DeleteCvReviewInp
   }
 }
 `;
-export const createPricingPlans = `mutation CreatePricingPlans($input: CreatePricingPlansInput!) {
-  createPricingPlans(input: $input) {
+export const createPricingPlan = `mutation CreatePricingPlan($input: CreatePricingPlanInput!) {
+  createPricingPlan(input: $input) {
+    cvReviewsAllowed
+    id
     name
-    availableCvReviews
-    Price
+    price
+    weightage
   }
 }
 `;
-export const updatePricingPlans = `mutation UpdatePricingPlans($input: UpdatePricingPlansInput!) {
-  updatePricingPlans(input: $input) {
+export const updatePricingPlan = `mutation UpdatePricingPlan($input: UpdatePricingPlanInput!) {
+  updatePricingPlan(input: $input) {
+    cvReviewsAllowed
+    id
     name
-    availableCvReviews
-    Price
+    price
+    weightage
   }
 }
 `;
-export const deletePricingPlans = `mutation DeletePricingPlans($input: DeletePricingPlansInput!) {
-  deletePricingPlans(input: $input) {
+export const deletePricingPlan = `mutation DeletePricingPlan($input: DeletePricingPlanInput!) {
+  deletePricingPlan(input: $input) {
+    cvReviewsAllowed
+    id
     name
-    availableCvReviews
-    Price
+    price
+    weightage
   }
 }
 `;
@@ -68,6 +74,7 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
     groups
     id
     phone_number
+    pricingPlan
     username
   }
 }
@@ -79,6 +86,7 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
     groups
     id
     phone_number
+    pricingPlan
     username
   }
 }
@@ -90,6 +98,7 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
     groups
     id
     phone_number
+    pricingPlan
     username
   }
 }

@@ -14,10 +14,12 @@ enum CvReviewStatus {
   reviewCompleted
 }
 
-type pricingPlans {
+type pricingPlan {
+  cvReviewsAllowed: Int
+  id: ID!
   name: String
-  availableCvReviews: Int
-  Price: Int
+  price: Int
+  weightage: Int
 }
 
 type User {
@@ -26,6 +28,7 @@ type User {
   groups: AWSJSON
   id: ID!
   phone_number: AWSPhone
+  pricingPlan: String
   username: String
 }
 
@@ -115,8 +118,8 @@ input ModelCvReviewFilterInput {
 type Query {
   getCvReview(id: ID!): CvReview
   listCvReviews(filter: ModelCvReviewFilterInput, limit: Int, nextToken: String): ModelCvReviewConnection
-  getPricingPlans(id: ID!): pricingPlans
-  listPricingPlanss(filter: ModelpricingPlansFilterInput, limit: Int, nextToken: String): ModelpricingPlansConnection
+  getPricingPlan(id: ID!): pricingPlan
+  listPricingPlans(filter: ModelpricingPlanFilterInput, limit: Int, nextToken: String): ModelpricingPlanConnection
   getUser(id: ID!): User
   listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
 }
@@ -149,9 +152,9 @@ type Mutation {
   createCvReview(input: CreateCvReviewInput!): CvReview
   updateCvReview(input: UpdateCvReviewInput!): CvReview
   deleteCvReview(input: DeleteCvReviewInput!): CvReview
-  createPricingPlans(input: CreatePricingPlansInput!): pricingPlans
-  updatePricingPlans(input: UpdatePricingPlansInput!): pricingPlans
-  deletePricingPlans(input: DeletePricingPlansInput!): pricingPlans
+  createPricingPlan(input: CreatePricingPlanInput!): pricingPlan
+  updatePricingPlan(input: UpdatePricingPlanInput!): pricingPlan
+  deletePricingPlan(input: DeletePricingPlanInput!): pricingPlan
   createUser(input: CreateUserInput!): User
   updateUser(input: UpdateUserInput!): User
   deleteUser(input: DeleteUserInput!): User
@@ -161,41 +164,47 @@ type Subscription {
   onCreateCvReview: CvReview @aws_subscribe(mutations: ["createCvReview"])
   onUpdateCvReview: CvReview @aws_subscribe(mutations: ["updateCvReview"])
   onDeleteCvReview: CvReview @aws_subscribe(mutations: ["deleteCvReview"])
-  onCreatePricingPlans: pricingPlans @aws_subscribe(mutations: ["createPricingPlans"])
-  onUpdatePricingPlans: pricingPlans @aws_subscribe(mutations: ["updatePricingPlans"])
-  onDeletePricingPlans: pricingPlans @aws_subscribe(mutations: ["deletePricingPlans"])
+  onCreatePricingPlan: pricingPlan @aws_subscribe(mutations: ["createPricingPlan"])
+  onUpdatePricingPlan: pricingPlan @aws_subscribe(mutations: ["updatePricingPlan"])
+  onDeletePricingPlan: pricingPlan @aws_subscribe(mutations: ["deletePricingPlan"])
   onCreateUser: User @aws_subscribe(mutations: ["createUser"])
   onUpdateUser: User @aws_subscribe(mutations: ["updateUser"])
   onDeleteUser: User @aws_subscribe(mutations: ["deleteUser"])
 }
 
-type ModelpricingPlansConnection {
-  items: [pricingPlans]
+type ModelpricingPlanConnection {
+  items: [pricingPlan]
   nextToken: String
 }
 
-input ModelpricingPlansFilterInput {
+input ModelpricingPlanFilterInput {
+  cvReviewsAllowed: ModelIntFilterInput
+  id: ModelIDFilterInput
   name: ModelStringFilterInput
-  availableCvReviews: ModelIntFilterInput
-  Price: ModelIntFilterInput
-  and: [ModelpricingPlansFilterInput]
-  or: [ModelpricingPlansFilterInput]
-  not: ModelpricingPlansFilterInput
+  price: ModelIntFilterInput
+  weightage: ModelIntFilterInput
+  and: [ModelpricingPlanFilterInput]
+  or: [ModelpricingPlanFilterInput]
+  not: ModelpricingPlanFilterInput
 }
 
-input CreatePricingPlansInput {
+input CreatePricingPlanInput {
+  cvReviewsAllowed: Int
+  id: ID
   name: String
-  availableCvReviews: Int
-  Price: Int
+  price: Int
+  weightage: Int
 }
 
-input UpdatePricingPlansInput {
+input UpdatePricingPlanInput {
+  cvReviewsAllowed: Int
+  id: ID!
   name: String
-  availableCvReviews: Int
-  Price: Int
+  price: Int
+  weightage: Int
 }
 
-input DeletePricingPlansInput {
+input DeletePricingPlanInput {
   id: ID
 }
 
@@ -210,6 +219,7 @@ input ModelUserFilterInput {
   groups: ModelStringFilterInput
   id: ModelIDFilterInput
   phone_number: ModelStringFilterInput
+  pricingPlan: ModelStringFilterInput
   username: ModelStringFilterInput
   and: [ModelUserFilterInput]
   or: [ModelUserFilterInput]
@@ -222,6 +232,7 @@ input CreateUserInput {
   groups: AWSJSON
   id: ID
   phone_number: AWSPhone
+  pricingPlan: String
   username: String
 }
 
@@ -231,6 +242,7 @@ input UpdateUserInput {
   groups: AWSJSON
   id: ID!
   phone_number: AWSPhone
+  pricingPlan: String
   username: String
 }
 

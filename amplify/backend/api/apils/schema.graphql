@@ -14,10 +14,12 @@ enum CvReviewStatus{
   reviewCompleted
 }
 
-type pricingPlans @model{
+type pricingPlan @model{
+  cvReviewsAllowed: Int
+  id: ID!
   name: String
-  availableCvReviews: Int
-  Price: Int
+  price: Int
+  weightage: Int
 }
 
 type User @model {
@@ -26,5 +28,6 @@ type User @model {
   groups: AWSJSON
   id: ID!
   phone_number: AWSPhone
+  pricingPlan: String
   username: String
 }
