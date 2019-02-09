@@ -169,17 +169,13 @@ Resources:
   # Created upon user selection
   # Depends on SNS Role for Arn if MFA is enabled
     Type: AWS::Cognito::UserPool
+    UpdateReplacePolicy: Retain
     Properties:
       UserPoolName: !If [ShouldNotCreateEnvResources, !Ref userPoolName, !Join ['',[!Ref userPoolName, '-', !Ref env]]]
       Schema: 
         
         -
           Name: email
-          Required: true
-          Mutable: true
-        
-        -
-          Name: name
           Required: true
           Mutable: true
         
@@ -343,7 +339,7 @@ Resources:
   # Always created
     Type: AWS::Cognito::IdentityPool
     Properties: 
-      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'idpoolls', !Join ['',['idpoolls', '__', !Ref env]]]
+      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'identitypoolls', !Join ['',['identitypoolls', '__', !Ref env]]]
       
       CognitoIdentityProviders:
         - ClientId:  !Ref UserPoolClient

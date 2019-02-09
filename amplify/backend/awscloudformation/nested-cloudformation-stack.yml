@@ -81,9 +81,9 @@
 		"authcognitols": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190130020530-deployment/amplify-cfn-templates/auth/cognitols-cloudformation-template.yml",
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190209152947-deployment/amplify-cfn-templates/auth/cognitols-cloudformation-template.yml",
 				"Parameters": {
-					"identityPoolName": "idpoolls",
+					"identityPoolName": "identitypoolls",
 					"allowUnauthenticatedIdentities": false,
 					"thirdPartyAuth": false,
 					"lambdaLogPolicy": "cognitols_lambda_log_policy",
@@ -105,11 +105,11 @@
 					"defaultPasswordPolicy": true,
 					"passwordPolicyMinLength": "6",
 					"passwordPolicyCharacters": "",
-					"requiredAttributes": "email,name,phone_number",
+					"requiredAttributes": "email,phone_number",
 					"userpoolClientName": "cognitols_app_client",
 					"userpoolClientGenerateSecret": true,
 					"userpoolClientRefreshTokenValidity": "10",
-					"userpoolClientReadAttributes": "email,name,phone_number",
+					"userpoolClientReadAttributes": "address,birthdate,email,name,phone_number,picture,profile",
 					"mfaLambdaRole": "cognitols_totp_lambda_role",
 					"mfaLambdaLogPolicy": "cognitols_totp_lambda_log_policy",
 					"mfaPassRolePolicy": "cognitols_totp_pass_role_policy",
@@ -121,7 +121,7 @@
 					"useDefault": "manual",
 					"authSelections": "identityPoolAndUserPool",
 					"resourceName": "cognitols",
-					"userpoolClientWriteAttributes": "email,name,phone_number",
+					"userpoolClientWriteAttributes": "address,birthdate,name,picture,profile,email,phone_number",
 					"authRoleName": {
 						"Ref": "AuthRoleName"
 					},
@@ -147,7 +147,7 @@
 		"apiapils": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190130020530-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190209152947-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"Parameters": {
 					"AppSyncApiName": "apils",
 					"AuthCognitoUserPoolId": {
@@ -156,22 +156,22 @@
 							"Outputs.UserPoolId"
 						]
 					},
-					"schemaGraphql": "s3://learning-sage-20190130020530-deployment/amplify-appsync-files/schema.graphql.1549653247580",
-					"ResolverBucket": "learning-sage-20190130020530-deployment",
+					"schemaGraphql": "s3://learning-sage-20190209152947-deployment/amplify-appsync-files/schema.graphql.1549718243351",
+					"ResolverBucket": "learning-sage-20190209152947-deployment",
 					"ResolverRootKey": "amplify-appsync-files",
-					"DeploymentTimestamp": "1549653247580",
+					"DeploymentTimestamp": "1549718243351",
 					"env": "local"
 				}
 			}
 		},
-		"storages3ls": {
+		"storagestorages3": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190130020530-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190209152947-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
 				"Parameters": {
-					"bucketName": "s3bucketls",
-					"authPolicyName": "s3_amplify_629a7835",
-					"unauthPolicyName": "s3_amplify_629a7835",
+					"bucketName": "s3ls",
+					"authPolicyName": "s3_amplify_321e49ee",
+					"unauthPolicyName": "s3_amplify_321e49ee",
 					"authRoleName": {
 						"Ref": "AuthRoleName"
 					},
@@ -180,6 +180,15 @@
 					},
 					"authPermissions": "rw",
 					"unauthPermissions": "",
+					"env": "local"
+				}
+			}
+		},
+		"functioncognitoFunction": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190209152947-deployment/amplify-cfn-templates/function/cognitoFunction-cloudformation-template.json",
+				"Parameters": {
 					"env": "local"
 				}
 			}

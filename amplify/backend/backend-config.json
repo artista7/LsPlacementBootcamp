@@ -15,9 +15,17 @@
 		}
 	},
 	"storage": {
-		"s3ls": {
+		"storages3": {
 			"service": "S3",
 			"providerPlugin": "awscloudformation"
+		}
+	},
+	"function": {
+		"cognitoFunction": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": []
 		}
 	}
 }

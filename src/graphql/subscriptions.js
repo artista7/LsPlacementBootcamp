@@ -43,3 +43,36 @@ export const onDeleteCvReview = `subscription OnDeleteCvReview {
   }
 }
 `;
+export const onCreateUser = `subscription OnCreateUser {
+  onCreateUser {
+    cvReviewsTaken
+    email
+    groups
+    id
+    phone_number
+    username
+  }
+}
+`;
+export const onUpdateUser = `subscription OnUpdateUser {
+  onUpdateUser {
+    cvReviewsTaken
+    email
+    groups
+    id
+    phone_number
+    username
+  }
+}
+`;
+export const onDeleteUser = `subscription OnDeleteUser {
+  onDeleteUser {
+    cvReviewsTaken
+    email
+    groups
+    id
+    phone_number
+    username
+  }
+}
+`;

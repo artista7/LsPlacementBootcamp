@@ -20,10 +20,10 @@ export function _createCvReviewSuccess(cvReview) {
     return { type: types.CREATE_CVREVIEW_SUCCESS, cvReview };
 }
 
-export function _listCvReviews(userId) {
+export function _listCvReviews(username) {
     return function (dispatch) {
         return API.graphql(graphqlOperation(listCvReviews)).then(response => {
-            dispatch(_listCvReviewsSuccess(response.data.listCvReviews.items.filter(cvReview => cvReview.createdBy == userId)));
+            dispatch(_listCvReviewsSuccess(response.data.listCvReviews.items.filter(cvReview => cvReview.createdBy == username)));
         }).catch(response => {
             NotificationManager.error('Error loading reviews', 'Error', 2000);
             console.log(response);

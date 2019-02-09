@@ -15,3 +15,12 @@ enum CvReviewStatus{
   underReview
   reviewCompleted
 }
+
+type User @model {
+  cvReviewsTaken: Int
+  email: AWSEmail
+  groups: AWSJSON
+  id: ID!
+  phone_number: AWSPhone
+  username: String
+}

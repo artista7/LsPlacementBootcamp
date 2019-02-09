@@ -43,3 +43,36 @@ export const deleteCvReview = `mutation DeleteCvReview($input: DeleteCvReviewInp
   }
 }
 `;
+export const createUser = `mutation CreateUser($input: CreateUserInput!) {
+  createUser(input: $input) {
+    cvReviewsTaken
+    email
+    groups
+    id
+    phone_number
+    username
+  }
+}
+`;
+export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
+  updateUser(input: $input) {
+    cvReviewsTaken
+    email
+    groups
+    id
+    phone_number
+    username
+  }
+}
+`;
+export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
+  deleteUser(input: $input) {
+    cvReviewsTaken
+    email
+    groups
+    id
+    phone_number
+    username
+  }
+}
+`;

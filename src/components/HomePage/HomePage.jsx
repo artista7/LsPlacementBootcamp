@@ -69,10 +69,10 @@ class HomePage extends React.Component {
         this.setState({ expanded: expanded });
     };
 
-    loadUserCvReviews(userId) {
+    loadUserCvReviews(username) {
         //WORK - cvReview of current user should be loaded
         //this.setInitializing(true);
-        this.props.cvReviewActions._listCvReviews(userId).then(data => {
+        this.props.cvReviewActions._listCvReviews(username).then(data => {
             this.setInitializing(false);
         }).catch(error => {
             this.setInitializing(false);
@@ -83,8 +83,8 @@ class HomePage extends React.Component {
         Auth.currentUserInfo().then(data => {
             //this.setInitializing(false);
             this.props.userInfoActions._loadUserInfo(data);
-            var userId = data.id;
-            this.loadUserCvReviews(userId);
+            var username = data.username;
+            this.loadUserCvReviews(username);
         }).catch(err => {
             this.setInitializing(false);
             NotificationManager.error('Error fetching user data', 'Error!', 2000);

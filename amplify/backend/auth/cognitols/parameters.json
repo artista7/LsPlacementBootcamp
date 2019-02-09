@@ -1,5 +1,5 @@
 {
-    "identityPoolName": "idpoolls",
+    "identityPoolName": "identitypoolls",
     "allowUnauthenticatedIdentities": false,
     "thirdPartyAuth": false,
     "lambdaLogPolicy": "cognitols_lambda_log_policy",
@@ -27,16 +27,19 @@
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
         "email",
-        "name",
         "phone_number"
     ],
     "userpoolClientName": "cognitols_app_client",
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": "10",
     "userpoolClientReadAttributes": [
+        "address",
+        "birthdate",
         "email",
         "name",
-        "phone_number"
+        "phone_number",
+        "picture",
+        "profile"
     ],
     "mfaLambdaRole": "cognitols_totp_lambda_role",
     "mfaLambdaLogPolicy": "cognitols_totp_lambda_log_policy",
@@ -50,8 +53,12 @@
     "authSelections": "identityPoolAndUserPool",
     "resourceName": "cognitols",
     "userpoolClientWriteAttributes": [
-        "email",
+        "address",
+        "birthdate",
         "name",
+        "picture",
+        "profile",
+        "email",
         "phone_number"
     ],
     "authRoleName": {
