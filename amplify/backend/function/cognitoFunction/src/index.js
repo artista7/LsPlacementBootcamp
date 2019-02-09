@@ -1,11 +1,9 @@
 const
-  aws = require('aws-sdk'),
-  uuidv4 = require('uuid/v4');
+  aws = require('aws-sdk');
 
 const ddb = new aws.DynamoDB({ apiVersion: '2012-10-08' });
 
 exports.handler = function (event, context, callback) {
-  var d = new Date();
   console.log("Event Passed - ", event);
 
   var params = {
@@ -34,7 +32,7 @@ exports.handler = function (event, context, callback) {
     var paramsUser = {
       TableName: 'User-ew2bghmyzvcktaphwwjm4kxbeu-local',
       Item: {
-        "id": { "S": uuidv4() },
+        "id": { "S": event.userName },
         "cvReviewsTaken": { "N": "0" },
         "email": { "S": event.request.userAttributes.email },
         "phone_number": { "S": event.request.userAttributes.phone_number },
