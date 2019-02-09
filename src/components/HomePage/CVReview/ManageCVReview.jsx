@@ -16,7 +16,7 @@ class ManageCVReview extends React.Component {
         super(props, context);
 
         this.state = {
-            cvReview: { id: null, createdBy: null, createdAt: null, lastUpdatedAt: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null },
+            cvReview: { id: null, createdBy: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null },
             isS3Uploading: false,
             loaded: 0,
             numPages: null,
@@ -80,10 +80,8 @@ class ManageCVReview extends React.Component {
                     //add cvReview into dynamo table
                     let createCvReviewInput = {
                         comments: "none",
-                        createdAt: +(new Date),
                         createdBy: username,
                         fileName: s3FileName,
-                        lastUpdatedAt: +(new Date),
                         lastUpdatedBy: username,
                         reviewedBy: "none",
                         status: "submitted"
@@ -208,7 +206,7 @@ function mapStateToProps(state, ownProps) {
         cvReviewId = ownProps.match.params.id;
     }
 
-    let cvReview = { id: null, createdBy: null, createdAt: null, lastUpdatedAt: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null };
+    let cvReview = { id: null, createdBy: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null };
     if (cvReviewId && state.cvReviews && state.cvReviews.length > 0) {
         cvReview = getCvReviewById(state.cvReviews, cvReviewId);
     }

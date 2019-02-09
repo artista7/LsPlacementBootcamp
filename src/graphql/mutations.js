@@ -4,11 +4,9 @@
 export const createCvReview = `mutation CreateCvReview($input: CreateCvReviewInput!) {
   createCvReview(input: $input) {
     comments
-    createdAt
     createdBy
     fileName
     id
-    lastUpdatedAt
     lastUpdatedBy
     reviewedBy
     status
@@ -18,11 +16,9 @@ export const createCvReview = `mutation CreateCvReview($input: CreateCvReviewInp
 export const updateCvReview = `mutation UpdateCvReview($input: UpdateCvReviewInput!) {
   updateCvReview(input: $input) {
     comments
-    createdAt
     createdBy
     fileName
     id
-    lastUpdatedAt
     lastUpdatedBy
     reviewedBy
     status
@@ -32,14 +28,36 @@ export const updateCvReview = `mutation UpdateCvReview($input: UpdateCvReviewInp
 export const deleteCvReview = `mutation DeleteCvReview($input: DeleteCvReviewInput!) {
   deleteCvReview(input: $input) {
     comments
-    createdAt
     createdBy
     fileName
     id
-    lastUpdatedAt
     lastUpdatedBy
     reviewedBy
     status
+  }
+}
+`;
+export const createPricingPlans = `mutation CreatePricingPlans($input: CreatePricingPlansInput!) {
+  createPricingPlans(input: $input) {
+    name
+    availableCvReviews
+    Price
+  }
+}
+`;
+export const updatePricingPlans = `mutation UpdatePricingPlans($input: UpdatePricingPlansInput!) {
+  updatePricingPlans(input: $input) {
+    name
+    availableCvReviews
+    Price
+  }
+}
+`;
+export const deletePricingPlans = `mutation DeletePricingPlans($input: DeletePricingPlansInput!) {
+  deletePricingPlans(input: $input) {
+    name
+    availableCvReviews
+    Price
   }
 }
 `;
