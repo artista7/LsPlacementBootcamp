@@ -36,3 +36,34 @@ export const listCvReviews = `query ListCvReviews(
   }
 }
 `;
+export const getUser = `query GetUser($id: ID!) {
+  getUser(id: $id) {
+    cvReviewsTaken
+    email
+    groups
+    Id
+    name
+    phone_number
+    username
+  }
+}
+`;
+export const listUsers = `query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      cvReviewsTaken
+      email
+      groups
+      Id
+      name
+      phone_number
+      username
+    }
+    nextToken
+  }
+}
+`;

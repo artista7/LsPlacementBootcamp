@@ -16,6 +16,16 @@ enum CvReviewStatus {
   reviewCompleted
 }
 
+type User {
+  cvReviewsTaken: Int
+  email: AWSEmail
+  groups: AWSJSON
+  Id: ID!
+  name: String
+  phone_number: AWSPhone
+  username: String
+}
+
 enum ModelSortDirection {
   ASC
   DESC
@@ -98,6 +108,8 @@ input ModelCvReviewFilterInput {
 type Query {
   getCvReview(id: ID!): CvReview
   listCvReviews(filter: ModelCvReviewFilterInput, limit: Int, nextToken: String): ModelCvReviewConnection
+  getUser(id: ID!): User
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
 }
 
 input CreateCvReviewInput {
@@ -132,10 +144,58 @@ type Mutation {
   createCvReview(input: CreateCvReviewInput!): CvReview
   updateCvReview(input: UpdateCvReviewInput!): CvReview
   deleteCvReview(input: DeleteCvReviewInput!): CvReview
+  createUser(input: CreateUserInput!): User
+  updateUser(input: UpdateUserInput!): User
+  deleteUser(input: DeleteUserInput!): User
 }
 
 type Subscription {
   onCreateCvReview: CvReview @aws_subscribe(mutations: ["createCvReview"])
   onUpdateCvReview: CvReview @aws_subscribe(mutations: ["updateCvReview"])
   onDeleteCvReview: CvReview @aws_subscribe(mutations: ["deleteCvReview"])
+  onCreateUser: User @aws_subscribe(mutations: ["createUser"])
+  onUpdateUser: User @aws_subscribe(mutations: ["updateUser"])
+  onDeleteUser: User @aws_subscribe(mutations: ["deleteUser"])
+}
+
+type ModelUserConnection {
+  items: [User]
+  nextToken: String
+}
+
+input ModelUserFilterInput {
+  cvReviewsTaken: ModelIntFilterInput
+  email: ModelStringFilterInput
+  groups: ModelStringFilterInput
+  Id: ModelIDFilterInput
+  name: ModelStringFilterInput
+  phone_number: ModelStringFilterInput
+  username: ModelStringFilterInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
+}
+
+input CreateUserInput {
+  cvReviewsTaken: Int
+  email: AWSEmail
+  groups: AWSJSON
+  Id: ID!
+  name: String
+  phone_number: AWSPhone
+  username: String
+}
+
+input UpdateUserInput {
+  cvReviewsTaken: Int
+  email: AWSEmail
+  groups: AWSJSON
+  Id: ID
+  name: String
+  phone_number: AWSPhone
+  username: String
+}
+
+input DeleteUserInput {
+  id: ID
 }
