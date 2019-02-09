@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../../actions/toDoActions';
+import * as actions from '../../actions/cvReviewActions';
 import { withAuthenticator } from 'aws-amplify-react';
 import { Redirect } from "react-router-dom";
 

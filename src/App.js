@@ -13,6 +13,9 @@ import Amplify from 'aws-amplify';
 /*Configure redux */
 import { Provider } from "react-redux";
 import configureStore from './store/configureStore';
+/*Styles */
+import 'react-circular-progressbar/dist/styles.css';
+import 'react-notifications/lib/notifications.css';
 
 Amplify.configure(aws_config);
 
@@ -35,7 +38,6 @@ class App extends Component {
     })
   }
 
-
   render() {
     var authState = localStorage.getItem("amplify-authenticator-authState");
     return (
@@ -48,8 +50,7 @@ class App extends Component {
               <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
             </Switch>}
             {authState == "signedIn" && <Switch>
-              <Route exact path="/" render={() => (<HomePage updateStateVariable={this.updateStateVariable}></HomePage>)}></Route>
-              <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
+              <Route exact path="*" render={({ history, location }) => (<HomePage history={history} location={location} updateStateVariable={this.updateStateVariable}></HomePage>)}></Route>
             </Switch>}
           </div>
         </Router>

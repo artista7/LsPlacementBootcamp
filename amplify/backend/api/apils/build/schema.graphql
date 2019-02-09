@@ -1,0 +1,141 @@
+type CvReview {
+  comments: String
+  createdAt: AWSTimestamp
+  createdBy: String!
+  fileName: String
+  id: ID!
+  lastUpdatedAt: AWSTimestamp
+  lastUpdatedBy: String
+  reviewedBy: String
+  status: CvReviewStatus
+}
+
+enum CvReviewStatus {
+  submitted
+  underReview
+  reviewCompleted
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelCvReviewConnection {
+  items: [CvReview]
+  nextToken: String
+}
+
+input ModelStringFilterInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+}
+
+input ModelIDFilterInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+}
+
+input ModelIntFilterInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  contains: Int
+  notContains: Int
+  between: [Int]
+}
+
+input ModelFloatFilterInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  contains: Float
+  notContains: Float
+  between: [Float]
+}
+
+input ModelBooleanFilterInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelCvReviewFilterInput {
+  comments: ModelStringFilterInput
+  createdAt: ModelIntFilterInput
+  createdBy: ModelStringFilterInput
+  fileName: ModelStringFilterInput
+  id: ModelIDFilterInput
+  lastUpdatedAt: ModelIntFilterInput
+  lastUpdatedBy: ModelStringFilterInput
+  reviewedBy: ModelStringFilterInput
+  and: [ModelCvReviewFilterInput]
+  or: [ModelCvReviewFilterInput]
+  not: ModelCvReviewFilterInput
+}
+
+type Query {
+  getCvReview(id: ID!): CvReview
+  listCvReviews(filter: ModelCvReviewFilterInput, limit: Int, nextToken: String): ModelCvReviewConnection
+}
+
+input CreateCvReviewInput {
+  comments: String
+  createdAt: AWSTimestamp
+  createdBy: String!
+  fileName: String
+  id: ID
+  lastUpdatedAt: AWSTimestamp
+  lastUpdatedBy: String
+  reviewedBy: String
+  status: CvReviewStatus
+}
+
+input UpdateCvReviewInput {
+  comments: String
+  createdAt: AWSTimestamp
+  createdBy: String
+  fileName: String
+  id: ID!
+  lastUpdatedAt: AWSTimestamp
+  lastUpdatedBy: String
+  reviewedBy: String
+  status: CvReviewStatus
+}
+
+input DeleteCvReviewInput {
+  id: ID
+}
+
+type Mutation {
+  createCvReview(input: CreateCvReviewInput!): CvReview
+  updateCvReview(input: UpdateCvReviewInput!): CvReview
+  deleteCvReview(input: DeleteCvReviewInput!): CvReview
+}
+
+type Subscription {
+  onCreateCvReview: CvReview @aws_subscribe(mutations: ["createCvReview"])
+  onUpdateCvReview: CvReview @aws_subscribe(mutations: ["updateCvReview"])
+  onDeleteCvReview: CvReview @aws_subscribe(mutations: ["deleteCvReview"])
+}

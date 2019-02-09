@@ -1,0 +1,13 @@
+.react-pdf__message{
+    text-align: center
+}
+
+/*Hiding annotations layer*/
+.react-pdf__Page__annotations{
+    display: none
+}
+
+.btn-primary:disabled {
+    background-color: #F05F40;
+    border-color: #F05F40;
+}
