@@ -28,7 +28,7 @@ const Main = styled.main`
 `;
 
 // create a component
-class HomePage extends React.Component {
+class MainPage extends React.Component {
     constructor(props, context) {
         super(props, context);
 
@@ -71,7 +71,6 @@ class HomePage extends React.Component {
 
     loadUserCvReviews(username) {
         //WORK - cvReview of current user should be loaded
-        //this.setInitializing(true);
         this.props.cvReviewActions._listCvReviews(username).then(data => {
             this.setInitializing(false);
         }).catch(error => {
@@ -80,13 +79,12 @@ class HomePage extends React.Component {
     }
 
     loadUserInfo() {
+        //get current username
         Auth.currentUserInfo().then(data => {
-            //this.setInitializing(false);
-            this.props.userInfoActions._loadUserInfo(data);
             var username = data.username;
+            this.props.userInfoActions._loadUserInfo(username);
             this.loadUserCvReviews(username);
         }).catch(err => {
-            this.setInitializing(false);
             NotificationManager.error('Error fetching user data', 'Error!', 2000);
         });
     }
@@ -185,11 +183,11 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-HomePage.propTypes = {
+MainPage.propTypes = {
     history: PropTypes.object,
     location: PropTypes.object,
     updateStateVariable: PropTypes.func.isRequired
 };
 
 //make this component available to the app
-export default withAuthenticator(connect(mapStateToProps, mapDispatchToProps)(HomePage));
+export default withAuthenticator(connect(mapStateToProps, mapDispatchToProps)(MainPage));
