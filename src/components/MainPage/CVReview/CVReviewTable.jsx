@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 // create a component
 const CVReviewTable = ({ cvReviewList }) => {
     return (
-        <table className="table">
+        <table className="table table-hover myCard hCenter" style={{ textAlign: "center", marginTop: "25px", width: "75%" }}>
             <thead>
                 <tr>
-                    <th>&nbsp;</th>
+                    <th>Link</th>
                     <th>Status</th>
                     {/* <th>Created By</th> */}
                     {/* <th>Created At</th> */}

@@ -36,3 +36,14 @@
 .notification-success{
   background-color: #196F3D !important
 }
+
+/*Horizontally centering an element*/
+.hCenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*card like look*/
+.myCard {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
