@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userInfoActions from '../../actions/userInfoActions';
 import * as cvReviewActions from '../../actions/cvReviewActions';
+import * as pricingPlanActions from '../../actions/pricingPlanActions';
 import { Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -16,6 +17,7 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 import Loader from 'react-loader-spinner';
 import * as constants from '../../constants/constants';
 /*Child components */
+import HomePage from './HomePage/HomePage';
 import CVReviewList from './CVReview/CVReviewList';
 import ManageCVReview from './CVReview/ManageCVReview';
 
@@ -48,6 +50,7 @@ class MainPage extends React.Component {
 
         this.onSelect = this.onSelect.bind(this);
         this.onToggle = this.onToggle.bind(this);
+        this.loadPricingPlans = this.loadPricingPlans.bind(this);
         this.loadUserCvReviews = this.loadUserCvReviews.bind(this);
         this.loadUserInfo = this.loadUserInfo.bind(this);
         this.setInitializing = this.setInitializing.bind(this);
@@ -69,6 +72,10 @@ class MainPage extends React.Component {
         this.setState({ expanded: expanded });
     };
 
+    loadPricingPlans() {
+        this.props.pricingPlanActions._listPricingPlans();
+    }
+
     loadUserCvReviews(username) {
         //WORK - cvReview of current user should be loaded
         this.props.cvReviewActions._listCvReviews(username).then(data => {
@@ -81,8 +88,10 @@ class MainPage extends React.Component {
     loadUserInfo() {
         //get current username
         Auth.currentUserInfo().then(data => {
-            var username = data.username;
+            let username = data.username;
+            //loading userinfo
             this.props.userInfoActions._loadUserInfo(username);
+            //loading user's reviews
             this.loadUserCvReviews(username);
         }).catch(err => {
             NotificationManager.error('Error fetching user data', 'Error!', 2000);
@@ -105,6 +114,7 @@ class MainPage extends React.Component {
     componentWillMount() {
         //adding current loggedin user data to redux state, this take time - some operations requiring user data might get affected
         this.setInitializing(true);
+        this.loadPricingPlans();
         this.loadUserInfo();
     }
 
@@ -157,7 +167,7 @@ class MainPage extends React.Component {
                 <Main expanded={expanded} style={{ height: "100vh", overflowY: "scroll" }}>
                     <Breadcrumbs pageTitle={pageTitle} selected={selected}></Breadcrumbs>
                     <Switch>
-                        <Route path="/" exact component={props => <div></div>} />
+                        <Route path="/" exact component={props => <HomePage {...props}></HomePage>} />
                         <Route exact path="/cvReviews" component={props => <CVReviewList {...props}></CVReviewList>} />
                         <Route exact path="/cvReview" component={props => <ManageCVReview {...props}></ManageCVReview>} />
                         <Route exact path="/cvReview/:id" component={props => <ManageCVReview {...props}></ManageCVReview>} />
@@ -179,7 +189,8 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         userInfoActions: bindActionCreators(userInfoActions, dispatch),
-        cvReviewActions: bindActionCreators(cvReviewActions, dispatch)
+        cvReviewActions: bindActionCreators(cvReviewActions, dispatch),
+        pricingPlanActions: bindActionCreators(pricingPlanActions, dispatch)
     };
 }
 
