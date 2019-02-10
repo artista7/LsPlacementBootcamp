@@ -1,11 +1,14 @@
-release/v0.0.2
+release/v1.0.0
 
 Enhancements
 - Configured multiple environments using 'aws-amplify/cli@multienv'
-- Added 'aws-amplify' a js library for Auth(cognito) and Api(Appsync)
+- Added 'aws-amplify' a js library for Auth(cognito), Api(Appsync), Storage(s3) and Function(lambda)
 - Added Sign In/Sign Out flow in the app
 - Configured graphQL-react-redux flow
-- Added relevant keywords
+- Added relevant keywords for SEO
+- Add cv review flow (list -> create -> update)
+- Formik for form validation & form standardization
+- Different pricing plans and limiting number of cv reviews
 
 Fixes
 - Fixed brochure team

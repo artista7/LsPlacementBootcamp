@@ -29,7 +29,6 @@ class ManageCVReview extends React.Component {
 
         this.handleFileUpload = this.handleFileUpload.bind(this);
         this.isSubmitAllowed = this.isSubmitAllowed.bind(this);
-        this.onCancel = this.onCancel.bind(this);
         this.onDocumentLoad = this.onDocumentLoad.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.redirectToRoute = this.redirectToRoute.bind(this);
@@ -55,7 +54,6 @@ class ManageCVReview extends React.Component {
     }
 
     isSubmitAllowed() {
-        debugger;
         try {
             if (this.props.userPricingPlan.cvReviewsAllowed > this.props.userInfo.cvReviewsTaken) {
                 return true;
@@ -65,11 +63,6 @@ class ManageCVReview extends React.Component {
         catch{
             return false;
         }
-    }
-
-    onCancel(event) {
-        event.preventDefault();
-        this.redirectToRoute('/cvReviews');
     }
 
     onDocumentLoad(numPages) {
@@ -115,7 +108,6 @@ class ManageCVReview extends React.Component {
                         });
 
                         //edit userInfo to update cvReviewsTaken
-                        debugger;
                         this.props.userInfoActions._updateUser({ ...this.props.userInfo, cvReviewsTaken: this.props.userInfo.cvReviewsTaken + 1 });
                         this.setIsS3Uploading(false);
                     })
@@ -206,16 +198,16 @@ class ManageCVReview extends React.Component {
         return (
             <CVReview
                 cvReview={this.state.cvReview}
+                cvUrl={this.state.cvUrl}
                 handleFileUpload={this.handleFileUpload}
                 isS3Uploading={this.state.isS3Uploading}
                 numPages={this.state.numPages}
-                onCancel={this.onCancel}
                 onDocumentLoad={this.onDocumentLoad}
                 onSubmit={this.onSubmit}
                 pageNumber={this.state.pageNumber}
+                redirectToRoute={this.redirectToRoute}
                 selectedFile={this.state.selectedFile}
-                shufflePage={this.shufflePage}
-                cvUrl={this.state.cvUrl}>
+                shufflePage={this.shufflePage}>
             </CVReview>
         );
     }
@@ -227,16 +219,12 @@ function getCvReviewById(cvReviews, id) {
     return null;
 }
 
-function getUserPricingPlan(pricingPlans, userInfo) {
-    debugger;
-    try {
-        debugger;
-        const userPricingPlan = pricingPlans.filter(pricingPlan => pricingPlan.id == userInfo.pricingPlanId);
-        if (userPricingPlan) { return userPricingPlan[0]; }
+function getUserPricingPlan(pricingPlans, pricingPlanId) {
+    const userPricingPlan = pricingPlans.filter(pricingPlan => pricingPlan.id == pricingPlanId);
+    if (userPricingPlan.length > 0) {
+        return userPricingPlan[0];
     }
-    catch{
-        return null;
-    }
+    return { cvReviewsAllowed: 0 };     //in case user's pricing plan not available, default allowed reviews to zero
 }
 
 function mapStateToProps(state, ownProps) {
@@ -250,7 +238,7 @@ function mapStateToProps(state, ownProps) {
         cvReview = getCvReviewById(state.cvReviews, cvReviewId);
     }
 
-    let userPricingPlan = getUserPricingPlan(state.pricingPlans, state.userInfo);
+    let userPricingPlan = getUserPricingPlan(state.pricingPlans, state.userInfo.pricingPlanId);
 
     let userInfo = state.userInfo;
     //override cvReview from redux state

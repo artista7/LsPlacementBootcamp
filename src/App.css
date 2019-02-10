@@ -13,6 +13,18 @@
   color: rgb(204, 80, 74)
 }
 
+.submittedColor{
+  color: #D4AC0D
+}
+
+.underReviewColor{
+  color: #2980B9
+}
+
+.completedColor{
+  color: #196F3D
+}
+
 /* Validation errors */
 .errorText{
   color: rgb(204, 80, 74);
@@ -35,4 +47,21 @@
 /* Notification success */
 .notification-success{
   background-color: #196F3D !important
+}
+
+/*Horizontally centering an element*/
+.hCenter {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*card like look*/
+.myCard {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/*Full height div*/
+.fullHeight{
+  height: 100vh;
 }

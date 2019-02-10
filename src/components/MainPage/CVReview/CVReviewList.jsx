@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import * as cvReviewActions from '../../../actions/cvReviewActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Loader from 'react-loader-spinner'
 import CVReviewTable from './CVReviewTable';
+
 // create a component
 class CVReviewList extends React.Component {
     constructor(props, context) {
@@ -33,11 +33,14 @@ class CVReviewList extends React.Component {
         const { cvReviewList } = this.props;
         return (
             <div>
-                <input
-                    type="submit"
-                    value="Create Cv Review"
-                    className="btn btn-primary"
-                    onClick={() => this.redirectToRoute('/cvReview')}></input>
+                <div>
+                    <input
+                        type="submit"
+                        value="Create Cv Review"
+                        className="btn btn-primary hCenter"
+                        onClick={() => this.redirectToRoute('/cvReview')}></input>
+                </div>
+                {/* <hr /> */}
                 {cvReviewList.length > 0 && <CVReviewTable cvReviewList={cvReviewList}></CVReviewTable>}
             </div>
         );

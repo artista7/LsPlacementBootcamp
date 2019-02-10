@@ -17,7 +17,7 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 import Loader from 'react-loader-spinner';
 import * as constants from '../../constants/constants';
 /*Child components */
-import HomePage from './HomePage/HomePage';
+import HomePage from './HomePage/ManageHomePage';
 import CVReviewList from './CVReview/CVReviewList';
 import ManageCVReview from './CVReview/ManageCVReview';
 
@@ -42,8 +42,8 @@ class MainPage extends React.Component {
                 'cvReviews': 'CV Review(s)',
                 'devices': ['Devices'],
                 'reports': ['Reports'],
-                'settings/policies': ['Settings', 'Policies'],
-                'settings/network': ['Settings', 'Network']
+                // 'settings/policies': ['Settings', 'Policies'],
+                // 'settings/network': ['Settings', 'Network']
             },
             selected: 'home'
         };
@@ -54,16 +54,19 @@ class MainPage extends React.Component {
         this.loadUserCvReviews = this.loadUserCvReviews.bind(this);
         this.loadUserInfo = this.loadUserInfo.bind(this);
         this.setInitializing = this.setInitializing.bind(this);
+        this.setSelected = this.setSelected.bind(this);
         this.signOut = this.signOut.bind(this);
     }
 
     onSelect(selected) {
+        //sign out on clicking on it
         if (selected == constants.SIGN_OUT) {
             this.signOut();
         }
+        //else if clicked icon is different, change selected icon and redirect to intended route
         const to = '/' + selected;
         if (this.props.location.pathname !== to) {
-            this.setState({ selected: selected })
+            this.setSelected(selected);
             this.props.history.push(to);
         }
     }
@@ -104,6 +107,12 @@ class MainPage extends React.Component {
         })
     }
 
+    setSelected(selected) {
+        this.setState({
+            selected: selected
+        });
+    }
+
     signOut() {
         Auth.signOut().then(data => {
         }).catch(err => {
@@ -119,22 +128,30 @@ class MainPage extends React.Component {
     }
 
     componentDidMount() {
+        //get selected icon from route on component mount
         var selected = this.props.history.location.pathname;
         if (selected == "" || selected == "/") {
-            this.setState({
-                selected: 'home'
-            });
+            this.setSelected('home');
         }
         else if (selected.indexOf("cvReview") != -1) {
-            this.setState({
-                selected: 'cvReviews'
-            });
+            this.setSelected('cvReviews');
         }
         else {
-            this.setState({
-                selected: selected.substring(1)
-            });
+            this.setSelected(selected.substring(1));
         }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        //if current path is different from previous, update selected icon
+        if (prevProps.location.pathname != this.props.location.pathname) {
+            var selected = this.props.history.location.pathname;
+            if (selected == "" || selected == "/") {
+                this.setSelected('home');
+            }
+            else {
+                this.setSelected(selected.substring(1));
+            }
+        };
     }
 
     componentWillUnmount() {
@@ -165,7 +182,7 @@ class MainPage extends React.Component {
                 /></div>}
                 <Sidebar onSelect={this.onSelect} onToggle={this.onToggle} selected={selected}></Sidebar>
                 <Main expanded={expanded} style={{ height: "100vh", overflowY: "scroll" }}>
-                    <Breadcrumbs pageTitle={pageTitle} selected={selected}></Breadcrumbs>
+                    {selected != "home" && <Breadcrumbs pageTitle={pageTitle} selected={selected}></Breadcrumbs>}
                     <Switch>
                         <Route path="/" exact component={props => <HomePage {...props}></HomePage>} />
                         <Route exact path="/cvReviews" component={props => <CVReviewList {...props}></CVReviewList>} />

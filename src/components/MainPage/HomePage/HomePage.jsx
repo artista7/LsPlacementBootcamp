@@ -1,51 +1,42 @@
 //import libraries
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import './HomePage.css';
+import wallpaper from '../../../assets/img/homepage.jpg';
 
 // create a component
-class HomePage extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-    }
-
-    render() {
-        return (
-            <div>
-                {this.props.userInfo.username && <React.Fragment>
-                    <p>Username - {this.props.userInfo.username}</p>
-                    <p>email - {this.props.userInfo.email}</p>
-                    <p>Phone No. - {this.props.userInfo.phone_number}</p>
-                    <p>Cv Reviews taken - {this.props.userInfo.cvReviewsTaken}</p>
-                    {this.props.userPricingPlan && <p>Cv Reviews allowed - {this.props.userPricingPlan.cvReviewsAllowed}</p>}
-                </React.Fragment>}
+const HomePage = ({ userInfo, userPricingPlan }) => {
+    return (
+        <React.Fragment>
+            <div className="row" style={{ marginLeft: "-20px", marginRight: "-20px" }}>
+                <div className="col-sm-4 fullHeight" style={{ padding: 0 }}>
+                    <img src={wallpaper} className="fullHeight" style={{ position: "absolute", zIndex: "-1" }} alt="wallpaper is missing"></img>
+                    {userInfo.username && <div style={{ color: "#CACFD2" }}>
+                        {/* <p className="independent" style={{ bottom: "5%", fontSize: "28px" }}>{userInfo.username}</p> */}
+                        {/* <p className="independent">email - {userInfo.email}</p>
+                        <p className="independent">Phone No. - {userInfo.phone_number}</p> */}
+                        {userPricingPlan && <div className="independent" style={{ top: "40%", fontSize: "14px" }}>
+                            <svg height="80" width="80">
+                                <circle cx="40" cy="40" r="30" stroke="white" strokeWidth="3" fill="none" />
+                            </svg>
+                            <p style={{ marginTop: "-49px" }}>{userInfo.cvReviewsTaken} / {userPricingPlan.cvReviewsAllowed}</p>
+                            <p style={{ marginTop: "25px" }}>Cv Reviews Taken</p>
+                        </div>}
+                    </div>}
+                </div>
+                <div className="col-sm-8 fullHeight" style={{ padding: 0, backgroundColor: "white" }}>
+                    <p className="independent" style={{ top: "40%", fontSize: "28px" }}>{userInfo.username}</p>
+                    <p className="independent" style={{ top: "45%" }}>{userInfo.email}</p>
+                    <p className="independent" style={{ top: "48%" }}>{userInfo.phone_number}</p>
+                </div>
             </div>
-        );
-    }
-}
+        </React.Fragment>
+    );
+};
 
-function getUserPricingPlan(pricingPlans, pricingPlanId) {
-    const userPricingPlan = pricingPlans.filter(pricingPlan => pricingPlan.id == pricingPlanId);
-    if (userPricingPlan) { return userPricingPlan[0]; }
-    return null;
-}
-
-function mapStateToProps(state, ownProps) {
-    let userInfo = state.userInfo;
-    let userPricingPlan = getUserPricingPlan(state.pricingPlans, userInfo.pricingPlanId);
-    return {
-        userInfo: userInfo,
-        userPricingPlan: userPricingPlan
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        //actions: bindActionCreators(actions, dispatch)
-    };
-}
 HomePage.propTypes = {
+    userInfo: PropTypes.object.isRequired,
+    userPricingPlan: PropTypes.object.isRequired
 };
 //make this component available to the app
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default HomePage;
