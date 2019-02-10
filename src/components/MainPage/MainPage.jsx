@@ -42,8 +42,8 @@ class MainPage extends React.Component {
                 'cvReviews': 'CV Review(s)',
                 'devices': ['Devices'],
                 'reports': ['Reports'],
-                'settings/policies': ['Settings', 'Policies'],
-                'settings/network': ['Settings', 'Network']
+                // 'settings/policies': ['Settings', 'Policies'],
+                // 'settings/network': ['Settings', 'Network']
             },
             selected: 'home'
         };
