@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const CVReviewTable = ({ cvReviewList }) => {
     return (
         <React.Fragment>
-            <table className="table table-hover myCard hCenter" style={{ marginTop: "25px", width: "75%" }}>
+            <table className="table table-hover myCard hCenter" style={{ marginTop: "25px", width: "95%" }}>
                 <thead>
                     <tr>
                         <th>Link</th>
