@@ -13,6 +13,18 @@
   color: rgb(204, 80, 74)
 }
 
+.submittedColor{
+  color: #D4AC0D
+}
+
+.underReviewColor{
+  color: #2980B9
+}
+
+.completedColor{
+  color: #196F3D
+}
+
 /* Validation errors */
 .errorText{
   color: rgb(204, 80, 74);

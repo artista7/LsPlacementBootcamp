@@ -17,7 +17,14 @@ const CVReview = ({ cvReview, cvUrl, handleFileUpload, isS3Uploading, numPages, 
             <div className="row">
                 {/* Left panel - Form */}
                 <div className="col-sm-12 col-lg-6">
-                    <p>Status: {cvReview.status}</p>
+                    <div style={{ textAlign: "center" }}>
+                        <Loader
+                            type="Rings"
+                            color={cvReview.status == CVReviewStatus.draft ? "rgb(204,80,74)" : cvReview.status == CVReviewStatus.submitted ? "#D4AC0D" : cvReview.status == CVReviewStatus.underReview ? "#2980B9" : cvReview.status == CVReviewStatus.complete ? "#196F3D" : "black"}
+                            height={40}
+                            width={40}
+                        />
+                    </div>
                     {/* Showing form in draft or submitted state only */}
                     {cvReview.status == CVReviewStatus.draft && <div>
                         <p>Upload CV:</p>
