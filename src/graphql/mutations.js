@@ -4,11 +4,9 @@
 export const createCvReview = `mutation CreateCvReview($input: CreateCvReviewInput!) {
   createCvReview(input: $input) {
     comments
-    createdAt
     createdBy
     fileName
     id
-    lastUpdatedAt
     lastUpdatedBy
     reviewedBy
     status
@@ -18,11 +16,9 @@ export const createCvReview = `mutation CreateCvReview($input: CreateCvReviewInp
 export const updateCvReview = `mutation UpdateCvReview($input: UpdateCvReviewInput!) {
   updateCvReview(input: $input) {
     comments
-    createdAt
     createdBy
     fileName
     id
-    lastUpdatedAt
     lastUpdatedBy
     reviewedBy
     status
@@ -32,14 +28,42 @@ export const updateCvReview = `mutation UpdateCvReview($input: UpdateCvReviewInp
 export const deleteCvReview = `mutation DeleteCvReview($input: DeleteCvReviewInput!) {
   deleteCvReview(input: $input) {
     comments
-    createdAt
     createdBy
     fileName
     id
-    lastUpdatedAt
     lastUpdatedBy
     reviewedBy
     status
+  }
+}
+`;
+export const createPricingPlan = `mutation CreatePricingPlan($input: CreatePricingPlanInput!) {
+  createPricingPlan(input: $input) {
+    cvReviewsAllowed
+    id
+    name
+    price
+    weightage
+  }
+}
+`;
+export const updatePricingPlan = `mutation UpdatePricingPlan($input: UpdatePricingPlanInput!) {
+  updatePricingPlan(input: $input) {
+    cvReviewsAllowed
+    id
+    name
+    price
+    weightage
+  }
+}
+`;
+export const deletePricingPlan = `mutation DeletePricingPlan($input: DeletePricingPlanInput!) {
+  deletePricingPlan(input: $input) {
+    cvReviewsAllowed
+    id
+    name
+    price
+    weightage
   }
 }
 `;
@@ -50,6 +74,7 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
     groups
     id
     phone_number
+    pricingPlanId
     username
   }
 }
@@ -61,6 +86,7 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
     groups
     id
     phone_number
+    pricingPlanId
     username
   }
 }
@@ -72,6 +98,7 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
     groups
     id
     phone_number
+    pricingPlanId
     username
   }
 }

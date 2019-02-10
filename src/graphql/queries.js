@@ -4,11 +4,9 @@
 export const getCvReview = `query GetCvReview($id: ID!) {
   getCvReview(id: $id) {
     comments
-    createdAt
     createdBy
     fileName
     id
-    lastUpdatedAt
     lastUpdatedBy
     reviewedBy
     status
@@ -23,14 +21,39 @@ export const listCvReviews = `query ListCvReviews(
   listCvReviews(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       comments
-      createdAt
       createdBy
       fileName
       id
-      lastUpdatedAt
       lastUpdatedBy
       reviewedBy
       status
+    }
+    nextToken
+  }
+}
+`;
+export const getPricingPlan = `query GetPricingPlan($id: ID!) {
+  getPricingPlan(id: $id) {
+    cvReviewsAllowed
+    id
+    name
+    price
+    weightage
+  }
+}
+`;
+export const listPricingPlans = `query ListPricingPlans(
+  $filter: ModelpricingPlanFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPricingPlans(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      cvReviewsAllowed
+      id
+      name
+      price
+      weightage
     }
     nextToken
   }
@@ -43,6 +66,7 @@ export const getUser = `query GetUser($id: ID!) {
     groups
     id
     phone_number
+    pricingPlanId
     username
   }
 }
@@ -59,6 +83,7 @@ export const listUsers = `query ListUsers(
       groups
       id
       phone_number
+      pricingPlanId
       username
     }
     nextToken

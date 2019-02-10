@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as cvReviewActions from '../../../actions/cvReviewActions';
+import * as userInfoActions from '../../../actions/userInfoActions';
 import CVReview from './CVReview';
 import { CVReviewStatus } from '../../../constants/constants';
-import { Auth, Storage } from 'aws-amplify';
+import { Storage } from 'aws-amplify';
 import { NotificationManager } from 'react-notifications';
 import _ from 'lodash';
 
@@ -16,7 +17,7 @@ class ManageCVReview extends React.Component {
         super(props, context);
 
         this.state = {
-            cvReview: { id: null, createdBy: null, createdAt: null, lastUpdatedAt: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null },
+            cvReview: { id: null, createdBy: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null },
             isS3Uploading: false,
             loaded: 0,
             numPages: null,
@@ -27,6 +28,7 @@ class ManageCVReview extends React.Component {
         }
 
         this.handleFileUpload = this.handleFileUpload.bind(this);
+        this.isSubmitAllowed = this.isSubmitAllowed.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onDocumentLoad = this.onDocumentLoad.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -52,6 +54,19 @@ class ManageCVReview extends React.Component {
         }
     }
 
+    isSubmitAllowed() {
+        debugger;
+        try {
+            if (this.props.userPricingPlan.cvReviewsAllowed > this.props.userInfo.cvReviewsTaken) {
+                return true;
+            }
+            return false;
+        }
+        catch{
+            return false;
+        }
+    }
+
     onCancel(event) {
         event.preventDefault();
         this.redirectToRoute('/cvReviews');
@@ -63,42 +78,52 @@ class ManageCVReview extends React.Component {
 
     onSubmit() {
         try {
-            this.setIsS3Uploading(true);
-            var setPercent = this.setPercent;
-            var redirectToRoute = this.redirectToRoute;
-            var s3FileName = this.state.selectedFile.name != undefined ? +(new Date) + '_' + this.state.selectedFile.name : '';
-            let username = this.props.userInfo.username != undefined ? this.props.userInfo.id : "";  //need to handle case when username is not retrieved
-            Storage.put(s3FileName, this.state.selectedFile, {
-                level: 'protected',
-                contentType: 'application/pdf',
-                progressCallback(progress) {
-                    setPercent(Math.floor(progress.loaded * 100 / progress.total));
-                }
-            })
-                .then(result => {
-                    //This code should trigger through lambda while adding cv into s3 for ml stuff
-                    //add cvReview into dynamo table
-                    let createCvReviewInput = {
-                        comments: "none",
-                        createdAt: +(new Date),
-                        createdBy: username,
-                        fileName: s3FileName,
-                        lastUpdatedAt: +(new Date),
-                        lastUpdatedBy: username,
-                        reviewedBy: "none",
-                        status: "submitted"
-                    };
-
-                    this.props.cvReviewActions._createCvReview(createCvReviewInput).then(response => {
-                        redirectToRoute('/cvReviews');
-                    }).catch(response => {
-                    });
-                    this.setIsS3Uploading(false);
+            //check if user is allowed to submit cv
+            //if not, through notification warning and redirect to previous page
+            if (!this.isSubmitAllowed()) {
+                NotificationManager.error("Cv Review limit reached", "Upgrade plan", 6000);
+                this.redirectToRoute('/cvReviews');
+            }
+            else {
+                //if yes
+                this.setIsS3Uploading(true);
+                var setPercent = this.setPercent;
+                var redirectToRoute = this.redirectToRoute;
+                var s3FileName = this.state.selectedFile.name != undefined ? +(new Date) + '_' + this.state.selectedFile.name : '';
+                let username = this.props.userInfo.username != undefined ? this.props.userInfo.username : "";  //NOTE - need to handle case when username is not retrieved
+                Storage.put(s3FileName, this.state.selectedFile, {
+                    level: 'protected',
+                    contentType: 'application/pdf',
+                    progressCallback(progress) {
+                        setPercent(Math.floor(progress.loaded * 100 / progress.total));
+                    }
                 })
-                .catch(err => {
-                    this.setIsS3Uploading(false);
-                    console.log(err);
-                });
+                    .then(result => {
+                        //add cvReview into dynamo table
+                        let createCvReviewInput = {
+                            comments: "none",
+                            createdBy: username,
+                            fileName: s3FileName,
+                            lastUpdatedBy: username,
+                            reviewedBy: "none",
+                            status: "submitted"
+                        };
+
+                        this.props.cvReviewActions._createCvReview(createCvReviewInput).then(response => {
+                            redirectToRoute('/cvReviews');
+                        }).catch(response => {
+                        });
+
+                        //edit userInfo to update cvReviewsTaken
+                        debugger;
+                        this.props.userInfoActions._updateUser({ ...this.props.userInfo, cvReviewsTaken: this.props.userInfo.cvReviewsTaken + 1 });
+                        this.setIsS3Uploading(false);
+                    })
+                    .catch(err => {
+                        this.setIsS3Uploading(false);
+                        console.log(err);
+                    });
+            }
         }
         catch (err) {
             alert("debugger" + err);
@@ -202,28 +227,44 @@ function getCvReviewById(cvReviews, id) {
     return null;
 }
 
+function getUserPricingPlan(pricingPlans, userInfo) {
+    debugger;
+    try {
+        debugger;
+        const userPricingPlan = pricingPlans.filter(pricingPlan => pricingPlan.id == userInfo.pricingPlanId);
+        if (userPricingPlan) { return userPricingPlan[0]; }
+    }
+    catch{
+        return null;
+    }
+}
+
 function mapStateToProps(state, ownProps) {
     var cvReviewId = null;
     if (ownProps.match && ownProps.match.params.id != undefined) {
         cvReviewId = ownProps.match.params.id;
     }
 
-    let cvReview = { id: null, createdBy: null, createdAt: null, lastUpdatedAt: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null };
+    let cvReview = { id: null, createdBy: null, lastUpdatedBy: null, s3FilePath: null, fileName: null, status: CVReviewStatus.draft, reviewedBy: null, comments: null };
     if (cvReviewId && state.cvReviews && state.cvReviews.length > 0) {
         cvReview = getCvReviewById(state.cvReviews, cvReviewId);
     }
+
+    let userPricingPlan = getUserPricingPlan(state.pricingPlans, state.userInfo);
 
     let userInfo = state.userInfo;
     //override cvReview from redux state
     return {
         cvReview: cvReview,
-        userInfo: userInfo
+        userInfo: userInfo,
+        userPricingPlan: userPricingPlan
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        cvReviewActions: bindActionCreators(cvReviewActions, dispatch)
+        cvReviewActions: bindActionCreators(cvReviewActions, dispatch),
+        userInfoActions: bindActionCreators(userInfoActions, dispatch)
     };
 }
 ManageCVReview.propTypes = {

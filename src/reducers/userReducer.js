@@ -6,6 +6,10 @@ export default function userReducer(state = initialState.userInfo, action) {
         case types.LOAD_USER_INFO:
             return Object.assign({}, action.userInfo)
 
+        case types.UPDATE_USER_INFO:
+            debugger;
+            return Object.assign({}, action.userInfo)
+
         default:
             return state;
     }

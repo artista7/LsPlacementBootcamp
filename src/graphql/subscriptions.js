@@ -4,11 +4,9 @@
 export const onCreateCvReview = `subscription OnCreateCvReview {
   onCreateCvReview {
     comments
-    createdAt
     createdBy
     fileName
     id
-    lastUpdatedAt
     lastUpdatedBy
     reviewedBy
     status
@@ -18,11 +16,9 @@ export const onCreateCvReview = `subscription OnCreateCvReview {
 export const onUpdateCvReview = `subscription OnUpdateCvReview {
   onUpdateCvReview {
     comments
-    createdAt
     createdBy
     fileName
     id
-    lastUpdatedAt
     lastUpdatedBy
     reviewedBy
     status
@@ -32,14 +28,42 @@ export const onUpdateCvReview = `subscription OnUpdateCvReview {
 export const onDeleteCvReview = `subscription OnDeleteCvReview {
   onDeleteCvReview {
     comments
-    createdAt
     createdBy
     fileName
     id
-    lastUpdatedAt
     lastUpdatedBy
     reviewedBy
     status
+  }
+}
+`;
+export const onCreatePricingPlan = `subscription OnCreatePricingPlan {
+  onCreatePricingPlan {
+    cvReviewsAllowed
+    id
+    name
+    price
+    weightage
+  }
+}
+`;
+export const onUpdatePricingPlan = `subscription OnUpdatePricingPlan {
+  onUpdatePricingPlan {
+    cvReviewsAllowed
+    id
+    name
+    price
+    weightage
+  }
+}
+`;
+export const onDeletePricingPlan = `subscription OnDeletePricingPlan {
+  onDeletePricingPlan {
+    cvReviewsAllowed
+    id
+    name
+    price
+    weightage
   }
 }
 `;
@@ -50,6 +74,7 @@ export const onCreateUser = `subscription OnCreateUser {
     groups
     id
     phone_number
+    pricingPlanId
     username
   }
 }
@@ -61,6 +86,7 @@ export const onUpdateUser = `subscription OnUpdateUser {
     groups
     id
     phone_number
+    pricingPlanId
     username
   }
 }
@@ -72,6 +98,7 @@ export const onDeleteUser = `subscription OnDeleteUser {
     groups
     id
     phone_number
+    pricingPlanId
     username
   }
 }

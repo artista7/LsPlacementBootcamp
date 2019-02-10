@@ -7,7 +7,7 @@ import { NotificationManager } from 'react-notifications';
 export function _createCvReview(cvReview) {
     return function (dispatch) {
         return API.graphql(graphqlOperation(createCvReview, { input: cvReview })).then(response => {
-            NotificationManager.success('Submitted review successfully', 'Success', 2000);
+            NotificationManager.success('Submitted cv successfully', 'Success', 2000);
             dispatch(_createCvReviewSuccess(response.data.createCvReview));
         }).catch(response => {
             NotificationManager.error('Error submitting review', 'Error', 2000);

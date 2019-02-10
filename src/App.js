@@ -5,7 +5,7 @@ import 'font-awesome/css/font-awesome.min.css'
 import './App.css';
 import LandingPage from './components/LandingPage/LandingPage';
 import LoginPage from './components/Auth/Login';
-import HomePage from './components/HomePage/HomePage';
+import MainPage from './components/MainPage/MainPage';
 import history from './history';
 /* Configuring Amplify*/
 import aws_config from "./aws-exports";
@@ -43,16 +43,16 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router history={history}>
-          <div>
+          <React.Fragment>
             {authState != "signedIn" && <Switch>
               <Route exact path="/" component={LandingPage}></Route>
               <Route exact path="/login" render={() => (<LoginPage updateStateVariable={this.updateStateVariable}></LoginPage>)}></Route>
               <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
             </Switch>}
             {authState == "signedIn" && <Switch>
-              <Route exact path="*" render={({ history, location }) => (<HomePage history={history} location={location} updateStateVariable={this.updateStateVariable}></HomePage>)}></Route>
+              <Route exact path="*" render={({ history, location }) => (<MainPage history={history} location={location} updateStateVariable={this.updateStateVariable}></MainPage>)}></Route>
             </Switch>}
-          </div>
+          </React.Fragment>
         </Router>
       </Provider>
     );

@@ -156,10 +156,10 @@
 							"Outputs.UserPoolId"
 						]
 					},
-					"schemaGraphql": "s3://learning-sage-20190209152947-deployment/amplify-appsync-files/schema.graphql.1549718243351",
+					"schemaGraphql": "s3://learning-sage-20190209152947-deployment/amplify-appsync-files/schema.graphql.1549754641575",
 					"ResolverBucket": "learning-sage-20190209152947-deployment",
 					"ResolverRootKey": "amplify-appsync-files",
-					"DeploymentTimestamp": "1549718243351",
+					"DeploymentTimestamp": "1549754641575",
 					"env": "local"
 				}
 			}
@@ -188,6 +188,15 @@
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190209152947-deployment/amplify-cfn-templates/function/cognitoFunction-cloudformation-template.json",
+				"Parameters": {
+					"env": "local"
+				}
+			}
+		},
+		"functionseedDataFunction": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190209152947-deployment/amplify-cfn-templates/function/seedDataFunction-cloudformation-template.json",
 				"Parameters": {
 					"env": "local"
 				}

@@ -26,6 +26,12 @@
 			"providerPlugin": "awscloudformation",
 			"build": true,
 			"dependsOn": []
+		},
+		"seedDataFunction": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": []
 		}
 	}
 }
