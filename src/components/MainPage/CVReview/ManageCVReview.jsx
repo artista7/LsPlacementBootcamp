@@ -221,7 +221,9 @@ function getCvReviewById(cvReviews, id) {
 
 function getUserPricingPlan(pricingPlans, pricingPlanId) {
     const userPricingPlan = pricingPlans.filter(pricingPlan => pricingPlan.id == pricingPlanId);
-    if (userPricingPlan.length > 0) { return userPricingPlan[0]; }
+    if (userPricingPlan.length > 0) {
+        return userPricingPlan[0];
+    }
     return { cvReviewsAllowed: 0 };     //in case user's pricing plan not available, default allowed reviews to zero
 }
 
@@ -236,7 +238,7 @@ function mapStateToProps(state, ownProps) {
         cvReview = getCvReviewById(state.cvReviews, cvReviewId);
     }
 
-    let userPricingPlan = getUserPricingPlan(state.pricingPlans, state.userInfo);
+    let userPricingPlan = getUserPricingPlan(state.pricingPlans, state.userInfo.pricingPlanId);
 
     let userInfo = state.userInfo;
     //override cvReview from redux state

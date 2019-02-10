@@ -17,7 +17,7 @@ const HomePage = ({ userInfo, userPricingPlan }) => {
                         <p className="independent">Phone No. - {userInfo.phone_number}</p> */}
                         {userPricingPlan && <div className="independent" style={{ top: "40%", fontSize: "14px" }}>
                             <svg height="80" width="80">
-                                <circle cx="40" cy="40" r="30" stroke="white" stroke-width="3" fill="none" />
+                                <circle cx="40" cy="40" r="30" stroke="white" strokeWidth="3" fill="none" />
                             </svg>
                             <p style={{ marginTop: "-49px" }}>{userInfo.cvReviewsTaken} / {userPricingPlan.cvReviewsAllowed}</p>
                             <p style={{ marginTop: "25px" }}>Cv Reviews Taken</p>
