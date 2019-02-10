@@ -14,8 +14,7 @@ const breadcrumbs = ({ pageTitle, selected }) => {
             {list.map((item, index) => (
                 <Breadcrumbs.Item
                     active={index === list.length - 1}
-                    key={`${selected}_${index}`}
-                >
+                    key={`${selected}_${index}`}>
                     {item}
                 </Breadcrumbs.Item>
             ))}

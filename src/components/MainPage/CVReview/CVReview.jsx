@@ -24,6 +24,7 @@ const CVReview = ({ cvReview, cvUrl, handleFileUpload, isS3Uploading, numPages, 
                             height={40}
                             width={40}
                         />
+                        {/* <span>{cvReview.status}</span> */}
                     </div>
                     {/* Showing form in draft or submitted state only */}
                     {cvReview.status == CVReviewStatus.draft && <div>

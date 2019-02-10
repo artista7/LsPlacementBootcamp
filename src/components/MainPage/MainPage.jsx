@@ -165,7 +165,7 @@ class MainPage extends React.Component {
                 /></div>}
                 <Sidebar onSelect={this.onSelect} onToggle={this.onToggle} selected={selected}></Sidebar>
                 <Main expanded={expanded} style={{ height: "100vh", overflowY: "scroll" }}>
-                    <Breadcrumbs pageTitle={pageTitle} selected={selected}></Breadcrumbs>
+                    {selected != "home" && <Breadcrumbs pageTitle={pageTitle} selected={selected}></Breadcrumbs>}
                     <Switch>
                         <Route path="/" exact component={props => <HomePage {...props}></HomePage>} />
                         <Route exact path="/cvReviews" component={props => <CVReviewList {...props}></CVReviewList>} />
