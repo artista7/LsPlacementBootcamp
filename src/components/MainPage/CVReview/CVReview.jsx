@@ -11,7 +11,7 @@ import { Formik, ErrorMessage, Form } from 'formik';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 // create a component
-const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onCancel, onDocumentLoad, onSubmit, pageNumber, selectedFile, shufflePage, cvUrl }) => {
+const CVReview = ({ cvReview, cvUrl, handleFileUpload, isS3Uploading, numPages, onDocumentLoad, onSubmit, pageNumber, redirectToRoute, selectedFile, shufflePage }) => {
     return (
         <div>
             <div className="row">
@@ -19,7 +19,7 @@ const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onCance
                 <div className="col-sm-12 col-lg-6">
                     <p>Status: {cvReview.status}</p>
                     {/* Showing form in draft or submitted state only */}
-                    {(cvReview.status == CVReviewStatus.draft || cvReview.status == CVReviewStatus.submitted) && <div>
+                    {cvReview.status == CVReviewStatus.draft && <div>
                         <p>Upload CV:</p>
                         <Formik
                             enableReinitialize
@@ -43,8 +43,8 @@ const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onCance
                                         </div>
 
                                         <div className="mt-3" style={{ textAlign: "center" }}>
-                                            <button type="submit" disabled={isSubmitting} className="btn btn-primary">{cvReview.status == CVReviewStatus.draft ? "Submit" : "Update"}</button>
-                                            {/* <button className="btn btn-primary" onClick={onCancel}>Cancel</button> */}
+                                            <button type="submit" disabled={isSubmitting} className="btn btn-primary">Submit</button>
+                                            <button className="btn btn-primary" style={{ marginLeft: "20px" }} onClick={() => redirectToRoute('/cvReviews')}>Cancel</button>
                                         </div>
                                         {/* <div id="debug">
                                             {JSON.stringify(values)}
@@ -54,8 +54,13 @@ const CVReview = ({ cvReview, handleFileUpload, isS3Uploading, numPages, onCance
                             }}
                         </Formik>
                     </div>}
+
                     {/* Showing comments in completed review */}
                     {cvReview.status == CVReviewStatus.complete && <div style={{ textAlign: "center" }}>Comments Recieved</div>}
+
+                    {cvReview.status != CVReviewStatus.draft && <div className="mt-3" style={{ textAlign: "center" }}>
+                        <button className="btn btn-primary" onClick={() => redirectToRoute('/cvReviews')}>Back</button>
+                    </div>}
                 </div>
                 {/* Right panel - CV View */}
                 <div className="col-sm-12 col-lg-6" style={{ borderLeft: "1px #e6e6e6 solid", overflowY: "scroll", height: "calc(100vh - 60px)" }}>
@@ -91,10 +96,10 @@ CVReview.propTypes = {
     handleFileUpload: PropTypes.func.isRequired,
     isS3Uploading: PropTypes.bool.isRequired,
     numPages: PropTypes.number,
-    onCancel: PropTypes.func.isRequired,
     onDocumentLoad: PropTypes.func,
     onSubmit: PropTypes.func.isRequired,
     pageNumber: PropTypes.number,
+    redirectToRoute: PropTypes.func.isRequired,
     selectedFile: PropTypes.object,
     shufflePage: PropTypes.func.isRequired,
     cvUrl: PropTypes.string.isRequired

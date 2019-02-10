@@ -29,7 +29,6 @@ class ManageCVReview extends React.Component {
 
         this.handleFileUpload = this.handleFileUpload.bind(this);
         this.isSubmitAllowed = this.isSubmitAllowed.bind(this);
-        this.onCancel = this.onCancel.bind(this);
         this.onDocumentLoad = this.onDocumentLoad.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.redirectToRoute = this.redirectToRoute.bind(this);
@@ -64,11 +63,6 @@ class ManageCVReview extends React.Component {
         catch{
             return false;
         }
-    }
-
-    onCancel(event) {
-        event.preventDefault();
-        this.redirectToRoute('/cvReviews');
     }
 
     onDocumentLoad(numPages) {
@@ -204,16 +198,16 @@ class ManageCVReview extends React.Component {
         return (
             <CVReview
                 cvReview={this.state.cvReview}
+                cvUrl={this.state.cvUrl}
                 handleFileUpload={this.handleFileUpload}
                 isS3Uploading={this.state.isS3Uploading}
                 numPages={this.state.numPages}
-                onCancel={this.onCancel}
                 onDocumentLoad={this.onDocumentLoad}
                 onSubmit={this.onSubmit}
                 pageNumber={this.state.pageNumber}
+                redirectToRoute={this.redirectToRoute}
                 selectedFile={this.state.selectedFile}
-                shufflePage={this.shufflePage}
-                cvUrl={this.state.cvUrl}>
+                shufflePage={this.shufflePage}>
             </CVReview>
         );
     }
