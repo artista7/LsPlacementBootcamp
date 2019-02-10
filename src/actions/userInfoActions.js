@@ -22,7 +22,6 @@ export function _loadUserInfoSuccess(userInfo) {
 export function _updateUser(userInfo) {
     return function (dispatch) {
         return API.graphql(graphqlOperation(updateUser, { input: userInfo })).then(response => {
-            debugger;
             console.log("updated user info");
             dispatch(_updateUserSuccess(response.data.updateUser));
         }).catch(response => {

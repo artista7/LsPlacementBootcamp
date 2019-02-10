@@ -22,8 +22,8 @@ class ManageHomePage extends React.Component {
 
 function getUserPricingPlan(pricingPlans, pricingPlanId) {
     const userPricingPlan = pricingPlans.filter(pricingPlan => pricingPlan.id == pricingPlanId);
-    if (userPricingPlan) { return userPricingPlan[0]; }
-    return null;
+    if (userPricingPlan.length > 0) { return userPricingPlan[0]; }
+    return { cvReviewsAllowed: 0 };     //in case user's pricing plan not available, default allowed reviews to zero
 }
 
 function mapStateToProps(state, ownProps) {

@@ -55,7 +55,6 @@ class ManageCVReview extends React.Component {
     }
 
     isSubmitAllowed() {
-        debugger;
         try {
             if (this.props.userPricingPlan.cvReviewsAllowed > this.props.userInfo.cvReviewsTaken) {
                 return true;
@@ -115,7 +114,6 @@ class ManageCVReview extends React.Component {
                         });
 
                         //edit userInfo to update cvReviewsTaken
-                        debugger;
                         this.props.userInfoActions._updateUser({ ...this.props.userInfo, cvReviewsTaken: this.props.userInfo.cvReviewsTaken + 1 });
                         this.setIsS3Uploading(false);
                     })
@@ -227,16 +225,10 @@ function getCvReviewById(cvReviews, id) {
     return null;
 }
 
-function getUserPricingPlan(pricingPlans, userInfo) {
-    debugger;
-    try {
-        debugger;
-        const userPricingPlan = pricingPlans.filter(pricingPlan => pricingPlan.id == userInfo.pricingPlanId);
-        if (userPricingPlan) { return userPricingPlan[0]; }
-    }
-    catch{
-        return null;
-    }
+function getUserPricingPlan(pricingPlans, pricingPlanId) {
+    const userPricingPlan = pricingPlans.filter(pricingPlan => pricingPlan.id == pricingPlanId);
+    if (userPricingPlan.length > 0) { return userPricingPlan[0]; }
+    return { cvReviewsAllowed: 0 };     //in case user's pricing plan not available, default allowed reviews to zero
 }
 
 function mapStateToProps(state, ownProps) {

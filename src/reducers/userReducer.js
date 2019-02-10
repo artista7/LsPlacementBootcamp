@@ -7,7 +7,6 @@ export default function userReducer(state = initialState.userInfo, action) {
             return Object.assign({}, action.userInfo)
 
         case types.UPDATE_USER_INFO:
-            debugger;
             return Object.assign({}, action.userInfo)
 
         default:
