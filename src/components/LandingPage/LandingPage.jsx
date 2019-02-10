@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import './LandingPage.css';
 import ravi from '../../assets/img/team/Ravi.jpg';
 import shubham from '../../assets/img/team/Shubham.jpeg';

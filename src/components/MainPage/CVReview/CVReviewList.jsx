@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import * as cvReviewActions from '../../../actions/cvReviewActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Loader from 'react-loader-spinner'
 import CVReviewTable from './CVReviewTable';
+
 // create a component
 class CVReviewList extends React.Component {
     constructor(props, context) {

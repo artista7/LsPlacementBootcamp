@@ -17,7 +17,7 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 import Loader from 'react-loader-spinner';
 import * as constants from '../../constants/constants';
 /*Child components */
-import HomePage from './HomePage/HomePage';
+import HomePage from './HomePage/ManageHomePage';
 import CVReviewList from './CVReview/CVReviewList';
 import ManageCVReview from './CVReview/ManageCVReview';
 
