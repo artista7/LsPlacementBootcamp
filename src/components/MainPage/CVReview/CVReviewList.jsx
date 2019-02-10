@@ -33,11 +33,14 @@ class CVReviewList extends React.Component {
         const { cvReviewList } = this.props;
         return (
             <div>
-                <input
-                    type="submit"
-                    value="Create Cv Review"
-                    className="btn btn-primary"
-                    onClick={() => this.redirectToRoute('/cvReview')}></input>
+                <div className="hCenter">
+                    <input
+                        type="submit"
+                        value="Create Cv Review"
+                        className="btn btn-primary hCenter"
+                        onClick={() => this.redirectToRoute('/cvReview')}></input>
+                </div>
+                <hr />
                 {cvReviewList.length > 0 && <CVReviewTable cvReviewList={cvReviewList}></CVReviewTable>}
             </div>
         );

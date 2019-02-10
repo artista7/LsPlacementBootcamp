@@ -39,6 +39,7 @@
 
 /*Horizontally centering an element*/
 .hCenter {
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
