@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const CVReviewTable = ({ cvReviewList }) => {
     return (
         <React.Fragment>
-            <table className="table table-hover myCard hCenter" style={{ marginTop: "25px", width: "95%" }}>
+            <table className="table table-hover myCard hCenter" style={{ marginTop: "25px", fontFamily: "Helvetica Neue" }}>
                 <thead>
                     <tr>
                         <th>Link</th>
@@ -29,7 +29,7 @@ const CVReviewTable = ({ cvReviewList }) => {
                     })}
                 </tbody>
             </table>
-            <h6 className="hCenter">Submitted Reviews</h6>
+            <p className="hCenter" style={{ fontSize: "14px" }}>Submitted Reviews</p>
         </React.Fragment>
     );
 };
