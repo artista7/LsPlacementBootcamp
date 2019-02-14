@@ -6,7 +6,7 @@
 		}
 	},
 	"api": {
-		"apils": {
+		"ls": {
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {
@@ -14,24 +14,24 @@
 			}
 		}
 	},
-	"storage": {
-		"storages3": {
-			"service": "S3",
-			"providerPlugin": "awscloudformation"
-		}
-	},
 	"function": {
-		"cognitoFunction": {
+		"seedFunction": {
 			"service": "Lambda",
 			"providerPlugin": "awscloudformation",
 			"build": true,
 			"dependsOn": []
 		},
-		"seedDataFunction": {
+		"cognitoFunction": {
 			"service": "Lambda",
 			"providerPlugin": "awscloudformation",
 			"build": true,
 			"dependsOn": []
+		}
+	},
+	"storage": {
+		"storagels": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
 		}
 	}
 }

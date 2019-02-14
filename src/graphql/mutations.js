@@ -67,6 +67,30 @@ export const deletePricingPlan = `mutation DeletePricingPlan($input: DeletePrici
   }
 }
 `;
+export const createServiceEnabled = `mutation CreateServiceEnabled($input: CreateServiceEnabledInput!) {
+  createServiceEnabled(input: $input) {
+    id
+    name
+    isEnabled
+  }
+}
+`;
+export const updateServiceEnabled = `mutation UpdateServiceEnabled($input: UpdateServiceEnabledInput!) {
+  updateServiceEnabled(input: $input) {
+    id
+    name
+    isEnabled
+  }
+}
+`;
+export const deleteServiceEnabled = `mutation DeleteServiceEnabled($input: DeleteServiceEnabledInput!) {
+  deleteServiceEnabled(input: $input) {
+    id
+    name
+    isEnabled
+  }
+}
+`;
 export const createUser = `mutation CreateUser($input: CreateUserInput!) {
   createUser(input: $input) {
     cvReviewsTaken

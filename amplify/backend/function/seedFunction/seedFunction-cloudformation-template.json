@@ -28,12 +28,12 @@
 				"FunctionName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"seedDataFunction",
+						"seedFunction",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"seedDataFunction",
+									"seedFunction",
 									"-",
 									{
 										"Ref": "env"
@@ -59,8 +59,8 @@
 				"Runtime": "nodejs8.10",
 				"Timeout": "25",
 				"Code": {
-					"S3Bucket": "learning-sage-20190209152947-deployment",
-					"S3Key": "amplify-builds/seedDataFunction-1549734759-latest-build.zip"
+					"S3Bucket": "learning-sage-20190211234618-deployment",
+					"S3Key": "amplify-builds/seedFunction-1549909341-latest-build.zip"
 				}
 			}
 		},
@@ -70,12 +70,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"learningsageLambdaRole483c3edc",
+						"learningsageLambdaRole01ff9e1d",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"learningsageLambdaRole483c3edc",
+									"learningsageLambdaRole01ff9e1d",
 									"-",
 									{
 										"Ref": "env"

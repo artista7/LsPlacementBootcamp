@@ -43,7 +43,7 @@ export const getPricingPlan = `query GetPricingPlan($id: ID!) {
 }
 `;
 export const listPricingPlans = `query ListPricingPlans(
-  $filter: ModelpricingPlanFilterInput
+  $filter: ModelPricingPlanFilterInput
   $limit: Int
   $nextToken: String
 ) {
@@ -54,6 +54,29 @@ export const listPricingPlans = `query ListPricingPlans(
       name
       price
       weightage
+    }
+    nextToken
+  }
+}
+`;
+export const getServiceEnabled = `query GetServiceEnabled($id: ID!) {
+  getServiceEnabled(id: $id) {
+    id
+    name
+    isEnabled
+  }
+}
+`;
+export const listServiceEnableds = `query ListServiceEnableds(
+  $filter: ModelServiceEnabledFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listServiceEnableds(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      isEnabled
     }
     nextToken
   }

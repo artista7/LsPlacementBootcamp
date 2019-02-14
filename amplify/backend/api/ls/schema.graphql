@@ -14,12 +14,18 @@ enum CvReviewStatus{
   reviewCompleted
 }
 
-type pricingPlan @model{
+type PricingPlan @model{
   cvReviewsAllowed: Int
   id: ID!
   name: String
   price: Int
   weightage: Int
+}
+
+type ServiceEnabled @model{
+  id: ID!
+  name: String
+  isEnabled: Boolean
 }
 
 type User @model {

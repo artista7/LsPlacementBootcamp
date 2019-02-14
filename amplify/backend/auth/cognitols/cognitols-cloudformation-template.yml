@@ -87,10 +87,10 @@ Parameters:
               
   userpoolClientGenerateSecret:
     Type: String
-          
+              
   userpoolClientRefreshTokenValidity:
-    Type: String
-                  
+    Type: Number
+              
   userpoolClientReadAttributes:
     Type: CommaDelimitedList
       
@@ -339,7 +339,7 @@ Resources:
   # Always created
     Type: AWS::Cognito::IdentityPool
     Properties: 
-      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'identitypoolls', !Join ['',['identitypoolls', '__', !Ref env]]]
+      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'idpoolls', !Join ['',['idpoolls', '__', !Ref env]]]
       
       CognitoIdentityProviders:
         - ClientId:  !Ref UserPoolClient

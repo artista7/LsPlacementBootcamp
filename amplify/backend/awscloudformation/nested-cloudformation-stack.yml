@@ -81,9 +81,9 @@
 		"authcognitols": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190209152947-deployment/amplify-cfn-templates/auth/cognitols-cloudformation-template.yml",
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190211234618-deployment/amplify-cfn-templates/auth/cognitols-cloudformation-template.yml",
 				"Parameters": {
-					"identityPoolName": "identitypoolls",
+					"identityPoolName": "idpoolls",
 					"allowUnauthenticatedIdentities": false,
 					"thirdPartyAuth": false,
 					"lambdaLogPolicy": "cognitols_lambda_log_policy",
@@ -99,7 +99,7 @@
 					"roleExternalId": "cognitols_role_external_id",
 					"policyName": "cognitols-sns-policy",
 					"smsAuthenticationMessage": "Your authentication code is {####}",
-					"smsVerificationMessage": "Your verification code is {####}",
+					"smsVerificationMessage": "Your verification code is {####} - Learning-sage",
 					"emailVerificationSubject": "Your verification code",
 					"emailVerificationMessage": "Your verification code is {####}",
 					"defaultPasswordPolicy": true,
@@ -108,8 +108,8 @@
 					"requiredAttributes": "email,phone_number",
 					"userpoolClientName": "cognitols_app_client",
 					"userpoolClientGenerateSecret": true,
-					"userpoolClientRefreshTokenValidity": "10",
-					"userpoolClientReadAttributes": "address,birthdate,email,name,phone_number,picture,profile",
+					"userpoolClientRefreshTokenValidity": 30,
+					"userpoolClientReadAttributes": "address,birthdate,email,name,phone_number,picture,profile,email_verified,phone_number_verified",
 					"mfaLambdaRole": "cognitols_totp_lambda_role",
 					"mfaLambdaLogPolicy": "cognitols_totp_lambda_log_policy",
 					"mfaPassRolePolicy": "cognitols_totp_pass_role_policy",
@@ -144,34 +144,52 @@
 				}
 			}
 		},
-		"apiapils": {
+		"apils": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190209152947-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190211234618-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"Parameters": {
-					"AppSyncApiName": "apils",
+					"AppSyncApiName": "ls",
 					"AuthCognitoUserPoolId": {
 						"Fn::GetAtt": [
 							"authcognitols",
 							"Outputs.UserPoolId"
 						]
 					},
-					"schemaGraphql": "s3://learning-sage-20190209152947-deployment/amplify-appsync-files/schema.graphql.1549754641575",
-					"ResolverBucket": "learning-sage-20190209152947-deployment",
+					"schemaGraphql": "s3://learning-sage-20190211234618-deployment/amplify-appsync-files/schema.graphql.1549909342976",
+					"ResolverBucket": "learning-sage-20190211234618-deployment",
 					"ResolverRootKey": "amplify-appsync-files",
-					"DeploymentTimestamp": "1549754641575",
+					"DeploymentTimestamp": "1549909342976",
 					"env": "local"
 				}
 			}
 		},
-		"storagestorages3": {
+		"functionseedFunction": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190209152947-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190211234618-deployment/amplify-cfn-templates/function/seedFunction-cloudformation-template.json",
 				"Parameters": {
-					"bucketName": "s3ls",
-					"authPolicyName": "s3_amplify_321e49ee",
-					"unauthPolicyName": "s3_amplify_321e49ee",
+					"env": "local"
+				}
+			}
+		},
+		"functioncognitoFunction": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190211234618-deployment/amplify-cfn-templates/function/cognitoFunction-cloudformation-template.json",
+				"Parameters": {
+					"env": "local"
+				}
+			}
+		},
+		"storagestoragels": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190211234618-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
+				"Parameters": {
+					"bucketName": "storagels",
+					"authPolicyName": "s3_amplify_3dd146f4",
+					"unauthPolicyName": "s3_amplify_3dd146f4",
 					"authRoleName": {
 						"Ref": "AuthRoleName"
 					},
@@ -180,24 +198,6 @@
 					},
 					"authPermissions": "rw",
 					"unauthPermissions": "",
-					"env": "local"
-				}
-			}
-		},
-		"functioncognitoFunction": {
-			"Type": "AWS::CloudFormation::Stack",
-			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190209152947-deployment/amplify-cfn-templates/function/cognitoFunction-cloudformation-template.json",
-				"Parameters": {
-					"env": "local"
-				}
-			}
-		},
-		"functionseedDataFunction": {
-			"Type": "AWS::CloudFormation::Stack",
-			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190209152947-deployment/amplify-cfn-templates/function/seedDataFunction-cloudformation-template.json",
-				"Parameters": {
 					"env": "local"
 				}
 			}

@@ -67,6 +67,30 @@ export const onDeletePricingPlan = `subscription OnDeletePricingPlan {
   }
 }
 `;
+export const onCreateServiceEnabled = `subscription OnCreateServiceEnabled {
+  onCreateServiceEnabled {
+    id
+    name
+    isEnabled
+  }
+}
+`;
+export const onUpdateServiceEnabled = `subscription OnUpdateServiceEnabled {
+  onUpdateServiceEnabled {
+    id
+    name
+    isEnabled
+  }
+}
+`;
+export const onDeleteServiceEnabled = `subscription OnDeleteServiceEnabled {
+  onDeleteServiceEnabled {
+    id
+    name
+    isEnabled
+  }
+}
+`;
 export const onCreateUser = `subscription OnCreateUser {
   onCreateUser {
     cvReviewsTaken

@@ -59,8 +59,8 @@
 				"Runtime": "nodejs8.10",
 				"Timeout": "25",
 				"Code": {
-					"S3Bucket": "learning-sage-20190209152947-deployment",
-					"S3Key": "amplify-builds/cognitoFunction-1549753964-latest-build.zip"
+					"S3Bucket": "learning-sage-20190211234618-deployment",
+					"S3Key": "amplify-builds/cognitoFunction-1549909342-latest-build.zip"
 				}
 			}
 		},
@@ -70,12 +70,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"learningsageLambdaRolebc4a7eab",
+						"learningsageLambdaRole9eaaa948",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"learningsageLambdaRolebc4a7eab",
+									"learningsageLambdaRole9eaaa948",
 									"-",
 									{
 										"Ref": "env"

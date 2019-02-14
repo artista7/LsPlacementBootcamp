@@ -94,11 +94,11 @@ class ManageCVReview extends React.Component {
                     .then(result => {
                         //add cvReview into dynamo table
                         let createCvReviewInput = {
-                            comments: "none",
+                            //comments: "",
                             createdBy: username,
                             fileName: s3FileName,
                             lastUpdatedBy: username,
-                            reviewedBy: "none",
+                            //reviewedBy: "",
                             status: "submitted"
                         };
 

@@ -14,12 +14,18 @@ enum CvReviewStatus {
   reviewCompleted
 }
 
-type pricingPlan {
+type PricingPlan {
   cvReviewsAllowed: Int
   id: ID!
   name: String
   price: Int
   weightage: Int
+}
+
+type ServiceEnabled {
+  id: ID!
+  name: String
+  isEnabled: Boolean
 }
 
 type User {
@@ -118,8 +124,10 @@ input ModelCvReviewFilterInput {
 type Query {
   getCvReview(id: ID!): CvReview
   listCvReviews(filter: ModelCvReviewFilterInput, limit: Int, nextToken: String): ModelCvReviewConnection
-  getPricingPlan(id: ID!): pricingPlan
-  listPricingPlans(filter: ModelpricingPlanFilterInput, limit: Int, nextToken: String): ModelpricingPlanConnection
+  getPricingPlan(id: ID!): PricingPlan
+  listPricingPlans(filter: ModelPricingPlanFilterInput, limit: Int, nextToken: String): ModelPricingPlanConnection
+  getServiceEnabled(id: ID!): ServiceEnabled
+  listServiceEnableds(filter: ModelServiceEnabledFilterInput, limit: Int, nextToken: String): ModelServiceEnabledConnection
   getUser(id: ID!): User
   listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
 }
@@ -152,9 +160,12 @@ type Mutation {
   createCvReview(input: CreateCvReviewInput!): CvReview
   updateCvReview(input: UpdateCvReviewInput!): CvReview
   deleteCvReview(input: DeleteCvReviewInput!): CvReview
-  createPricingPlan(input: CreatePricingPlanInput!): pricingPlan
-  updatePricingPlan(input: UpdatePricingPlanInput!): pricingPlan
-  deletePricingPlan(input: DeletePricingPlanInput!): pricingPlan
+  createPricingPlan(input: CreatePricingPlanInput!): PricingPlan
+  updatePricingPlan(input: UpdatePricingPlanInput!): PricingPlan
+  deletePricingPlan(input: DeletePricingPlanInput!): PricingPlan
+  createServiceEnabled(input: CreateServiceEnabledInput!): ServiceEnabled
+  updateServiceEnabled(input: UpdateServiceEnabledInput!): ServiceEnabled
+  deleteServiceEnabled(input: DeleteServiceEnabledInput!): ServiceEnabled
   createUser(input: CreateUserInput!): User
   updateUser(input: UpdateUserInput!): User
   deleteUser(input: DeleteUserInput!): User
@@ -164,28 +175,31 @@ type Subscription {
   onCreateCvReview: CvReview @aws_subscribe(mutations: ["createCvReview"])
   onUpdateCvReview: CvReview @aws_subscribe(mutations: ["updateCvReview"])
   onDeleteCvReview: CvReview @aws_subscribe(mutations: ["deleteCvReview"])
-  onCreatePricingPlan: pricingPlan @aws_subscribe(mutations: ["createPricingPlan"])
-  onUpdatePricingPlan: pricingPlan @aws_subscribe(mutations: ["updatePricingPlan"])
-  onDeletePricingPlan: pricingPlan @aws_subscribe(mutations: ["deletePricingPlan"])
+  onCreatePricingPlan: PricingPlan @aws_subscribe(mutations: ["createPricingPlan"])
+  onUpdatePricingPlan: PricingPlan @aws_subscribe(mutations: ["updatePricingPlan"])
+  onDeletePricingPlan: PricingPlan @aws_subscribe(mutations: ["deletePricingPlan"])
+  onCreateServiceEnabled: ServiceEnabled @aws_subscribe(mutations: ["createServiceEnabled"])
+  onUpdateServiceEnabled: ServiceEnabled @aws_subscribe(mutations: ["updateServiceEnabled"])
+  onDeleteServiceEnabled: ServiceEnabled @aws_subscribe(mutations: ["deleteServiceEnabled"])
   onCreateUser: User @aws_subscribe(mutations: ["createUser"])
   onUpdateUser: User @aws_subscribe(mutations: ["updateUser"])
   onDeleteUser: User @aws_subscribe(mutations: ["deleteUser"])
 }
 
-type ModelpricingPlanConnection {
-  items: [pricingPlan]
+type ModelPricingPlanConnection {
+  items: [PricingPlan]
   nextToken: String
 }
 
-input ModelpricingPlanFilterInput {
+input ModelPricingPlanFilterInput {
   cvReviewsAllowed: ModelIntFilterInput
   id: ModelIDFilterInput
   name: ModelStringFilterInput
   price: ModelIntFilterInput
   weightage: ModelIntFilterInput
-  and: [ModelpricingPlanFilterInput]
-  or: [ModelpricingPlanFilterInput]
-  not: ModelpricingPlanFilterInput
+  and: [ModelPricingPlanFilterInput]
+  or: [ModelPricingPlanFilterInput]
+  not: ModelPricingPlanFilterInput
 }
 
 input CreatePricingPlanInput {
@@ -205,6 +219,36 @@ input UpdatePricingPlanInput {
 }
 
 input DeletePricingPlanInput {
+  id: ID
+}
+
+type ModelServiceEnabledConnection {
+  items: [ServiceEnabled]
+  nextToken: String
+}
+
+input ModelServiceEnabledFilterInput {
+  id: ModelIDFilterInput
+  name: ModelStringFilterInput
+  isEnabled: ModelBooleanFilterInput
+  and: [ModelServiceEnabledFilterInput]
+  or: [ModelServiceEnabledFilterInput]
+  not: ModelServiceEnabledFilterInput
+}
+
+input CreateServiceEnabledInput {
+  id: ID
+  name: String
+  isEnabled: Boolean
+}
+
+input UpdateServiceEnabledInput {
+  id: ID!
+  name: String
+  isEnabled: Boolean
+}
+
+input DeleteServiceEnabledInput {
   id: ID
 }
 

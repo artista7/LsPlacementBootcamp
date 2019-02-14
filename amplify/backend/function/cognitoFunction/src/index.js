@@ -13,7 +13,7 @@ exports.handler = function (event, context, callback) {
     ProjectionExpression: 'id',
     ExpressionAttributeNames: { "#n": "name" },
     FilterExpression: 'contains (#n, :n)',
-    TableName: 'pricingPlan-ew2bghmyzvcktaphwwjm4kxbeu-local'
+    TableName: 'PricingPlan-ya5pnukycbhtve3t452za5wjjq-local'
   };
 
   //1. get id of free plan
@@ -23,14 +23,14 @@ exports.handler = function (event, context, callback) {
     } else {
       var id = data.Items[0].id.S;
       console.log("Successfully fetched Free plan's id - ", id);
-      //2. insert id into users
+      //2. insert id into created users
       insertUserInDb(id);
     }
   });
 
   function insertUserInDb(id) {
     var paramsUser = {
-      TableName: 'User-ew2bghmyzvcktaphwwjm4kxbeu-local',
+      TableName: 'User-ya5pnukycbhtve3t452za5wjjq-local',
       Item: {
         "id": { "S": event.userName },
         "cvReviewsTaken": { "N": "0" },
