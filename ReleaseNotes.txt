@@ -1,6 +1,7 @@
 release/v1.0.0
 
 Enhancements
+- Cloudformation deployement script added
 - Configured multiple environments using 'aws-amplify/cli@multienv'
 - Added 'aws-amplify' a js library for Auth(cognito), Api(Appsync), Storage(s3) and Function(lambda)
 - Added Sign In/Sign Out flow in the app

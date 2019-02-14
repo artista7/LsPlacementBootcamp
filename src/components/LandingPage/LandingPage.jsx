@@ -130,7 +130,7 @@ class LandingPage extends Component {
                                             <img src={ravi} height="230" width="223px" style={{ borderRadius: "1.5%" }} alt="Ravi Ranjan is missing"></img>
                                             <div style={{ marginTop: "10px", fontSize: "25px" }}>Ravi Ranjan</div>
                                             <div style={{ marginTop: "5px", fontSize: "15px" }}>Co-Founder</div>
-                                            <p style={{ marginTop: "5px", fontSize: "15px" }}>An Alumni of IITD & a big-data expert, he is currently pursuing his MBA from IIM A</p>
+                                            <p style={{ marginTop: "5px", fontSize: "15px" }}>An IITD Alumnus & a big-data expert, he is currently pursuing his MBA from IIM A</p>
                                         </div>
                                     </div>
 
@@ -140,7 +140,7 @@ class LandingPage extends Component {
                                             <img src={shubham} height="230" width="223px" style={{ borderRadius: "1.5%" }} alt="Shubham is missing"></img>
                                             <div style={{ marginTop: "10px", fontSize: "25px" }}>Shubham Gupta</div>
                                             <div style={{ marginTop: "5px", fontSize: "15px" }}>Co-Founder</div>
-                                            <p style={{ marginTop: "5px", fontSize: "15px" }}>An Alumni of IITD & an ex-citi employee he likes solving problems with technology</p>
+                                            <p style={{ marginTop: "5px", fontSize: "15px" }}>An IITD Alumnus & an ex-citi employee he likes solving problems with technology</p>
                                         </div>
                                     </div>
                                 </div>
