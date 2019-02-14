@@ -1,11 +1,20 @@
-const
-  aws = require('aws-sdk'),
-  uuidv4 = require('uuid/v4');
+const aws = require('aws-sdk');
+const uuidv4 = require('uuid/v4');
 const ddb = new aws.DynamoDB({ apiVersion: '2012-10-08' });
+const graphqlApiId = process.env.GraphQLApiId;
+const env = process.env.ENV;
 exports.handler = function (event, context, callback) {
+  //getting table names from environment variables
+  const PricingPlanTableName = "PricingPlan-" + graphqlApiId + "-" + env;
+  const ServiceEnabledTableName = "ServiceEnabled-" + graphqlApiId + "-" + env;
+
+  console.log("Pricing table name is - " + PricingPlanTableName);
+  console.log("ServiceEnabled table name is - " + ServiceEnabledTableName);
+
+  //creating params object for db entry
   var params = {
     RequestItems: {
-      "PricingPlan-ya5pnukycbhtve3t452za5wjjq-local": [
+      [PricingPlanTableName]: [
         {
           PutRequest: {
             Item: {
@@ -29,7 +38,7 @@ exports.handler = function (event, context, callback) {
           }
         }
       ],
-      "ServiceEnabled-ya5pnukycbhtve3t452za5wjjq-local": [
+      [ServiceEnabledTableName]: [
         {
           PutRequest: {
             Item: {
@@ -52,6 +61,7 @@ exports.handler = function (event, context, callback) {
     }
   };
 
+  //Batch writing to ddb
   ddb.batchWriteItem(params, function (err, data) {
     if (err) {
       console.log("Error", err);
