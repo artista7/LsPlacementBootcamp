@@ -1,0 +1,295 @@
+type CvReview {
+  comments: String
+  createdBy: String!
+  fileName: String
+  id: ID!
+  lastUpdatedBy: String
+  reviewedBy: String
+  status: CvReviewStatus
+}
+
+enum CvReviewStatus {
+  submitted
+  underReview
+  reviewCompleted
+}
+
+type PricingPlan {
+  cvReviewsAllowed: Int
+  id: ID!
+  name: String
+  price: Int
+  weightage: Int
+}
+
+type ServiceEnabled {
+  id: ID!
+  name: String
+  isEnabled: Boolean
+}
+
+type User {
+  cvReviewsTaken: Int
+  email: AWSEmail
+  groups: AWSJSON
+  id: ID!
+  phone_number: AWSPhone
+  pricingPlanId: String
+  username: String
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelCvReviewConnection {
+  items: [CvReview]
+  nextToken: String
+}
+
+input ModelStringFilterInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+}
+
+input ModelIDFilterInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+}
+
+input ModelIntFilterInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  contains: Int
+  notContains: Int
+  between: [Int]
+}
+
+input ModelFloatFilterInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  contains: Float
+  notContains: Float
+  between: [Float]
+}
+
+input ModelBooleanFilterInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelCvReviewStatusFilterInput {
+  eq: CvReviewStatus
+  ne: CvReviewStatus
+}
+
+input ModelCvReviewFilterInput {
+  comments: ModelStringFilterInput
+  createdBy: ModelStringFilterInput
+  fileName: ModelStringFilterInput
+  id: ModelIDFilterInput
+  lastUpdatedBy: ModelStringFilterInput
+  reviewedBy: ModelStringFilterInput
+  status: ModelCvReviewStatusFilterInput
+  and: [ModelCvReviewFilterInput]
+  or: [ModelCvReviewFilterInput]
+  not: ModelCvReviewFilterInput
+}
+
+type Query {
+  getCvReview(id: ID!): CvReview
+  listCvReviews(filter: ModelCvReviewFilterInput, limit: Int, nextToken: String): ModelCvReviewConnection
+  getPricingPlan(id: ID!): PricingPlan
+  listPricingPlans(filter: ModelPricingPlanFilterInput, limit: Int, nextToken: String): ModelPricingPlanConnection
+  getServiceEnabled(id: ID!): ServiceEnabled
+  listServiceEnableds(filter: ModelServiceEnabledFilterInput, limit: Int, nextToken: String): ModelServiceEnabledConnection
+  getUser(id: ID!): User
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
+}
+
+input CreateCvReviewInput {
+  comments: String
+  createdBy: String!
+  fileName: String
+  id: ID
+  lastUpdatedBy: String
+  reviewedBy: String
+  status: CvReviewStatus
+}
+
+input UpdateCvReviewInput {
+  comments: String
+  createdBy: String
+  fileName: String
+  id: ID!
+  lastUpdatedBy: String
+  reviewedBy: String
+  status: CvReviewStatus
+}
+
+input DeleteCvReviewInput {
+  id: ID
+}
+
+type Mutation {
+  createCvReview(input: CreateCvReviewInput!): CvReview
+  updateCvReview(input: UpdateCvReviewInput!): CvReview
+  deleteCvReview(input: DeleteCvReviewInput!): CvReview
+  createPricingPlan(input: CreatePricingPlanInput!): PricingPlan
+  updatePricingPlan(input: UpdatePricingPlanInput!): PricingPlan
+  deletePricingPlan(input: DeletePricingPlanInput!): PricingPlan
+  createServiceEnabled(input: CreateServiceEnabledInput!): ServiceEnabled
+  updateServiceEnabled(input: UpdateServiceEnabledInput!): ServiceEnabled
+  deleteServiceEnabled(input: DeleteServiceEnabledInput!): ServiceEnabled
+  createUser(input: CreateUserInput!): User
+  updateUser(input: UpdateUserInput!): User
+  deleteUser(input: DeleteUserInput!): User
+}
+
+type Subscription {
+  onCreateCvReview: CvReview @aws_subscribe(mutations: ["createCvReview"])
+  onUpdateCvReview: CvReview @aws_subscribe(mutations: ["updateCvReview"])
+  onDeleteCvReview: CvReview @aws_subscribe(mutations: ["deleteCvReview"])
+  onCreatePricingPlan: PricingPlan @aws_subscribe(mutations: ["createPricingPlan"])
+  onUpdatePricingPlan: PricingPlan @aws_subscribe(mutations: ["updatePricingPlan"])
+  onDeletePricingPlan: PricingPlan @aws_subscribe(mutations: ["deletePricingPlan"])
+  onCreateServiceEnabled: ServiceEnabled @aws_subscribe(mutations: ["createServiceEnabled"])
+  onUpdateServiceEnabled: ServiceEnabled @aws_subscribe(mutations: ["updateServiceEnabled"])
+  onDeleteServiceEnabled: ServiceEnabled @aws_subscribe(mutations: ["deleteServiceEnabled"])
+  onCreateUser: User @aws_subscribe(mutations: ["createUser"])
+  onUpdateUser: User @aws_subscribe(mutations: ["updateUser"])
+  onDeleteUser: User @aws_subscribe(mutations: ["deleteUser"])
+}
+
+type ModelPricingPlanConnection {
+  items: [PricingPlan]
+  nextToken: String
+}
+
+input ModelPricingPlanFilterInput {
+  cvReviewsAllowed: ModelIntFilterInput
+  id: ModelIDFilterInput
+  name: ModelStringFilterInput
+  price: ModelIntFilterInput
+  weightage: ModelIntFilterInput
+  and: [ModelPricingPlanFilterInput]
+  or: [ModelPricingPlanFilterInput]
+  not: ModelPricingPlanFilterInput
+}
+
+input CreatePricingPlanInput {
+  cvReviewsAllowed: Int
+  id: ID
+  name: String
+  price: Int
+  weightage: Int
+}
+
+input UpdatePricingPlanInput {
+  cvReviewsAllowed: Int
+  id: ID!
+  name: String
+  price: Int
+  weightage: Int
+}
+
+input DeletePricingPlanInput {
+  id: ID
+}
+
+type ModelServiceEnabledConnection {
+  items: [ServiceEnabled]
+  nextToken: String
+}
+
+input ModelServiceEnabledFilterInput {
+  id: ModelIDFilterInput
+  name: ModelStringFilterInput
+  isEnabled: ModelBooleanFilterInput
+  and: [ModelServiceEnabledFilterInput]
+  or: [ModelServiceEnabledFilterInput]
+  not: ModelServiceEnabledFilterInput
+}
+
+input CreateServiceEnabledInput {
+  id: ID
+  name: String
+  isEnabled: Boolean
+}
+
+input UpdateServiceEnabledInput {
+  id: ID!
+  name: String
+  isEnabled: Boolean
+}
+
+input DeleteServiceEnabledInput {
+  id: ID
+}
+
+type ModelUserConnection {
+  items: [User]
+  nextToken: String
+}
+
+input ModelUserFilterInput {
+  cvReviewsTaken: ModelIntFilterInput
+  email: ModelStringFilterInput
+  groups: ModelStringFilterInput
+  id: ModelIDFilterInput
+  phone_number: ModelStringFilterInput
+  pricingPlanId: ModelStringFilterInput
+  username: ModelStringFilterInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
+}
+
+input CreateUserInput {
+  cvReviewsTaken: Int
+  email: AWSEmail
+  groups: AWSJSON
+  id: ID
+  phone_number: AWSPhone
+  pricingPlanId: String
+  username: String
+}
+
+input UpdateUserInput {
+  cvReviewsTaken: Int
+  email: AWSEmail
+  groups: AWSJSON
+  id: ID!
+  phone_number: AWSPhone
+  pricingPlanId: String
+  username: String
+}
+
+input DeleteUserInput {
+  id: ID
+}

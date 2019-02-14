@@ -1,5 +1,5 @@
 {
-    "identityPoolName": "identitypoolls",
+    "identityPoolName": "idpoolls",
     "allowUnauthenticatedIdentities": false,
     "thirdPartyAuth": false,
     "lambdaLogPolicy": "cognitols_lambda_log_policy",
@@ -19,7 +19,7 @@
     "roleExternalId": "cognitols_role_external_id",
     "policyName": "cognitols-sns-policy",
     "smsAuthenticationMessage": "Your authentication code is {####}",
-    "smsVerificationMessage": "Your verification code is {####}",
+    "smsVerificationMessage": "Your verification code is {####} - Learning-Sage",
     "emailVerificationSubject": "Your verification code",
     "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": true,
@@ -39,7 +39,9 @@
         "name",
         "phone_number",
         "picture",
-        "profile"
+        "profile",
+        "email_verified",
+        "phone_number_verified"
     ],
     "mfaLambdaRole": "cognitols_totp_lambda_role",
     "mfaLambdaLogPolicy": "cognitols_totp_lambda_log_policy",
@@ -58,6 +60,7 @@
         "name",
         "picture",
         "profile",
+        "website",
         "email",
         "phone_number"
     ],

@@ -1,0 +1,13 @@
+{
+    "bucketName": "storagels",
+    "authPolicyName": "s3_amplify_f1351bdc",
+    "unauthPolicyName": "s3_amplify_f1351bdc",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authPermissions": "rw",
+    "unauthPermissions": ""
+}
