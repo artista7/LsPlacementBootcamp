@@ -87,10 +87,10 @@ Parameters:
               
   userpoolClientGenerateSecret:
     Type: String
-              
+          
   userpoolClientRefreshTokenValidity:
-    Type: Number
-              
+    Type: String
+                  
   userpoolClientReadAttributes:
     Type: CommaDelimitedList
       

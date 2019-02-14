@@ -1,13 +1,10 @@
 {
     "AppSyncApiName": "ls",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
     "AuthCognitoUserPoolId": {
         "Fn::GetAtt": [
             "authcognitols",
             "Outputs.UserPoolId"
         ]
-    },
-    "schemaGraphql": "s3://learning-sage-20190211234618-deployment/amplify-appsync-files/schema.graphql.1549909342976",
-    "ResolverBucket": "learning-sage-20190211234618-deployment",
-    "ResolverRootKey": "amplify-appsync-files",
-    "DeploymentTimestamp": "1549909342976"
+    }
 }

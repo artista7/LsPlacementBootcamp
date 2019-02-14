@@ -59,8 +59,8 @@
 				"Runtime": "nodejs8.10",
 				"Timeout": "25",
 				"Code": {
-					"S3Bucket": "learning-sage-20190211234618-deployment",
-					"S3Key": "amplify-builds/seedFunction-1549909341-latest-build.zip"
+					"S3Bucket": "learning-sage-20190214114503-deployment",
+					"S3Key": "amplify-builds/seedFunction-1550127935-latest-build.zip"
 				}
 			}
 		},
@@ -70,12 +70,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"learningsageLambdaRole01ff9e1d",
+						"learningsageSeedFunctionLambdaRole",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"learningsageLambdaRole01ff9e1d",
+									"learningsageSeedFunctionLambdaRole",
 									"-",
 									{
 										"Ref": "env"
@@ -141,6 +141,30 @@
 									}
 								]
 							}
+						}
+					]
+				}
+			}
+		},
+		"lambdaddbaccesspolicy": {
+			"DependsOn": [
+				"LambdaExecutionRole"
+			],
+			"Type": "AWS::IAM::Policy",
+			"Properties": {
+				"PolicyName": "lambda-ddb-access-policy",
+				"Roles": [
+					{
+						"Ref": "LambdaExecutionRole"
+					}
+				],
+				"PolicyDocument": {
+					"Version": "2012-10-17",
+					"Statement": [
+						{
+							"Effect": "Allow",
+							"Action": "dynamodb:*",
+							"Resource": "*"
 						}
 					]
 				}

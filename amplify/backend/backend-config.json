@@ -14,24 +14,18 @@
 			}
 		}
 	},
+	"storage": {
+		"storagels": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
+	},
 	"function": {
 		"seedFunction": {
 			"service": "Lambda",
 			"providerPlugin": "awscloudformation",
 			"build": true,
 			"dependsOn": []
-		},
-		"cognitoFunction": {
-			"service": "Lambda",
-			"providerPlugin": "awscloudformation",
-			"build": true,
-			"dependsOn": []
-		}
-	},
-	"storage": {
-		"storagels": {
-			"service": "S3",
-			"providerPlugin": "awscloudformation"
 		}
 	}
 }

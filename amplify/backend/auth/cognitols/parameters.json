@@ -19,7 +19,7 @@
     "roleExternalId": "cognitols_role_external_id",
     "policyName": "cognitols-sns-policy",
     "smsAuthenticationMessage": "Your authentication code is {####}",
-    "smsVerificationMessage": "Your verification code is {####} - Learning-sage",
+    "smsVerificationMessage": "Your verification code is {####} - Learning-Sage",
     "emailVerificationSubject": "Your verification code",
     "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": true,
@@ -31,7 +31,7 @@
     ],
     "userpoolClientName": "cognitols_app_client",
     "userpoolClientGenerateSecret": true,
-    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientRefreshTokenValidity": "10",
     "userpoolClientReadAttributes": [
         "address",
         "birthdate",
@@ -60,6 +60,7 @@
         "name",
         "picture",
         "profile",
+        "website",
         "email",
         "phone_number"
     ],

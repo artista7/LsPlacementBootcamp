@@ -1,7 +1,7 @@
 {
     "bucketName": "storagels",
-    "authPolicyName": "s3_amplify_3dd146f4",
-    "unauthPolicyName": "s3_amplify_3dd146f4",
+    "authPolicyName": "s3_amplify_f1351bdc",
+    "unauthPolicyName": "s3_amplify_f1351bdc",
     "authRoleName": {
         "Ref": "AuthRoleName"
     },
