@@ -3,6 +3,7 @@ const uuidv4 = require('uuid/v4');
 const ddb = new aws.DynamoDB({ apiVersion: '2012-10-08' });
 const graphqlApiId = process.env.GraphQLApiId;
 const env = process.env.ENV;
+
 exports.handler = function (event, context, callback) {
   //getting table names from environment variables
   const PricingPlanTableName = "PricingPlan-" + graphqlApiId + "-" + env;

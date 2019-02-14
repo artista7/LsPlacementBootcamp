@@ -197,6 +197,21 @@
 					"env": "local"
 				}
 			}
+		},
+		"functioncognitoLambda": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/learning-sage-20190214114503-deployment/amplify-cfn-templates/function/cognitoLambda-cloudformation-template.json",
+				"Parameters": {
+					"GraphQLApiId": {
+						"Fn::GetAtt": [
+							"apils",
+							"Outputs.GraphQLAPIIdOutput"
+						]
+					},
+					"env": "local"
+				}
+			}
 		}
 	},
 	"Outputs": {
