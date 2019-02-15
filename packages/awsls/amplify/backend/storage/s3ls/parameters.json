@@ -1,0 +1,13 @@
+{
+    "bucketName": "studentbucketls",
+    "authPolicyName": "s3_amplify_cb031630",
+    "unauthPolicyName": "s3_amplify_cb031630",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authPermissions": "rw",
+    "unauthPermissions": ""
+}

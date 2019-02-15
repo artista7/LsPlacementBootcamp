@@ -1,0 +1,8 @@
+{
+    "GraphQLApiId": {
+        "Fn::GetAtt": [
+            "apilearningsage",
+            "Outputs.GraphQLAPIIdOutput"
+        ]
+    }
+}

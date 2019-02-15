@@ -1,8 +1,0 @@
-{
-    "GraphQLApiId": {
-        "Fn::GetAtt": [
-            "apils",
-            "Outputs.GraphQLAPIIdOutput"
-        ]
-    }
-}
