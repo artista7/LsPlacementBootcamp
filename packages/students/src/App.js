@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Switch, Route, Redirect } from "react-router-dom";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import 'font-awesome/css/font-awesome.min.css'
+import 'font-awesome/css/font-awesome.min.css';
 import './App.css';
 import LandingPage from './components/LandingPage/LandingPage';
 import LoginPage from './components/Auth/Login';
@@ -18,7 +18,6 @@ import 'react-circular-progressbar/dist/styles.css';
 import 'react-notifications/lib/notifications.css';
 
 Amplify.configure(awsConfig);
-
 const store = configureStore()
 
 class App extends Component {
