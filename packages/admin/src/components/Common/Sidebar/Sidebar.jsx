@@ -7,11 +7,11 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import * as constants from '../../../constants/constants';
 
 // create a component
-const Sidebar = ({ onSelect, onToggle, selected }) => {
+const Sidebar = ({ onModuleSelect, onToggle, selectedModule }) => {
     return (
-        <SideNav onSelect={onSelect} onToggle={onToggle}>
+        <SideNav onSelect={onModuleSelect} onToggle={onToggle}>
             <SideNav.Toggle />
-            <SideNav.Nav selected={selected}>
+            <SideNav.Nav selected={selectedModule}>
                 <NavItem eventKey="home">
                     <NavIcon>
                         <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
@@ -60,9 +60,9 @@ const Sidebar = ({ onSelect, onToggle, selected }) => {
 };
 
 Sidebar.prototypes = {
-    onSelect: PropTypes.func.isRequired,
+    onModuleSelect: PropTypes.func.isRequired,
     onToggle: PropTypes.func.isRequired,
-    selected: PropTypes.string.isRequired
+    selectedModule: PropTypes.string.isRequired
 }
 //make this component available to the app
 export default Sidebar;

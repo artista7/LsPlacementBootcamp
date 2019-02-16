@@ -7,14 +7,14 @@ import Breadcrumbs from '@trendmicro/react-breadcrumbs';
 import '@trendmicro/react-breadcrumbs/dist/react-breadcrumbs.css';
 
 // create a component
-const breadcrumbs = ({ pageTitle, selected }) => {
-    const list = ensureArray(pageTitle[selected]);
+const breadcrumbs = ({ pageTitle, selectedModule }) => {
+    const list = ensureArray(pageTitle[selectedModule]);
     return (
         <Breadcrumbs showLineSeparator>
             {list.map((item, index) => (
                 <Breadcrumbs.Item
                     active={index === list.length - 1}
-                    key={`${selected}_${index}`}>
+                    key={`${selectedModule}_${index}`}>
                     {item}
                 </Breadcrumbs.Item>
             ))}
@@ -24,7 +24,7 @@ const breadcrumbs = ({ pageTitle, selected }) => {
 
 breadcrumbs.propTypes = {
     pageTitle: PropTypes.object.isRequired,
-    selected: PropTypes.string.isRequired
+    selectedModule: PropTypes.string.isRequired
 };
 //make this component available to the app
 export default breadcrumbs;

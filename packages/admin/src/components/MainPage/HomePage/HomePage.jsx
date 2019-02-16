@@ -8,7 +8,7 @@ const HomePage = ({ userInfo, userPricingPlan }) => {
     return (
         <React.Fragment>
             <div className="row" style={{ marginLeft: "-20px", marginRight: "-20px" }}>
-                HomePage!-!
+                Admin HomePage!
             </div>
         </React.Fragment>
     );

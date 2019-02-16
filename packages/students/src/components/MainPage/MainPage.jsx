@@ -45,20 +45,20 @@ class MainPage extends React.Component {
                 // 'settings/policies': ['Settings', 'Policies'],
                 // 'settings/network': ['Settings', 'Network']
             },
-            selected: 'home'
+            selectedModule: 'home'
         };
 
-        this.onSelect = this.onSelect.bind(this);
+        this.onModuleSelect = this.onModuleSelect.bind(this);
         this.onToggle = this.onToggle.bind(this);
         this.loadPricingPlans = this.loadPricingPlans.bind(this);
         this.loadUserCvReviews = this.loadUserCvReviews.bind(this);
         this.loadUserInfo = this.loadUserInfo.bind(this);
         this.setInitializing = this.setInitializing.bind(this);
-        this.setSelected = this.setSelected.bind(this);
+        this.setSelectedModule = this.setSelectedModule.bind(this);
         this.signOut = this.signOut.bind(this);
     }
 
-    onSelect(selected) {
+    onModuleSelect(selected) {
         //sign out on clicking on it
         if (selected == constants.SIGN_OUT) {
             this.signOut();
@@ -66,7 +66,6 @@ class MainPage extends React.Component {
         //else if clicked icon is different, change selected icon and redirect to intended route
         const to = '/' + selected;
         if (this.props.location.pathname !== to) {
-            this.setSelected(selected);
             this.props.history.push(to);
         }
     }
@@ -107,11 +106,22 @@ class MainPage extends React.Component {
         })
     }
 
-    setSelected(selected) {
+    setSelectedModule(selectedModule) {
+        var selectedIcon = "";
+        if (selectedModule == "" || selectedModule == "/") {
+            selectedIcon = 'home';
+        }
+        else if (selectedModule.indexOf("cvReview") != -1) {
+            selectedIcon = 'cvReviews';
+        }
+        else {
+            selectedIcon = selectedModule.substring(1);
+        }
         this.setState({
-            selected: selected
+            selectedModule: selectedIcon
         });
     }
+
 
     signOut() {
         Auth.signOut().then(data => {
@@ -129,28 +139,15 @@ class MainPage extends React.Component {
 
     componentDidMount() {
         //get selected icon from route on component mount
-        var selected = this.props.history.location.pathname;
-        if (selected == "" || selected == "/") {
-            this.setSelected('home');
-        }
-        else if (selected.indexOf("cvReview") != -1) {
-            this.setSelected('cvReviews');
-        }
-        else {
-            this.setSelected(selected.substring(1));
-        }
+        var selectedModule = this.props.history.location.pathname;
+        this.setSelectedModule(selectedModule);
     }
 
     componentDidUpdate(prevProps, prevState) {
         //if current path is different from previous, update selected icon
         if (prevProps.location.pathname != this.props.location.pathname) {
-            var selected = this.props.history.location.pathname;
-            if (selected == "" || selected == "/") {
-                this.setSelected('home');
-            }
-            else {
-                this.setSelected(selected.substring(1));
-            }
+            var selectedModule = this.props.history.location.pathname;
+            this.setSelectedModule(selectedModule);
         };
     }
 
@@ -172,7 +169,7 @@ class MainPage extends React.Component {
     }
 
     render() {
-        const { expanded, pageTitle, selected } = this.state;
+        const { expanded, pageTitle, selectedModule } = this.state;
         return (
             <div>
                 <NotificationContainer />
@@ -180,9 +177,9 @@ class MainPage extends React.Component {
                     type="Triangle"
                     color="rgb(204,80,74)"
                 /></div>}
-                <Sidebar onSelect={this.onSelect} onToggle={this.onToggle} selected={selected}></Sidebar>
+                <Sidebar onModuleSelect={this.onModuleSelect} onToggle={this.onToggle} selectedModule={selectedModule}></Sidebar>
                 <Main expanded={expanded} style={{ height: "100vh", overflowY: "scroll" }}>
-                    {selected != "home" && <Breadcrumbs pageTitle={pageTitle} selected={selected}></Breadcrumbs>}
+                    {selectedModule != "home" && <Breadcrumbs pageTitle={pageTitle} selectedModule={selectedModule}></Breadcrumbs>}
                     <Switch>
                         <Route path="/" exact component={props => <HomePage {...props}></HomePage>} />
                         <Route exact path="/cvReviews" component={props => <CVReviewList {...props}></CVReviewList>} />
