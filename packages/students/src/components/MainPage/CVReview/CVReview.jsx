@@ -64,7 +64,15 @@ const CVReview = ({ cvReview, cvUrl, handleFileUpload, isS3Uploading, numPages, 
                     </div>}
 
                     {/* Showing comments in completed review */}
-                    {cvReview.status == CVReviewStatus.complete && <div style={{ textAlign: "center" }}>Comments Recieved</div>}
+                    {cvReview.status == CVReviewStatus.reviewCompleted && <div style={{ textAlign: "center" }}>
+                        <textarea
+                            disabled
+                            name="comments"
+                            value={cvReview.comments != null ? cvReview.comments : ""}
+                            rows="4"
+                            cols="50"
+                            style={{ width: "100%" }}></textarea>
+                    </div>}
 
                     {cvReview.status != CVReviewStatus.draft && <div className="mt-3" style={{ textAlign: "center" }}>
                         <button className="btn btn-primary" onClick={() => redirectToRoute('/cvReviews')}>Back</button>
