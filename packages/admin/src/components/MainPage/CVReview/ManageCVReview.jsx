@@ -27,10 +27,9 @@ class ManageCVReview extends React.Component {
             cvUrl: ""
         }
 
-        this.handleFileUpload = this.handleFileUpload.bind(this);
-        this.isSubmitAllowed = this.isSubmitAllowed.bind(this);
         this.onDocumentLoad = this.onDocumentLoad.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.pickCvForReview = this.pickCvForReview.bind(this);
         this.redirectToRoute = this.redirectToRoute.bind(this);
         this.setCvReview = this.setCvReview.bind(this);
         this.setCvUrl = this.setCvUrl.bind(this);
@@ -39,85 +38,42 @@ class ManageCVReview extends React.Component {
         this.shufflePage = this.shufflePage.bind(this);
     }
 
-    handleFileUpload(event) {
-        var selectedFile = event.target.files[0];
-        if (selectedFile.size && selectedFile.size < 5242880) {
-            this.setState({
-                loaded: 0,
-                cvReview: Object.assign({}, this.state.cvReview, { fileName: selectedFile.name != undefined ? selectedFile.name : "" }),
-                selectedFile: selectedFile
-            });
-        }
-        else {
-            NotificationManager.warning('File size exceeds 5Mb', 'Warning!', 2000);
-        }
-    }
-
-    isSubmitAllowed() {
-        try {
-            if (this.props.userPricingPlan.cvReviewsAllowed > this.props.userInfo.cvReviewsTaken) {
-                return true;
-            }
-            return false;
-        }
-        catch{
-            return false;
-        }
-    }
-
     onDocumentLoad(numPages) {
         this.setState({ numPages: numPages.numPages, pageNumber: 1 });
     }
 
-    onSubmit() {
+    onSubmit(values, action) {
         try {
-            //check if user is allowed to submit cv
-            //if not, through notification warning and redirect to previous page
-            if (!this.isSubmitAllowed()) {
-                NotificationManager.error("Cv Review limit reached", "Upgrade plan", 6000);
+            this.setIsS3Uploading(true);
+            let updateCvReviewInput = Object.assign({}, values, {
+                lastUpdatedBy: this.props.userInfo.username,
+                reviewedBy: this.props.userInfo.username,
+                status: CVReviewStatus.reviewCompleted
+            });
+            this.props.cvReviewActions._updateCvReview(updateCvReviewInput).then(Response => {
+                this.setIsS3Uploading(false);
                 this.redirectToRoute('/cvReviews');
-            }
-            else {
-                //if yes
-                this.setIsS3Uploading(true);
-                var setPercent = this.setPercent;
-                var redirectToRoute = this.redirectToRoute;
-                var s3FileName = this.state.selectedFile.name != undefined ? +(new Date) + '_' + this.state.selectedFile.name : '';
-                let username = this.props.userInfo.username != undefined ? this.props.userInfo.username : "";  //NOTE - need to handle case when username is not retrieved
-                Storage.put(s3FileName, this.state.selectedFile, {
-                    level: 'public',
-                    contentType: 'application/pdf',
-                    progressCallback(progress) {
-                        setPercent(Math.floor(progress.loaded * 100 / progress.total));
-                    }
-                })
-                    .then(result => {
-                        //add cvReview into dynamo table
-                        let createCvReviewInput = {
-                            createdBy: username,
-                            fileName: s3FileName,
-                            lastUpdatedBy: username,
-                            status: "submitted"
-                        };
-
-                        this.props.cvReviewActions._createCvReview(createCvReviewInput).then(response => {
-                            redirectToRoute('/cvReviews');
-                        }).catch(response => {
-                        });
-
-                        //edit userInfo to update cvReviewsTaken
-                        this.props.userInfoActions._updateUser({ ...this.props.userInfo, cvReviewsTaken: this.props.userInfo.cvReviewsTaken + 1 });
-                        this.setIsS3Uploading(false);
-                    })
-                    .catch(err => {
-                        this.setIsS3Uploading(false);
-                        console.log(err);
-                    });
-            }
+                NotificationManager.success('CV review submitted', 'Success', 2000);
+            }).catch(error => {
+                this.setIsS3Uploading(false);
+            });
         }
         catch (err) {
             alert("debugger" + err);
         }
+    }
+
+    pickCvForReview() {
+        let updateCvReviewInput = Object.assign({}, this.state.cvReview, {
+            lastUpdatedBy: this.props.userInfo.username,
+            reviewedBy: this.props.userInfo.username,
+            status: "underReview"
+        });
+        this.props.cvReviewActions._updateCvReview(updateCvReviewInput).then(response => {
+            NotificationManager.success('CV picked for review', 'Success', 2000);
+        }).catch(err => {
+
+        });
     }
 
     redirectToRoute(route) {
@@ -197,12 +153,12 @@ class ManageCVReview extends React.Component {
             <CVReview
                 cvReview={this.state.cvReview}
                 cvUrl={this.state.cvUrl}
-                handleFileUpload={this.handleFileUpload}
                 isS3Uploading={this.state.isS3Uploading}
                 numPages={this.state.numPages}
                 onDocumentLoad={this.onDocumentLoad}
                 onSubmit={this.onSubmit}
                 pageNumber={this.state.pageNumber}
+                pickCvForReview={this.pickCvForReview}
                 redirectToRoute={this.redirectToRoute}
                 selectedFile={this.state.selectedFile}
                 shufflePage={this.shufflePage}>
@@ -236,14 +192,12 @@ function mapStateToProps(state, ownProps) {
         cvReview = getCvReviewById(state.cvReviews, cvReviewId);
     }
 
-    let userPricingPlan = getUserPricingPlan(state.pricingPlans, state.userInfo.pricingPlanId);
-
     let userInfo = state.userInfo;
+
     //override cvReview from redux state
     return {
         cvReview: cvReview,
-        userInfo: userInfo,
-        userPricingPlan: userPricingPlan
+        userInfo: userInfo
     };
 }
 

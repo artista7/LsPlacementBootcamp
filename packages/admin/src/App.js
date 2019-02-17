@@ -13,6 +13,9 @@ import configureStore from './store/configureStore';
 import history from './history';
 /*React components */
 import MainPage from './components/MainPage/MainPage';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '@devexpress/dx-react-grid-bootstrap4/dist/dx-react-grid-bootstrap4.css';
+import 'react-notifications/lib/notifications.css';
 
 Amplify.configure(awsConfig);
 const store = configureStore()
@@ -24,8 +27,7 @@ class App extends Component {
         <Router history={history}>
           <React.Fragment>
             <Switch>
-              <Route exact path="/" render={({ history, location }) => (<MainPage history={history} location={location}></MainPage>)}></Route>
-              <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
+              <Route exact path="*" render={({ history, location }) => (<MainPage history={history} location={location}></MainPage>)}></Route>
             </Switch>
           </React.Fragment>
         </Router>

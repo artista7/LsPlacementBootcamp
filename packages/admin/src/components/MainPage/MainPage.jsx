@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as cvReviewActions from '../../actions/cvReviewActions';
+import * as userInfoActions from '../../actions/userInfoActions';
 import { Auth } from 'aws-amplify';
 import { Switch, Route, Redirect } from "react-router-dom";
 /*styled components */
@@ -14,8 +15,8 @@ import Loader from 'react-loader-spinner';
 import * as constants from '../../constants/constants';
 /*Child components */
 import HomePage from './HomePage/ManageHomePage';
-// import CVReviewList from './CVReview/CVReviewList';
-// import ManageCVReview from './CVReview/ManageCVReview';
+import CVReviewList from './CVReview/CVReviewList';
+import ManageCVReview from './CVReview/ManageCVReview';
 
 const Main = styled.main`
     position: relative;
@@ -46,7 +47,8 @@ class MainPage extends React.Component {
 
         this.onModuleSelect = this.onModuleSelect.bind(this);
         this.onToggle = this.onToggle.bind(this);
-        //this.loadUserCvReviews = this.loadUserCvReviews.bind(this);
+        this.loadCvReviews = this.loadCvReviews.bind(this);
+        this.loadUserInfo = this.loadUserInfo.bind(this);
         this.setInitializing = this.setInitializing.bind(this);
         this.setSelectedModule = this.setSelectedModule.bind(this);
         this.signOut = this.signOut.bind(this);
@@ -68,14 +70,25 @@ class MainPage extends React.Component {
         this.setState({ expanded: expanded });
     };
 
-    // loadUserCvReviews(username) {
-    //     //WORK - cvReview of current user should be loaded
-    //     this.props.cvReviewActions._listCvReviews(username).then(data => {
-    //         this.setInitializing(false);
-    //     }).catch(error => {
-    //         this.setInitializing(false);
-    //     });
-    // }
+    loadCvReviews() {
+        this.setInitializing(true);
+        this.props.cvReviewActions._listCvReviews().then(data => {
+            this.setInitializing(false);
+        }).catch(error => {
+            this.setInitializing(false);
+        });
+    }
+
+    loadUserInfo() {
+        //get current username
+        Auth.currentUserInfo().then(data => {
+            let username = data.username;
+            //loading userinfo
+            this.props.userInfoActions._loadUserInfo(username);
+        }).catch(err => {
+            NotificationManager.error('Error fetching user data', 'Error!', 2000);
+        });
+    }
 
     setInitializing(bool) {
         this.setState({
@@ -84,18 +97,17 @@ class MainPage extends React.Component {
     }
 
     setSelectedModule(selectedModule) {
-        var selectedIcon = "";
         if (selectedModule == "" || selectedModule == "/") {
-            selectedIcon = 'home';
+            selectedModule = 'home';
         }
         else if (selectedModule.indexOf("cvReview") != -1) {
-            selectedIcon = 'cvReviews';
+            selectedModule = 'cvReviews';
         }
         else {
-            selectedIcon = selectedModule.substring(1);
+            selectedModule = selectedModule.substring(1);
         }
         this.setState({
-            selectedModule: selectedIcon
+            selectedModule: selectedModule
         });
     }
 
@@ -108,13 +120,15 @@ class MainPage extends React.Component {
 
     componentWillMount() {
         //adding current loggedin user data to redux state, this take time - some operations requiring user data might get affected
-        //this.setInitializing(true);
+        this.loadUserInfo();
     }
 
     componentDidMount() {
         //get selected icon from route on component mount
         var selectedModule = this.props.history.location.pathname;
         this.setSelectedModule(selectedModule);
+        //fetch cv reviews
+        this.loadCvReviews();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -129,18 +143,18 @@ class MainPage extends React.Component {
         //this.props.updateStateVariable();
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     //preventing re-render of child components on redux state change
-    //     //component update on state changed
-    //     if (JSON.stringify(this.state) != JSON.stringify(nextState)) {
-    //         return true;
-    //     }
-    //     //component update on router path change
-    //     if (this.props.location.pathname != nextProps.history.location.pathname) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
+    shouldComponentUpdate(nextProps, nextState) {
+        //preventing re-render of child components on redux state change
+        //component update on state changed
+        if (JSON.stringify(this.state) != JSON.stringify(nextState)) {
+            return true;
+        }
+        //component update on router path change
+        if (this.props.location.pathname != nextProps.history.location.pathname) {
+            return true;
+        }
+        return false;
+    }
 
     render() {
         const { expanded, pageTitle, selectedModule } = this.state;
@@ -155,9 +169,9 @@ class MainPage extends React.Component {
                 <Main expanded={expanded} style={{ height: "100vh", overflowY: "scroll" }}>
                     <Switch>
                         <Route path="/" exact component={props => <HomePage {...props}></HomePage>} />
-                        {/* <Route exact path="/cvReviews" component={props => <CVReviewList {...props}></CVReviewList>} />
-                        <Route exact path="/cvReview" component={props => <ManageCVReview {...props}></ManageCVReview>} />
+                        <Route exact path="/cvReviews" component={props => <CVReviewList {...props}></CVReviewList>} />
                         <Route exact path="/cvReview/:id" component={props => <ManageCVReview {...props}></ManageCVReview>} />
+                        {/* <Route exact path="/cvReview" component={props => <ManageCVReview {...props}></ManageCVReview>} />
                         <Route path="/settings/*" component={props => <div>settings</div>} /> */}
                         <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
                     </Switch>
@@ -175,7 +189,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        cvReviewActions: bindActionCreators(cvReviewActions, dispatch)
+        cvReviewActions: bindActionCreators(cvReviewActions, dispatch),
+        userInfoActions: bindActionCreators(userInfoActions, dispatch),
     };
 }
 

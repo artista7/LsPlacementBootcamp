@@ -202,9 +202,9 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        userInfoActions: bindActionCreators(userInfoActions, dispatch),
         cvReviewActions: bindActionCreators(cvReviewActions, dispatch),
-        pricingPlanActions: bindActionCreators(pricingPlanActions, dispatch)
+        pricingPlanActions: bindActionCreators(pricingPlanActions, dispatch),
+        userInfoActions: bindActionCreators(userInfoActions, dispatch),
     };
 }
 
