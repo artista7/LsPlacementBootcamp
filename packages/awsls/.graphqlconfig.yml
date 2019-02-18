@@ -1,5 +1,5 @@
 projects:
-  learningsage:
+  awsls:
     schemaPath: src/graphql/schema.json
     includes:
       - src/graphql/**/*.js
@@ -10,7 +10,7 @@ projects:
         codeGenTarget: javascript
         generatedFileName: ''
         docsFilePath: src/graphql
-        graphQLApiId: uwsuypouvvh7xcpuxorbs7f75q
+        graphQLApiId: 7exorhpfwfhebket6ng3bn5434
       endpoints:
         prod: >-
-          https://ik7iuuszvzbtvfu3b42dsjdjm4.appsync-api.ap-south-1.amazonaws.com/graphql
+          https://bmirlbkc5rgthf5ufrmqojzssu.appsync-api.ap-south-1.amazonaws.com/graphql

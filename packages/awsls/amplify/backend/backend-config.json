@@ -6,7 +6,7 @@
 		}
 	},
 	"api": {
-		"learningsage": {
+		"awsls": {
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {
