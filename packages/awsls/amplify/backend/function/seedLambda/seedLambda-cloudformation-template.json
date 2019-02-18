@@ -67,7 +67,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "awsls-20190218171327-deployment",
-					"S3Key": "amplify-builds/seedLambda-1550497168-latest-build.zip"
+					"S3Key": "amplify-builds/seedLambda-1550498413-latest-build.zip"
 				}
 			}
 		},

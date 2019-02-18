@@ -46,6 +46,30 @@ export const onDeleteAppModuleAccess = `subscription OnDeleteAppModuleAccess {
   }
 }
 `;
+export const onCreateCollege = `subscription OnCreateCollege {
+  onCreateCollege {
+    id
+    name
+    studentPasscode
+  }
+}
+`;
+export const onUpdateCollege = `subscription OnUpdateCollege {
+  onUpdateCollege {
+    id
+    name
+    studentPasscode
+  }
+}
+`;
+export const onDeleteCollege = `subscription OnDeleteCollege {
+  onDeleteCollege {
+    id
+    name
+    studentPasscode
+  }
+}
+`;
 export const onCreateCvReview = `subscription OnCreateCvReview {
   onCreateCvReview {
     comments
@@ -140,7 +164,7 @@ export const onCreateUser = `subscription OnCreateUser {
   onCreateUser {
     cvReviewsTaken
     email
-    groups
+    group
     id
     phone_number
     pricingPlanId
@@ -152,7 +176,7 @@ export const onUpdateUser = `subscription OnUpdateUser {
   onUpdateUser {
     cvReviewsTaken
     email
-    groups
+    group
     id
     phone_number
     pricingPlanId
@@ -164,7 +188,7 @@ export const onDeleteUser = `subscription OnDeleteUser {
   onDeleteUser {
     cvReviewsTaken
     email
-    groups
+    group
     id
     phone_number
     pricingPlanId

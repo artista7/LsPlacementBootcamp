@@ -45,6 +45,29 @@ export const listAppModuleAccesss = `query ListAppModuleAccesss(
   }
 }
 `;
+export const getCollege = `query GetCollege($id: ID!) {
+  getCollege(id: $id) {
+    id
+    name
+    studentPasscode
+  }
+}
+`;
+export const listColleges = `query ListColleges(
+  $filter: ModelCollegeFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listColleges(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      studentPasscode
+    }
+    nextToken
+  }
+}
+`;
 export const getCvReview = `query GetCvReview($id: ID!) {
   getCvReview(id: $id) {
     comments
@@ -130,7 +153,7 @@ export const getUser = `query GetUser($id: ID!) {
   getUser(id: $id) {
     cvReviewsTaken
     email
-    groups
+    group
     id
     phone_number
     pricingPlanId
@@ -147,7 +170,7 @@ export const listUsers = `query ListUsers(
     items {
       cvReviewsTaken
       email
-      groups
+      group
       id
       phone_number
       pricingPlanId

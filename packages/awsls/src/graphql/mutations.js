@@ -46,6 +46,30 @@ export const deleteAppModuleAccess = `mutation DeleteAppModuleAccess($input: Del
   }
 }
 `;
+export const createCollege = `mutation CreateCollege($input: CreateCollegeInput!) {
+  createCollege(input: $input) {
+    id
+    name
+    studentPasscode
+  }
+}
+`;
+export const updateCollege = `mutation UpdateCollege($input: UpdateCollegeInput!) {
+  updateCollege(input: $input) {
+    id
+    name
+    studentPasscode
+  }
+}
+`;
+export const deleteCollege = `mutation DeleteCollege($input: DeleteCollegeInput!) {
+  deleteCollege(input: $input) {
+    id
+    name
+    studentPasscode
+  }
+}
+`;
 export const createCvReview = `mutation CreateCvReview($input: CreateCvReviewInput!) {
   createCvReview(input: $input) {
     comments
@@ -140,7 +164,7 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
   createUser(input: $input) {
     cvReviewsTaken
     email
-    groups
+    group
     id
     phone_number
     pricingPlanId
@@ -152,7 +176,7 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
   updateUser(input: $input) {
     cvReviewsTaken
     email
-    groups
+    group
     id
     phone_number
     pricingPlanId
@@ -164,7 +188,7 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
   deleteUser(input: $input) {
     cvReviewsTaken
     email
-    groups
+    group
     id
     phone_number
     pricingPlanId

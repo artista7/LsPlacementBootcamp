@@ -8,11 +8,13 @@ exports.handler = function (event, context, callback) {
   //getting table names from environment variables
   const AppModulesTableName = "AppModules-" + graphqlApiId + "-" + env;
   const AppModuleAccessTableName = "AppModuleAccess-" + graphqlApiId + "-" + env;
+  const CollegeTableName = "College-" + graphqlApiId + "-" + env;
   const PricingPlanTableName = "PricingPlan-" + graphqlApiId + "-" + env;
   const ServiceEnabledTableName = "ServiceEnabled-" + graphqlApiId + "-" + env;
 
   console.log("AppModules table name is - " + AppModulesTableName);
   console.log("AppModuleAccess table name is - " + AppModuleAccessTableName);
+  console.log("College table name is - " + CollegeTableName);
   console.log("Pricing table name is - " + PricingPlanTableName);
   console.log("ServiceEnabled table name is - " + ServiceEnabledTableName);
 
@@ -71,6 +73,17 @@ exports.handler = function (event, context, callback) {
               "id": { "S": uuidv4() },
               "group": { "S": "admin" },
               "appModules": { "S": "cvreview,settings,logout" }
+            }
+          }
+        }
+      ],
+      [CollegeTableName]: [
+        {
+          PutRequest: {
+            Item: {
+              "id": { "S": uuidv4() },
+              "name": { "S": "IIT Delhi" },
+              "studentPasscode": { "S": "IITD1234" }
             }
           }
         }
