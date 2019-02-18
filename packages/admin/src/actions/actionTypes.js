@@ -1,0 +1,6 @@
+//cvReview actions
+export const LIST_CVREVIEWS_SUCCESS = "LIST_CVREVIEWS_SUCCESS";
+export const UPDATE_CVREVIEW_SUCCESS = "UPDATE_CVREVIEW_SUCCESS";
+//userInfo actions
+export const LOAD_USER_INFO = "LOAD_USER_INFO";
+export const UPDATE_USER_INFO = "UPDATE_USER_INFO";

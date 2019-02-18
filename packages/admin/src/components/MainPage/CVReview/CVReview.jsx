@@ -11,7 +11,7 @@ import { Formik, ErrorMessage, Form } from 'formik';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 // create a component
-const CVReview = ({ cvReview, cvUrl, handleFileUpload, isS3Uploading, numPages, onDocumentLoad, onSubmit, pageNumber, redirectToRoute, selectedFile, shufflePage }) => {
+const CVReview = ({ cvReview, cvUrl, isS3Uploading, numPages, onDocumentLoad, onSubmit, pageNumber, pickCvForReview, redirectToRoute, selectedFile, shufflePage }) => {
     return (
         <div>
             <div className="row">
@@ -24,19 +24,18 @@ const CVReview = ({ cvReview, cvUrl, handleFileUpload, isS3Uploading, numPages, 
                             height={40}
                             width={40}
                         />
-                        {/* <span>{cvReview.status}</span> */}
                     </div>
-                    {/* Showing form in draft or submitted state only */}
-                    {cvReview.status == CVReviewStatus.draft && <div>
-                        <p>Upload CV:</p>
+
+                    {/* Showing comments text area in review state*/}
+                    <div>
                         <Formik
                             enableReinitialize
                             initialValues={cvReview}
                             validate={(values) => {
                                 let errors = {};
-                                if (!values.fileName)
-                                    errors.fileName = 'Upload CV!';
-
+                                if (values.comments == null) {
+                                    errors.comments = "Add a comment!";
+                                }
                                 return errors;
                             }}
                             onSubmit={onSubmit}>
@@ -44,39 +43,34 @@ const CVReview = ({ cvReview, cvUrl, handleFileUpload, isS3Uploading, numPages, 
                                 const { values, touched, errors, dirty, isSubmitting, handleChange, handleBlur, handleReset } = props;
                                 return (
                                     <Form>
-                                        <div className="custom-file mb-3">
-                                            <input type="file" className="custom-file-input" id="fileName" name="fileName" accept="application/pdf" onChange={e => { handleFileUpload(e) }} />
-                                            <label className="custom-file-label" htmlFor="fileName">{selectedFile != undefined ? selectedFile.name : "Choose file"}</label>
-                                            <ErrorMessage name="fileName">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
-                                        </div>
-
-                                        <div className="mt-3" style={{ textAlign: "center" }}>
-                                            <button type="submit" disabled={isSubmitting} className="btn btn-primary">Submit</button>
-                                            <button className="btn btn-primary" style={{ marginLeft: "20px" }} onClick={() => redirectToRoute('/cvReviews')}>Cancel</button>
-                                        </div>
+                                        {(cvReview.status == CVReviewStatus.underReview || cvReview.status == CVReviewStatus.reviewCompleted) &&
+                                            <React.Fragment>
+                                                <p>Review CV:</p>
+                                                <textarea
+                                                    name="comments"
+                                                    onChange={handleChange}
+                                                    value={values.comments != null ? values.comments : ""}
+                                                    rows="4"
+                                                    cols="50"
+                                                    style={{ width: "100%" }}>
+                                                </textarea>
+                                                <ErrorMessage name="comments">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
+                                            </React.Fragment>
+                                        }
                                         {/* <div id="debug">
                                             {JSON.stringify(values)}
                                         </div> */}
+                                        {<div className="mt-3" style={{ textAlign: "center" }}>
+                                            {(cvReview.status == CVReviewStatus.underReview || cvReview.status == CVReviewStatus.reviewCompleted) && <button type="submit" disabled={isSubmitting} className="btn btn-primary">Submit</button>}
+                                            {cvReview.status == CVReviewStatus.submitted && <button className="btn btn-primary" onClick={pickCvForReview}>Pick for Review</button>}
+                                            <button className="btn btn-primary" style={{ marginLeft: "20px" }} onClick={() => redirectToRoute('/cvReviews')}>Back</button>
+                                        </div>}
                                     </Form>
                                 );
                             }}
                         </Formik>
-                    </div>}
+                    </div>
 
-                    {/* Showing comments in completed review */}
-                    {cvReview.status == CVReviewStatus.reviewCompleted && <div style={{ textAlign: "center" }}>
-                        <textarea
-                            disabled
-                            name="comments"
-                            value={cvReview.comments != null ? cvReview.comments : ""}
-                            rows="4"
-                            cols="50"
-                            style={{ width: "100%" }}></textarea>
-                    </div>}
-
-                    {cvReview.status != CVReviewStatus.draft && <div className="mt-3" style={{ textAlign: "center" }}>
-                        <button className="btn btn-primary" onClick={() => redirectToRoute('/cvReviews')}>Back</button>
-                    </div>}
                 </div>
                 {/* Right panel - CV View */}
                 <div className="col-sm-12 col-lg-6" style={{ borderLeft: "1px #e6e6e6 solid", overflowY: "scroll", height: "calc(100vh - 60px)" }}>
@@ -109,12 +103,12 @@ const CVReview = ({ cvReview, cvUrl, handleFileUpload, isS3Uploading, numPages, 
 
 CVReview.propTypes = {
     cvReview: PropTypes.object.isRequired,
-    handleFileUpload: PropTypes.func.isRequired,
     isS3Uploading: PropTypes.bool.isRequired,
     numPages: PropTypes.number,
     onDocumentLoad: PropTypes.func,
     onSubmit: PropTypes.func.isRequired,
     pageNumber: PropTypes.number,
+    pickCvForReview: PropTypes.func.isRequired,
     redirectToRoute: PropTypes.func.isRequired,
     selectedFile: PropTypes.object,
     shufflePage: PropTypes.func.isRequired,

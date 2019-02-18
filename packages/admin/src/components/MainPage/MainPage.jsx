@@ -3,16 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as userInfoActions from '../../actions/userInfoActions';
 import * as cvReviewActions from '../../actions/cvReviewActions';
-import * as pricingPlanActions from '../../actions/pricingPlanActions';
+import * as userInfoActions from '../../actions/userInfoActions';
 import { Auth } from 'aws-amplify';
-import { withAuthenticator } from 'aws-amplify-react';
 import { Switch, Route, Redirect } from "react-router-dom";
 /*styled components */
 import styled from 'styled-components';
 import Sidebar from '../Common/Sidebar/Sidebar';
-import Breadcrumbs from '../Common/Breadcrumbs';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import Loader from 'react-loader-spinner';
 import * as constants from '../../constants/constants';
@@ -40,8 +37,8 @@ class MainPage extends React.Component {
             pageTitle: {
                 'home': 'Home',
                 'cvReviews': 'CV Review(s)',
-                'devices': ['Devices'],
-                'reports': ['Reports'],
+                // 'devices': ['Devices'],
+                // 'reports': ['Reports'],
                 // 'settings/policies': ['Settings', 'Policies'],
                 // 'settings/network': ['Settings', 'Network']
             },
@@ -50,8 +47,7 @@ class MainPage extends React.Component {
 
         this.onModuleSelect = this.onModuleSelect.bind(this);
         this.onToggle = this.onToggle.bind(this);
-        this.loadPricingPlans = this.loadPricingPlans.bind(this);
-        this.loadUserCvReviews = this.loadUserCvReviews.bind(this);
+        this.loadCvReviews = this.loadCvReviews.bind(this);
         this.loadUserInfo = this.loadUserInfo.bind(this);
         this.setInitializing = this.setInitializing.bind(this);
         this.setSelectedModule = this.setSelectedModule.bind(this);
@@ -74,13 +70,9 @@ class MainPage extends React.Component {
         this.setState({ expanded: expanded });
     };
 
-    loadPricingPlans() {
-        this.props.pricingPlanActions._listPricingPlans();
-    }
-
-    loadUserCvReviews(username) {
-        //WORK - cvReview of current user should be loaded
-        this.props.cvReviewActions._listCvReviews(username).then(data => {
+    loadCvReviews() {
+        this.setInitializing(true);
+        this.props.cvReviewActions._listCvReviews().then(data => {
             this.setInitializing(false);
         }).catch(error => {
             this.setInitializing(false);
@@ -93,8 +85,6 @@ class MainPage extends React.Component {
             let username = data.username;
             //loading userinfo
             this.props.userInfoActions._loadUserInfo(username);
-            //loading user's reviews
-            this.loadUserCvReviews(username);
         }).catch(err => {
             NotificationManager.error('Error fetching user data', 'Error!', 2000);
         });
@@ -107,21 +97,19 @@ class MainPage extends React.Component {
     }
 
     setSelectedModule(selectedModule) {
-        var selectedIcon = "";
         if (selectedModule == "" || selectedModule == "/") {
-            selectedIcon = 'home';
+            selectedModule = 'home';
         }
         else if (selectedModule.indexOf("cvReview") != -1) {
-            selectedIcon = 'cvReviews';
+            selectedModule = 'cvReviews';
         }
         else {
-            selectedIcon = selectedModule.substring(1);
+            selectedModule = selectedModule.substring(1);
         }
         this.setState({
-            selectedModule: selectedIcon
+            selectedModule: selectedModule
         });
     }
-
 
     signOut() {
         Auth.signOut().then(data => {
@@ -132,8 +120,6 @@ class MainPage extends React.Component {
 
     componentWillMount() {
         //adding current loggedin user data to redux state, this take time - some operations requiring user data might get affected
-        this.setInitializing(true);
-        this.loadPricingPlans();
         this.loadUserInfo();
     }
 
@@ -141,6 +127,8 @@ class MainPage extends React.Component {
         //get selected icon from route on component mount
         var selectedModule = this.props.history.location.pathname;
         this.setSelectedModule(selectedModule);
+        //fetch cv reviews
+        this.loadCvReviews();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -152,7 +140,7 @@ class MainPage extends React.Component {
     }
 
     componentWillUnmount() {
-        this.props.updateStateVariable();
+        //this.props.updateStateVariable();
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -179,13 +167,12 @@ class MainPage extends React.Component {
                 /></div>}
                 <Sidebar onModuleSelect={this.onModuleSelect} onToggle={this.onToggle} selectedModule={selectedModule}></Sidebar>
                 <Main expanded={expanded} style={{ height: "100vh", overflowY: "scroll" }}>
-                    {selectedModule != "home" && <Breadcrumbs pageTitle={pageTitle} selectedModule={selectedModule}></Breadcrumbs>}
                     <Switch>
                         <Route path="/" exact component={props => <HomePage {...props}></HomePage>} />
                         <Route exact path="/cvReviews" component={props => <CVReviewList {...props}></CVReviewList>} />
-                        <Route exact path="/cvReview" component={props => <ManageCVReview {...props}></ManageCVReview>} />
                         <Route exact path="/cvReview/:id" component={props => <ManageCVReview {...props}></ManageCVReview>} />
-                        <Route path="/settings/*" component={props => <div>settings</div>} />
+                        {/* <Route exact path="/cvReview" component={props => <ManageCVReview {...props}></ManageCVReview>} />
+                        <Route path="/settings/*" component={props => <div>settings</div>} /> */}
                         <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
                     </Switch>
                 </Main>
@@ -203,16 +190,14 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         cvReviewActions: bindActionCreators(cvReviewActions, dispatch),
-        pricingPlanActions: bindActionCreators(pricingPlanActions, dispatch),
         userInfoActions: bindActionCreators(userInfoActions, dispatch),
     };
 }
 
 MainPage.propTypes = {
     history: PropTypes.object,
-    location: PropTypes.object,
-    updateStateVariable: PropTypes.func.isRequired
+    location: PropTypes.object
 };
 
 //make this component available to the app
-export default withAuthenticator(connect(mapStateToProps, mapDispatchToProps)(MainPage));
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
