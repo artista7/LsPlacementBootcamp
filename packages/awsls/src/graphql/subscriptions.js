@@ -1,6 +1,51 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
+export const onCreateAppModules = `subscription OnCreateAppModules {
+  onCreateAppModules {
+    id
+    name
+  }
+}
+`;
+export const onUpdateAppModules = `subscription OnUpdateAppModules {
+  onUpdateAppModules {
+    id
+    name
+  }
+}
+`;
+export const onDeleteAppModules = `subscription OnDeleteAppModules {
+  onDeleteAppModules {
+    id
+    name
+  }
+}
+`;
+export const onCreateAppModuleAccess = `subscription OnCreateAppModuleAccess {
+  onCreateAppModuleAccess {
+    id
+    group
+    appModules
+  }
+}
+`;
+export const onUpdateAppModuleAccess = `subscription OnUpdateAppModuleAccess {
+  onUpdateAppModuleAccess {
+    id
+    group
+    appModules
+  }
+}
+`;
+export const onDeleteAppModuleAccess = `subscription OnDeleteAppModuleAccess {
+  onDeleteAppModuleAccess {
+    id
+    group
+    appModules
+  }
+}
+`;
 export const onCreateCvReview = `subscription OnCreateCvReview {
   onCreateCvReview {
     comments

@@ -1,3 +1,14 @@
+type AppModules @model{
+  id: ID!
+  name: String
+}
+
+type AppModuleAccess @model{
+  id: ID!
+  group: String
+  appModules: String
+}
+
 type CvReview @model {
   comments: String
   createdBy: String!

@@ -1,6 +1,50 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
+export const getAppModules = `query GetAppModules($id: ID!) {
+  getAppModules(id: $id) {
+    id
+    name
+  }
+}
+`;
+export const listAppModuless = `query ListAppModuless(
+  $filter: ModelAppModulesFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listAppModuless(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+    }
+    nextToken
+  }
+}
+`;
+export const getAppModuleAccess = `query GetAppModuleAccess($id: ID!) {
+  getAppModuleAccess(id: $id) {
+    id
+    group
+    appModules
+  }
+}
+`;
+export const listAppModuleAccesss = `query ListAppModuleAccesss(
+  $filter: ModelAppModuleAccessFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listAppModuleAccesss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      group
+      appModules
+    }
+    nextToken
+  }
+}
+`;
 export const getCvReview = `query GetCvReview($id: ID!) {
   getCvReview(id: $id) {
     comments

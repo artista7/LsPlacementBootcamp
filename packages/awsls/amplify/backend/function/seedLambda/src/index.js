@@ -6,15 +6,75 @@ const env = process.env.ENV;
 
 exports.handler = function (event, context, callback) {
   //getting table names from environment variables
+  const AppModulesTableName = "AppModules-" + graphqlApiId + "-" + env;
+  const AppModuleAccessTableName = "AppModuleAccess-" + graphqlApiId + "-" + env;
   const PricingPlanTableName = "PricingPlan-" + graphqlApiId + "-" + env;
   const ServiceEnabledTableName = "ServiceEnabled-" + graphqlApiId + "-" + env;
 
+  console.log("AppModules table name is - " + AppModulesTableName);
+  console.log("AppModuleAccess table name is - " + AppModuleAccessTableName);
   console.log("Pricing table name is - " + PricingPlanTableName);
   console.log("ServiceEnabled table name is - " + ServiceEnabledTableName);
 
+  //emptying given tables
+  //need to work on this
   //creating params object for db entry
-  var params = {
+  var insertParams = {
     RequestItems: {
+      [AppModulesTableName]: [
+        {
+          PutRequest: {
+            Item: {
+              "id": { "S": uuidv4() },
+              "name": { "S": "profile" }
+            }
+          }
+        },
+        {
+          PutRequest: {
+            Item: {
+              "id": { "S": uuidv4() },
+              "name": { "S": "cvreview" }
+            }
+          }
+        },
+        {
+          PutRequest: {
+            Item: {
+              "id": { "S": uuidv4() },
+              "name": { "S": "settings" }
+            }
+          }
+        },
+        {
+          PutRequest: {
+            Item: {
+              "id": { "S": uuidv4() },
+              "name": { "S": "logout" }
+            }
+          }
+        }
+      ],
+      [AppModuleAccessTableName]: [
+        {
+          PutRequest: {
+            Item: {
+              "id": { "S": uuidv4() },
+              "group": { "S": "student" },
+              "appModules": { "S": "profile,cvreview,logout" }
+            }
+          }
+        },
+        {
+          PutRequest: {
+            Item: {
+              "id": { "S": uuidv4() },
+              "group": { "S": "admin" },
+              "appModules": { "S": "cvreview,settings,logout" }
+            }
+          }
+        }
+      ],
       [PricingPlanTableName]: [
         {
           PutRequest: {
@@ -63,7 +123,7 @@ exports.handler = function (event, context, callback) {
   };
 
   //Batch writing to ddb
-  ddb.batchWriteItem(params, function (err, data) {
+  ddb.batchWriteItem(insertParams, function (err, data) {
     if (err) {
       console.log("Error", err);
       callback(null, event);

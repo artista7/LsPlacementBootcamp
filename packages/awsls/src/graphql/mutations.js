@@ -1,6 +1,51 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
+export const createAppModules = `mutation CreateAppModules($input: CreateAppModulesInput!) {
+  createAppModules(input: $input) {
+    id
+    name
+  }
+}
+`;
+export const updateAppModules = `mutation UpdateAppModules($input: UpdateAppModulesInput!) {
+  updateAppModules(input: $input) {
+    id
+    name
+  }
+}
+`;
+export const deleteAppModules = `mutation DeleteAppModules($input: DeleteAppModulesInput!) {
+  deleteAppModules(input: $input) {
+    id
+    name
+  }
+}
+`;
+export const createAppModuleAccess = `mutation CreateAppModuleAccess($input: CreateAppModuleAccessInput!) {
+  createAppModuleAccess(input: $input) {
+    id
+    group
+    appModules
+  }
+}
+`;
+export const updateAppModuleAccess = `mutation UpdateAppModuleAccess($input: UpdateAppModuleAccessInput!) {
+  updateAppModuleAccess(input: $input) {
+    id
+    group
+    appModules
+  }
+}
+`;
+export const deleteAppModuleAccess = `mutation DeleteAppModuleAccess($input: DeleteAppModuleAccessInput!) {
+  deleteAppModuleAccess(input: $input) {
+    id
+    group
+    appModules
+  }
+}
+`;
 export const createCvReview = `mutation CreateCvReview($input: CreateCvReviewInput!) {
   createCvReview(input: $input) {
     comments
