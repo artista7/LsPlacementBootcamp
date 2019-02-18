@@ -53,7 +53,7 @@ class ManageCVReview extends React.Component {
             this.props.cvReviewActions._updateCvReview(updateCvReviewInput).then(Response => {
                 this.setIsS3Uploading(false);
                 this.redirectToRoute('/cvReviews');
-                NotificationManager.success('CV review submitted', 'Success', 2000);
+                NotificationManager.success('CV review submitted', '', 2000);
             }).catch(error => {
                 this.setIsS3Uploading(false);
             });
@@ -70,7 +70,7 @@ class ManageCVReview extends React.Component {
             status: "underReview"
         });
         this.props.cvReviewActions._updateCvReview(updateCvReviewInput).then(response => {
-            NotificationManager.success('CV picked for review', 'Success', 2000);
+            NotificationManager.success('CV picked for review', '', 2000);
         }).catch(err => {
 
         });
@@ -133,7 +133,7 @@ class ManageCVReview extends React.Component {
             }).then(result => {
                 setCvUrl(result);
             }).catch(error => {
-                NotificationManager.error("Can't fetch cv preview", "Error", 2000);
+                NotificationManager.error("Can't fetch cv preview", '', 2000);
                 console.log(error)
             });
         }

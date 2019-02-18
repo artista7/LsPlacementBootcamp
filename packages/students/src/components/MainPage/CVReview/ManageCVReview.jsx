@@ -49,7 +49,7 @@ class ManageCVReview extends React.Component {
             });
         }
         else {
-            NotificationManager.warning('File size exceeds 5Mb', 'Warning!', 2000);
+            NotificationManager.warning('File size exceeds 5Mb', '', 2000);
         }
     }
 
@@ -74,7 +74,7 @@ class ManageCVReview extends React.Component {
             //check if user is allowed to submit cv
             //if not, through notification warning and redirect to previous page
             if (!this.isSubmitAllowed()) {
-                NotificationManager.error("Cv Review limit reached", "Upgrade plan", 6000);
+                NotificationManager.error("Cv Review limit reached", '', 6000);
                 this.redirectToRoute('/cvReviews');
             }
             else {
@@ -177,7 +177,7 @@ class ManageCVReview extends React.Component {
             }).then(result => {
                 setCvUrl(result);
             }).catch(error => {
-                NotificationManager.error("Can't fetch cv preview", "Error", 2000);
+                NotificationManager.error("Can't fetch cv preview", '', 2000);
                 console.log(error)
             });
         }

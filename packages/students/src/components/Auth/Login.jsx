@@ -4,8 +4,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/cvReviewActions';
-import { withAuthenticator } from 'aws-amplify-react';
+import { Authenticator, ConfirmSignUp, Loading, ForgotPassword, SignIn, SignUp } from 'aws-amplify-react';
 import { Redirect } from "react-router-dom";
+/*Custom screens*/
+import CustomSignIn from './CustomSignIn';
+import CustomSignUp from './CustomSignUp';
+import CustomConfirmSignUp from './CustomConfirmSignUp';
+import CustomForgotPassword from './CustomForgotPassword';
+import CustomLoading from './CustomLoading';
 
 // create a component
 class Login extends React.Component {
@@ -15,9 +21,23 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div>
-                {this.props.authState == "signedIn" ? <Redirect to={{ pathname: "/" }}></Redirect> : null}
-            </div>
+            <Authenticator
+                hideDefault={true}
+                onStateChange={(authState) => {     // Fired when Authentication State changes
+                    if (authState == "signedIn") {
+                        this.props.updateStateVariable();
+                    }
+                }}>
+                <CustomSignIn override={SignIn} updateStateVariable={this.props.updateStateVariable} />
+                {/* <ConfirmSignIn /> */}
+                {/* <RequireNewPassword /> */}
+                <CustomLoading override={Loading} />
+                <CustomSignUp override={SignUp} />
+                <CustomConfirmSignUp override={ConfirmSignUp} />
+                {/* <VerifyContact /> */}
+                <CustomForgotPassword override={ForgotPassword} />
+                {/* <TOTPSetup /> */}
+            </Authenticator>
         );
     }
 }
@@ -38,4 +58,4 @@ Login.propTypes = {
     updateStateVariable: PropTypes.func.isRequired
 };
 //make this component available to the app
-export default withAuthenticator(connect(mapStateToProps, mapDispatchToProps)(Login));
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

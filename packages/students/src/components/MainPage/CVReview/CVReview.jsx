@@ -6,7 +6,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import { CVReviewStatus } from '../../../constants/constants';
 import './CVReview.css';
 /*Loader */
-import Loader from 'react-loader-spinner'
+import Loader from 'react-loader-spinner';
 import { Formik, ErrorMessage, Form } from 'formik';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 

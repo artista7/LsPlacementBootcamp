@@ -16,6 +16,7 @@ import configureStore from './store/configureStore';
 /*Styles */
 import 'react-circular-progressbar/dist/styles.css';
 import 'react-notifications/lib/notifications.css';
+import { NotificationContainer } from 'react-notifications';
 
 Amplify.configure(awsConfig);
 const store = configureStore()
@@ -43,9 +44,10 @@ class App extends Component {
       <Provider store={store}>
         <Router history={history}>
           <React.Fragment>
+            <NotificationContainer />
             {authState != "signedIn" && <Switch>
               <Route exact path="/" component={LandingPage}></Route>
-              <Route exact path="/login" render={() => (<LoginPage updateStateVariable={this.updateStateVariable}></LoginPage>)}></Route>
+              <Route exact path="/login" render={({ history }) => (<LoginPage history={history} updateStateVariable={this.updateStateVariable}></LoginPage>)}></Route>
               <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
             </Switch>}
             {authState == "signedIn" && <Switch>

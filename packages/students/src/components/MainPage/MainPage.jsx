@@ -13,7 +13,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import styled from 'styled-components';
 import Sidebar from '../Common/Sidebar/Sidebar';
 import Breadcrumbs from '../Common/Breadcrumbs';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
+import { NotificationManager } from 'react-notifications';
 import Loader from 'react-loader-spinner';
 import * as constants from '../../constants/constants';
 /*Child components */
@@ -96,7 +96,7 @@ class MainPage extends React.Component {
             //loading user's reviews
             this.loadUserCvReviews(username);
         }).catch(err => {
-            NotificationManager.error('Error fetching user data', 'Error!', 2000);
+            NotificationManager.error('Error fetching user data', '', 2000);
         });
     }
 
@@ -172,7 +172,6 @@ class MainPage extends React.Component {
         const { expanded, pageTitle, selectedModule } = this.state;
         return (
             <div>
-                <NotificationContainer />
                 {this.state.isInitializing && <div className="pageCenter"><Loader
                     type="Triangle"
                     color="rgb(204,80,74)"
