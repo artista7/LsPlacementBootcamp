@@ -67,7 +67,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "awsls-20190218171327-deployment",
-					"S3Key": "amplify-builds/cognitoLambda-1550492340-latest-build.zip"
+					"S3Key": "amplify-builds/cognitoLambda-1550690231-latest-build.zip"
 				}
 			}
 		},
