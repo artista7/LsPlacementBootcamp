@@ -330,13 +330,13 @@ Resources:
       clientId: !Ref UserPoolClient
       userpoolId: !Ref UserPool
     DependsOn: UserPoolClientLogPolicy
-  UserPoolGroup:
-    Type: 'AWS::Cognito::UserPoolGroup'
-    Properties:
-      Description: "Admin group"
-      GroupName: "admin"
-      Precedence: 1
-      UserPoolId: !Ref UserPool
+  # UserPoolGroup:
+  #   Type: 'AWS::Cognito::UserPoolGroup'
+  #   Properties:
+  #     Description: "Admin group"
+  #     GroupName: "admin"
+  #     Precedence: 1
+  #     UserPoolId: !Ref UserPool
       
     
   # BEGIN IDENTITY POOL RESOURCES
