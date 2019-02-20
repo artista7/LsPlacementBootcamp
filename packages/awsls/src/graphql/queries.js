@@ -49,7 +49,7 @@ export const getCollege = `query GetCollege($id: ID!) {
   getCollege(id: $id) {
     id
     name
-    studentPasscode
+    collegePasscode
   }
 }
 `;
@@ -62,7 +62,7 @@ export const listColleges = `query ListColleges(
     items {
       id
       name
-      studentPasscode
+      collegePasscode
     }
     nextToken
   }

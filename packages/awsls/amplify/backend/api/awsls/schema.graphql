@@ -12,7 +12,7 @@ type AppModuleAccess @model{
 type College @model{
   id: ID!
   name: String
-  studentPasscode: String
+  collegePasscode: String
 }
 
 type CvReview @model {
@@ -46,6 +46,7 @@ type ServiceEnabled @model{
 }
 
 type User @model {
+  collegeName: String
   cvReviewsTaken: Int
   email: AWSEmail
   group: String

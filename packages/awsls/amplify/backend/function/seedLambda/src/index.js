@@ -83,7 +83,7 @@ exports.handler = function (event, context, callback) {
             Item: {
               "id": { "S": uuidv4() },
               "name": { "S": "IIT Delhi" },
-              "studentPasscode": { "S": "IITD1234" }
+              "collegePasscode": { "S": "IITD1234" }
             }
           }
         }

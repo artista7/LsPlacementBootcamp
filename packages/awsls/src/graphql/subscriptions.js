@@ -50,7 +50,7 @@ export const onCreateCollege = `subscription OnCreateCollege {
   onCreateCollege {
     id
     name
-    studentPasscode
+    collegePasscode
   }
 }
 `;
@@ -58,7 +58,7 @@ export const onUpdateCollege = `subscription OnUpdateCollege {
   onUpdateCollege {
     id
     name
-    studentPasscode
+    collegePasscode
   }
 }
 `;
@@ -66,7 +66,7 @@ export const onDeleteCollege = `subscription OnDeleteCollege {
   onDeleteCollege {
     id
     name
-    studentPasscode
+    collegePasscode
   }
 }
 `;

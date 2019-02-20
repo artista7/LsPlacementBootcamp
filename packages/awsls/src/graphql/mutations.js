@@ -50,7 +50,7 @@ export const createCollege = `mutation CreateCollege($input: CreateCollegeInput!
   createCollege(input: $input) {
     id
     name
-    studentPasscode
+    collegePasscode
   }
 }
 `;
@@ -58,7 +58,7 @@ export const updateCollege = `mutation UpdateCollege($input: UpdateCollegeInput!
   updateCollege(input: $input) {
     id
     name
-    studentPasscode
+    collegePasscode
   }
 }
 `;
@@ -66,7 +66,7 @@ export const deleteCollege = `mutation DeleteCollege($input: DeleteCollegeInput!
   deleteCollege(input: $input) {
     id
     name
-    studentPasscode
+    collegePasscode
   }
 }
 `;
