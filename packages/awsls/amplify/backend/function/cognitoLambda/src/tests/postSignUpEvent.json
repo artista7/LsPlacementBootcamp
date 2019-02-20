@@ -1,0 +1,24 @@
+{
+    "version": "1",
+    "region": "ap-south-1",
+    "userPoolId": "ap-south-1_XpSObUmB8",
+    "userName": "test10",
+    "callerContext": {
+        "awsSdkVersion": "aws-sdk-unknown-unknown",
+        "clientId": "45okvcmknncaatfg401s3in8uq"
+    },
+    "triggerSource": "PostConfirmation_ConfirmSignUp",
+    "request": {
+        "userAttributes": {
+            "phone_number": "+919582819710",
+            "email": "shubham1.6180@gmail.com",
+            "custom:addToGroup": "student",
+            "custom:collegePasscode": "IITD1234",
+            "sub": "9a8c1185-82b7-4e47-ac64-195d59c5bcb7",
+            "cognito:user_status": "CONFIRMED",
+            "email_verified": "false",
+            "phone_number_verified": "true"
+        }
+    },
+    "response": {}
+}
