@@ -139,9 +139,9 @@ class CustomSignIn extends React.Component {
                                 /></div>}
                                 <div className="wrapper fadeInDown">
                                     <div id="formContent">
-                                        <input type="text" className="fadeIn second" name="username" onChange={handleChange} placeholder="username" autocomplete="new-password" />
+                                        <input type="text" className="fadeIn second" name="username" onChange={handleChange} placeholder="username" autoComplete="new-password" />
                                         <ErrorMessage name="username">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
-                                        <input type="password" className="fadeIn third" name="password" onChange={handleChange} placeholder="password" autocomplete="new-password" />
+                                        <input type="password" className="fadeIn third" name="password" onChange={handleChange} placeholder="password" autoComplete="new-password" />
                                         <ErrorMessage name="password">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
                                         <p className="fadeIn third" style={{ paddingLeft: "40px", "textAlign": "left" }}>
                                             Forgot password? <a style={{ display: "inline-block" }} onClick={this.forgotPassword} href="#">Reset it</a>

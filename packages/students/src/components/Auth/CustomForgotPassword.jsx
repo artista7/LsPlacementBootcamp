@@ -103,7 +103,7 @@ class CustomForgotPassword extends React.Component {
                                 /></div>}
                                 <div className="wrapper fadeInDown">
                                     <div id="formContent">
-                                        <input type="text" className="fadeIn second" name="username" onChange={handleChange} placeholder="username" autocomplete="new-password" />
+                                        <input type="text" className="fadeIn second" name="username" onChange={handleChange} placeholder="username" autoComplete="new-password" />
                                         <ErrorMessage name="username">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
 
                                         <input type="submit" disabled={isSubmitting} className="fadeIn fourth" value="Send Code" />
@@ -149,9 +149,9 @@ class CustomForgotPassword extends React.Component {
                                 /></div>}
                                 <div className="wrapper fadeInDown">
                                     <div id="formContent">
-                                        <input type="text" className="fadeIn second" name="code" onChange={handleChange} placeholder="code" autocomplete="new-password" />
+                                        <input type="text" className="fadeIn second" name="code" onChange={handleChange} placeholder="code" autoComplete="new-password" />
                                         <ErrorMessage name="code">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
-                                        <input type="password" className="fadeIn second" name="newPassword" onChange={handleChange} placeholder="new password" autocomplete="new-password" />
+                                        <input type="password" className="fadeIn second" name="newPassword" onChange={handleChange} placeholder="new password" autoComplete="new-password" />
                                         <ErrorMessage name="newPassword">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
 
                                         <input type="submit" disabled={isSubmitting} className="fadeIn fourth" value="Reset Password" />

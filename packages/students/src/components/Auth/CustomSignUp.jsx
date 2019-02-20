@@ -42,8 +42,14 @@ class CustomSignUp extends React.Component {
                 phone_number,   // optional - E.164 number convention
                 //group
                 // other custom attributes 
-            }
-            //validationData: []  //optional
+            },
+            validationData: [{
+                Name: "collegePasscode",
+                Value: validationData.collegePasscode
+            }, {
+                Name: "group",
+                Value: group
+            }]  //optional
         })
             .then(data => {
                 this.setIsLoading(false);
@@ -55,8 +61,11 @@ class CustomSignUp extends React.Component {
             .catch(err => {
                 this.setIsLoading(false);
                 if (err.code == "InvalidParameterException") {
-                    if (err.message.indexOf("phone number" != -1)) {
+                    if (err.message.indexOf("phone number") != -1) {
                         NotificationManager.error('Wrong Phone number format, add ISD code', '', 6000);
+                    }
+                    else {
+                        NotificationManager.error(err.message);
                     }
                 }
                 else {
@@ -79,7 +88,7 @@ class CustomSignUp extends React.Component {
                         }
                         else {
                             this.setIsLoading(true);
-                            this.signUp(values.username, values.password, values.email, values.phone_number, values.validationData);
+                            this.signUp(values.username, values.password, values.email, values.phone_number, values.group, values.validationData);
                         }
                         //NOTE need to call this on signUp complete
                         actions.setSubmitting(false);
@@ -112,15 +121,15 @@ class CustomSignUp extends React.Component {
                                 /></div>}
                                 <div className="wrapper fadeInDown">
                                     <div id="formContent">
-                                        <input type="text" className="fadeIn second" name="username" onChange={handleChange} placeholder="uesrname" autocomplete="new-password" />
+                                        <input type="text" className="fadeIn second" name="username" onChange={handleChange} placeholder="username" autoComplete="new-password" />
                                         <ErrorMessage name="username">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
-                                        <input type="password" className="fadeIn third" name="password" onChange={handleChange} placeholder="password" autocomplete="new-password" />
+                                        <input type="password" className="fadeIn third" name="password" onChange={handleChange} placeholder="password" autoComplete="new-password" />
                                         <ErrorMessage name="password">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
-                                        <input type="email" className="fadeIn third" name="email" onChange={handleChange} placeholder="email" autocomplete="new-password" />
+                                        <input type="email" className="fadeIn third" name="email" onChange={handleChange} placeholder="email" autoComplete="new-password" />
                                         <ErrorMessage name="email">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
-                                        <input type="tel" className="fadeIn third" name="phone_number" onChange={handleChange} placeholder="phone number (+919999966666)" autocomplete="new-password" />
+                                        <input type="tel" className="fadeIn third" name="phone_number" onChange={handleChange} placeholder="phone number (+919999966666)" autoComplete="new-password" />
                                         <ErrorMessage name="phone_number">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
-                                        <input type="text" className="fadeIn third" name="validationData.collegePasscode" onChange={handleChange} placeholder="college passcode" autocomplete="new-password" />
+                                        <input type="text" className="fadeIn third" name="validationData.collegePasscode" onChange={handleChange} placeholder="college passcode" autoComplete="new-password" />
                                         {/* <ErrorMessage name="collegepasscode">{msg => <div className="errorText">{msg}</div>}</ErrorMessage> */}
 
                                         <input type="submit" disabled={isSubmitting} className="fadeIn fourth" value="Sign Up" />
