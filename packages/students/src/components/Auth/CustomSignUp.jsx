@@ -33,23 +33,18 @@ class CustomSignUp extends React.Component {
         })
     }
 
-    signUp(username, password, email, phone_number, group, validationData) {
+    signUp(username, password, email, phone_number, group, collegePasscode) {
         Auth.signUp({
             username,
             password,
             attributes: {
-                email,          // optional
-                phone_number,   // optional - E.164 number convention
-                //group
+                'email': email,          // optional
+                'phone_number': phone_number,   // optional - E.164 number convention
+                'custom:addToGroup': group,
+                'custom:collegePasscode': collegePasscode
                 // other custom attributes 
             },
-            validationData: [{
-                Name: "collegePasscode",
-                Value: validationData.collegePasscode
-            }, {
-                Name: "group",
-                Value: group
-            }]  //optional
+            validationData: []  //optional
         })
             .then(data => {
                 this.setIsLoading(false);
@@ -60,7 +55,15 @@ class CustomSignUp extends React.Component {
             })
             .catch(err => {
                 this.setIsLoading(false);
-                if (err.code == "InvalidParameterException") {
+                if (err.code == 'UserLambdaValidationException') {
+                    if (err.message.indexOf("College passcode") != -1) {
+                        NotificationManager.error('College Passcode not verified', '', 6000);
+                    }
+                    else {
+                        NotificationManager.error(err.message);
+                    }
+                }
+                else if (err.code == "InvalidParameterException") {
                     if (err.message.indexOf("phone number") != -1) {
                         NotificationManager.error('Wrong Phone number format, add ISD code', '', 6000);
                     }
@@ -88,7 +91,7 @@ class CustomSignUp extends React.Component {
                         }
                         else {
                             this.setIsLoading(true);
-                            this.signUp(values.username, values.password, values.email, values.phone_number, values.group, values.validationData);
+                            this.signUp(values.username, values.password, values.email, values.phone_number, values.group, values.validationData.collegePasscode);
                         }
                         //NOTE need to call this on signUp complete
                         actions.setSubmitting(false);
