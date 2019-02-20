@@ -9,7 +9,7 @@ export function _listCvReviews() {
         return API.graphql(graphqlOperation(queries.listCvReviews)).then(response => {
             dispatch(_listCvReviewsSuccess(response.data.listCvReviews.items));
         }).catch(response => {
-            NotificationManager.error('Error loading reviews', 'Error', 2000);
+            NotificationManager.error('Error loading reviews', '', 2000);
             console.log(response);
         })
     }
@@ -24,7 +24,7 @@ export function _updateCvReview(cvReview) {
         return API.graphql(graphqlOperation(mutations.updateCvReview, { input: cvReview })).then(response => {
             dispatch(_updateCvReviewSuccess(response.data.updateCvReview));
         }).catch(response => {
-            NotificationManager.error('Error submitting review', 'Error', 2000);
+            NotificationManager.error('Error submitting review', '', 2000);
             console.log(response);
         })
     }

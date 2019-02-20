@@ -1,6 +1,75 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
 
+export const createAppModules = `mutation CreateAppModules($input: CreateAppModulesInput!) {
+  createAppModules(input: $input) {
+    id
+    name
+  }
+}
+`;
+export const updateAppModules = `mutation UpdateAppModules($input: UpdateAppModulesInput!) {
+  updateAppModules(input: $input) {
+    id
+    name
+  }
+}
+`;
+export const deleteAppModules = `mutation DeleteAppModules($input: DeleteAppModulesInput!) {
+  deleteAppModules(input: $input) {
+    id
+    name
+  }
+}
+`;
+export const createAppModuleAccess = `mutation CreateAppModuleAccess($input: CreateAppModuleAccessInput!) {
+  createAppModuleAccess(input: $input) {
+    id
+    group
+    appModules
+  }
+}
+`;
+export const updateAppModuleAccess = `mutation UpdateAppModuleAccess($input: UpdateAppModuleAccessInput!) {
+  updateAppModuleAccess(input: $input) {
+    id
+    group
+    appModules
+  }
+}
+`;
+export const deleteAppModuleAccess = `mutation DeleteAppModuleAccess($input: DeleteAppModuleAccessInput!) {
+  deleteAppModuleAccess(input: $input) {
+    id
+    group
+    appModules
+  }
+}
+`;
+export const createCollege = `mutation CreateCollege($input: CreateCollegeInput!) {
+  createCollege(input: $input) {
+    id
+    name
+    collegePasscode
+  }
+}
+`;
+export const updateCollege = `mutation UpdateCollege($input: UpdateCollegeInput!) {
+  updateCollege(input: $input) {
+    id
+    name
+    collegePasscode
+  }
+}
+`;
+export const deleteCollege = `mutation DeleteCollege($input: DeleteCollegeInput!) {
+  deleteCollege(input: $input) {
+    id
+    name
+    collegePasscode
+  }
+}
+`;
 export const createCvReview = `mutation CreateCvReview($input: CreateCvReviewInput!) {
   createCvReview(input: $input) {
     comments
@@ -95,7 +164,7 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
   createUser(input: $input) {
     cvReviewsTaken
     email
-    groups
+    group
     id
     phone_number
     pricingPlanId
@@ -107,7 +176,7 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
   updateUser(input: $input) {
     cvReviewsTaken
     email
-    groups
+    group
     id
     phone_number
     pricingPlanId
@@ -119,7 +188,7 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
   deleteUser(input: $input) {
     cvReviewsTaken
     email
-    groups
+    group
     id
     phone_number
     pricingPlanId

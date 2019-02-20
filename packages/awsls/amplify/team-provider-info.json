@@ -1,14 +1,14 @@
 {
     "local": {
         "awscloudformation": {
-            "AuthRoleName": "learningsage-20190216033407-authRole",
-            "UnauthRoleArn": "arn:aws:iam::227484579606:role/learningsage-20190216033407-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::227484579606:role/learningsage-20190216033407-authRole",
+            "AuthRoleName": "awsls-20190218171327-authRole",
+            "UnauthRoleArn": "arn:aws:iam::227484579606:role/awsls-20190218171327-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::227484579606:role/awsls-20190218171327-authRole",
             "Region": "ap-south-1",
-            "DeploymentBucketName": "learningsage-20190216033407-deployment",
-            "UnauthRoleName": "learningsage-20190216033407-unauthRole",
-            "StackName": "learningsage-20190216033407",
-            "StackId": "arn:aws:cloudformation:ap-south-1:227484579606:stack/learningsage-20190216033407/9ed58360-316d-11e9-b3cf-02d368a4a862"
+            "DeploymentBucketName": "awsls-20190218171327-deployment",
+            "UnauthRoleName": "awsls-20190218171327-unauthRole",
+            "StackName": "awsls-20190218171327",
+            "StackId": "arn:aws:cloudformation:ap-south-1:227484579606:stack/awsls-20190218171327/67e5ea00-3372-11e9-b653-029e9c0f3f8e"
         },
         "categories": {
             "auth": {

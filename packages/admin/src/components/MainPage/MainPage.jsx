@@ -86,7 +86,7 @@ class MainPage extends React.Component {
             //loading userinfo
             this.props.userInfoActions._loadUserInfo(username);
         }).catch(err => {
-            NotificationManager.error('Error fetching user data', 'Error!', 2000);
+            NotificationManager.error('Error fetching user data', '', 2000);
         });
     }
 

@@ -1,3 +1,20 @@
+type AppModules @model{
+  id: ID!
+  name: String
+}
+
+type AppModuleAccess @model{
+  id: ID!
+  group: String
+  appModules: String
+}
+
+type College @model{
+  id: ID!
+  name: String
+  collegePasscode: String
+}
+
 type CvReview @model {
   comments: String
   createdBy: String!
@@ -29,9 +46,10 @@ type ServiceEnabled @model{
 }
 
 type User @model {
+  collegeName: String
   cvReviewsTaken: Int
   email: AWSEmail
-  groups: AWSJSON
+  group: String
   id: ID!
   phone_number: AWSPhone
   pricingPlanId: String
