@@ -17,7 +17,6 @@ class CustomLoading extends React.Component {
                     type="Triangle"
                     color="rgb(204,80,74)"
                 />
-                    PKMKB
                 </div>}
             </React.Fragment>
         );

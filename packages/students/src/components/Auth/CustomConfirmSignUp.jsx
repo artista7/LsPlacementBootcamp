@@ -89,9 +89,9 @@ class CustomConfirmSignUp extends React.Component {
                                 /></div>}
                                 <div className="wrapper fadeInDown">
                                     <div id="formContent">
-                                        <input type="text" className="fadeIn second" name="username" onChange={handleChange} placeholder="username" />
+                                        <input type="text" className="fadeIn second" name="username" onChange={handleChange} placeholder="username" autocomplete="new-password" />
                                         <ErrorMessage name="username">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
-                                        <input type="password" className="fadeIn third" name="code" onChange={handleChange} placeholder="code" />
+                                        <input type="password" className="fadeIn third" name="code" onChange={handleChange} placeholder="code" autocomplete="new-password" />
                                         <ErrorMessage name="code">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
                                         <p style={{ paddingLeft: "40px", "textAlign": "left" }}>
                                             Didn't get Code? <a style={{ display: "inline-block" }} onClick={() => this.resendCode(values.username)} href="#">Resend it</a>
