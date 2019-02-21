@@ -162,6 +162,7 @@ export const deleteServiceEnabled = `mutation DeleteServiceEnabled($input: Delet
 `;
 export const createUser = `mutation CreateUser($input: CreateUserInput!) {
   createUser(input: $input) {
+    collegeName
     cvReviewsTaken
     email
     group
@@ -174,6 +175,7 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
 `;
 export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
   updateUser(input: $input) {
+    collegeName
     cvReviewsTaken
     email
     group
@@ -186,6 +188,7 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
 `;
 export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
   deleteUser(input: $input) {
+    collegeName
     cvReviewsTaken
     email
     group

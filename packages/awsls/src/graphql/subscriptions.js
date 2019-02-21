@@ -162,6 +162,7 @@ export const onDeleteServiceEnabled = `subscription OnDeleteServiceEnabled {
 `;
 export const onCreateUser = `subscription OnCreateUser {
   onCreateUser {
+    collegeName
     cvReviewsTaken
     email
     group
@@ -174,6 +175,7 @@ export const onCreateUser = `subscription OnCreateUser {
 `;
 export const onUpdateUser = `subscription OnUpdateUser {
   onUpdateUser {
+    collegeName
     cvReviewsTaken
     email
     group
@@ -186,6 +188,7 @@ export const onUpdateUser = `subscription OnUpdateUser {
 `;
 export const onDeleteUser = `subscription OnDeleteUser {
   onDeleteUser {
+    collegeName
     cvReviewsTaken
     email
     group

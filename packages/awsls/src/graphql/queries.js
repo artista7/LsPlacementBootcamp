@@ -151,6 +151,7 @@ export const listServiceEnableds = `query ListServiceEnableds(
 `;
 export const getUser = `query GetUser($id: ID!) {
   getUser(id: $id) {
+    collegeName
     cvReviewsTaken
     email
     group
@@ -168,6 +169,7 @@ export const listUsers = `query ListUsers(
 ) {
   listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
+      collegeName
       cvReviewsTaken
       email
       group
