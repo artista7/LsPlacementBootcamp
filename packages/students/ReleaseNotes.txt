@@ -1,14 +1,15 @@
 release/v1.0.0
 
 Enhancements
-- Cloudformation deployement script added
-- Configured multiple environments using 'aws-amplify/cli@multienv'
+- Environment setup with a single script (Cloudformation deployement script added)
+- Configured setting up multiple environment like local, dev, test and prod (Configured multiple environments using 'aws-amplify/cli@multienv')
 - Added 'aws-amplify' a js library for Auth(cognito), Api(Appsync), Storage(s3) and Function(lambda)
 - Added lerna - monorepo!
-- Added Sign In/Sign Out flow in the app
-- Configured graphQL-react-redux flow
+- Added CUSTOM Sign In/Sign Out flow in the app
+- Pre sign up validation (college passcode) added to sign up
+- Best front end technology used (Configured graphQL-react-redux flow)
 - Added relevant keywords for SEO
-- Add cv review flow (list -> create -> update)
+- Add cv review flow for students (list -> create -> update)
 - Formik for form validation & form standardization
 - Different pricing plans and limiting number of cv reviews
 
