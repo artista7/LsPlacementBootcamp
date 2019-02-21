@@ -7,7 +7,7 @@
     "@trendmicro/react-sidenav": "^0.4.5",
     "aws-amplify": "^1.1.19",
     "aws-amplify-react": "^2.3.0",
-    "awsls": "1.0.0",
+    "awsls": "file:../awsls",
     "bootstrap": "^4.2.1",
     "classnames": "^2.2.6",
     "ensure-array": "^1.0.0",
