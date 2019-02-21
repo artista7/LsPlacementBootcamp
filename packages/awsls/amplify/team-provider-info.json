@@ -32,5 +32,22 @@
                 "cognitols": {}
             }
         }
+    },
+    "prod": {
+        "awscloudformation": {
+            "AuthRoleName": "awsls-20190221115606-authRole",
+            "UnauthRoleArn": "arn:aws:iam::227484579606:role/awsls-20190221115606-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::227484579606:role/awsls-20190221115606-authRole",
+            "Region": "ap-south-1",
+            "DeploymentBucketName": "awsls-20190221115606-deployment",
+            "UnauthRoleName": "awsls-20190221115606-unauthRole",
+            "StackName": "awsls-20190221115606",
+            "StackId": "arn:aws:cloudformation:ap-south-1:227484579606:stack/awsls-20190221115606/9219ec50-35a1-11e9-b6d2-029dd5210352"
+        },
+        "categories": {
+            "auth": {
+                "cognitols": {}
+            }
+        }
     }
 }
