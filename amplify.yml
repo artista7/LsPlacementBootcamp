@@ -3,8 +3,9 @@ frontend:
   phases:
     preBuild:
       commands:
+        - npm install --global lerna
+        - lerna bootstrap
         - cd packages/students
-        - npm set registry http://registry.npmjs.org/
         - npm install
     # IMPORTANT - Please verify your build commands
     build:
