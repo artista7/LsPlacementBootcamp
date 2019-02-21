@@ -4,6 +4,7 @@ frontend:
     preBuild:
       commands:
         - cd packages/students
+        - npm config set registry http://registry.npmjs.org
         - npm install
     # IMPORTANT - Please verify your build commands
     build:
