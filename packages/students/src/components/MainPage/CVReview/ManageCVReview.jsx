@@ -41,7 +41,6 @@ class ManageCVReview extends React.Component {
 
     handleFileUpload(event) {
         var selectedFile = event.target.files[0];
-        debugger;
         if (selectedFile.size && selectedFile.size < 1048576) {
             this.setState({
                 loaded: 0,
