@@ -1,14 +1,14 @@
 {
-    "local": {
+    "dev": {
         "awscloudformation": {
-            "AuthRoleName": "awsls-20190218171327-authRole",
-            "UnauthRoleArn": "arn:aws:iam::227484579606:role/awsls-20190218171327-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::227484579606:role/awsls-20190218171327-authRole",
-            "Region": "ap-south-1",
-            "DeploymentBucketName": "awsls-20190218171327-deployment",
-            "UnauthRoleName": "awsls-20190218171327-unauthRole",
-            "StackName": "awsls-20190218171327",
-            "StackId": "arn:aws:cloudformation:ap-south-1:227484579606:stack/awsls-20190218171327/67e5ea00-3372-11e9-b653-029e9c0f3f8e"
+            "AuthRoleName": "learningsage-20190225235015-authRole",
+            "UnauthRoleArn": "arn:aws:iam::227484579606:role/learningsage-20190225235015-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::227484579606:role/learningsage-20190225235015-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "learningsage-20190225235015-deployment",
+            "UnauthRoleName": "learningsage-20190225235015-unauthRole",
+            "StackName": "learningsage-20190225235015",
+            "StackId": "arn:aws:cloudformation:us-east-1:227484579606:stack/learningsage-20190225235015/2603be60-392a-11e9-a2c2-0eee31812ac2"
         },
         "categories": {
             "auth": {
@@ -18,14 +18,14 @@
     },
     "qa": {
         "awscloudformation": {
-            "AuthRoleName": "awsls-20190221112839-authRole",
-            "UnauthRoleArn": "arn:aws:iam::227484579606:role/awsls-20190221112839-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::227484579606:role/awsls-20190221112839-authRole",
-            "Region": "ap-south-1",
-            "DeploymentBucketName": "awsls-20190221112839-deployment",
-            "UnauthRoleName": "awsls-20190221112839-unauthRole",
-            "StackName": "awsls-20190221112839",
-            "StackId": "arn:aws:cloudformation:ap-south-1:227484579606:stack/awsls-20190221112839/bc38fde0-359d-11e9-8ab2-065ce6fc7b58"
+            "AuthRoleName": "learningsage-20190226015318-authRole",
+            "UnauthRoleArn": "arn:aws:iam::227484579606:role/learningsage-20190226015318-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::227484579606:role/learningsage-20190226015318-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "learningsage-20190226015318-deployment",
+            "UnauthRoleName": "learningsage-20190226015318-unauthRole",
+            "StackName": "learningsage-20190226015318",
+            "StackId": "arn:aws:cloudformation:us-east-1:227484579606:stack/learningsage-20190226015318/3294b150-393b-11e9-9e9c-0ec11b444504"
         },
         "categories": {
             "auth": {
@@ -35,14 +35,14 @@
     },
     "prod": {
         "awscloudformation": {
-            "AuthRoleName": "awsls-20190221115606-authRole",
-            "UnauthRoleArn": "arn:aws:iam::227484579606:role/awsls-20190221115606-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::227484579606:role/awsls-20190221115606-authRole",
-            "Region": "ap-south-1",
-            "DeploymentBucketName": "awsls-20190221115606-deployment",
-            "UnauthRoleName": "awsls-20190221115606-unauthRole",
-            "StackName": "awsls-20190221115606",
-            "StackId": "arn:aws:cloudformation:ap-south-1:227484579606:stack/awsls-20190221115606/9219ec50-35a1-11e9-b6d2-029dd5210352"
+            "AuthRoleName": "learningsage-20190226015440-authRole",
+            "UnauthRoleArn": "arn:aws:iam::227484579606:role/learningsage-20190226015440-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::227484579606:role/learningsage-20190226015440-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "learningsage-20190226015440-deployment",
+            "UnauthRoleName": "learningsage-20190226015440-unauthRole",
+            "StackName": "learningsage-20190226015440",
+            "StackId": "arn:aws:cloudformation:us-east-1:227484579606:stack/learningsage-20190226015440/634300e0-393b-11e9-98c7-0af7a73fd784"
         },
         "categories": {
             "auth": {

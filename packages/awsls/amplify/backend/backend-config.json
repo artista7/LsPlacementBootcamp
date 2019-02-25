@@ -6,7 +6,7 @@
 		}
 	},
 	"api": {
-		"awsls": {
+		"apils": {
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {

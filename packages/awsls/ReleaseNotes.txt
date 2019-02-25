@@ -1,0 +1,4 @@
+release/v2.0.0
+    Enhancements
+    - Moved amplify resources to N.Virginia region from Mumbai
+    - Added script for backend deployement!
