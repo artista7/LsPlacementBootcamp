@@ -10,7 +10,7 @@ backend:
         ##- if [ "${AWS_BRANCH}" = "master" ]; then amplifyPush --environment prod; fi
     build:
       commands:
-        ##- export STACKINFO="$(envCache --get stackInfo)"
+        - export STACKINFO="$(envCache --get stackInfo)"
         - if [ "${AWS_BRANCH}" = "feature/amplifyBackendBuild" ]; then amplifyPush --environment local; fi
         #- if [ "${AWS_BRANCH}" = "feature/amplifyBackendBuild" ]; then envCache --set stackInfo "$(amplify env get --json --name local)"; fi
         ##- if [ "${AWS_BRANCH}" = "qa" ]; then echo "qa branch"; fi
