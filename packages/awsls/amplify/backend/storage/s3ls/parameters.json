@@ -1,7 +1,7 @@
 {
     "bucketName": "bucketls",
-    "authPolicyName": "s3_amplify_23cc6e5a",
-    "unauthPolicyName": "s3_amplify_23cc6e5a",
+    "authPolicyName": "s3_amplify_c00f8c51",
+    "unauthPolicyName": "s3_amplify_c00f8c51",
     "authRoleName": {
         "Ref": "AuthRoleName"
     },

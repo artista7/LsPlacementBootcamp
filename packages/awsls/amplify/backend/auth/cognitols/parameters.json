@@ -19,7 +19,7 @@
     "roleExternalId": "cognitols_role_external_id",
     "policyName": "cognitols-sns-policy",
     "smsAuthenticationMessage": "Your authentication code is {####}",
-    "smsVerificationMessage": "Your verification code is {####} - Learning-Sage",
+    "smsVerificationMessage": "Your OTP is {####} - Learning Sage",
     "emailVerificationSubject": "Your verification code",
     "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": true,
@@ -39,7 +39,7 @@
         "name",
         "phone_number",
         "picture",
-        "website",
+        "profile",
         "email_verified",
         "phone_number_verified"
     ],
@@ -59,6 +59,7 @@
         "birthdate",
         "name",
         "picture",
+        "profile",
         "email",
         "phone_number"
     ],
