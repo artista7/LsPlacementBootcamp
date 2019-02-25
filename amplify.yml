@@ -6,7 +6,13 @@ backend:
         - cd packages/awsls
     build:
       commands:
-        - if [ "${AWS_BRANCH}" = "develop" ]; then echo "develop branch"; fi
+        - export STACKINFO="$(envCache --get stackInfo)"
+        - if [ "${AWS_BRANCH}" = "develop" ]; then amplifyPush --environment dev; fi
+        - if [ "${AWS_BRANCH}" = "develop" ]; then envCache --set stackInfo "$(amplify env get --json --name dev)"; fi
+        - if [ "${AWS_BRANCH}" = "qa" ]; then amplifyPush --environment qa; fi
+        - if [ "${AWS_BRANCH}" = "qa" ]; then envCache --set stackInfo "$(amplify env get --json --name qa)"; fi
+        - if [ "${AWS_BRANCH}" = "master" ]; then amplifyPush --environment prod; fi
+        - if [ "${AWS_BRANCH}" = "master" ]; then envCache --set stackInfo "$(amplify env get --json --name prod)"; fi
 frontend:
   phases:
     preBuild:
@@ -14,7 +20,7 @@ frontend:
         - npm install -g npm
         - npm install --global lerna
         - lerna bootstrap
-        - cd packages/students
+        - cd ../students
         - npm install
     # IMPORTANT - Please verify your build commands
     build:
