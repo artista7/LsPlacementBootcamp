@@ -50,6 +50,7 @@ class CustomSignUp extends React.Component {
                 this.setIsLoading(false);
                 if (!data.userConfirmed) {
                     this.props.onStateChange('confirmSignUp', data.user);
+                    NotificationManager.info('An OTP is sent to registered mobile number', '', 6000);
                 }
                 //console.log(data);
             })
