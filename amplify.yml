@@ -4,10 +4,9 @@ backend:
     preBuild:
       commands:
         - cd packages/awsls
+    build:
+      commands:
         - if [ "${AWS_BRANCH}" = "develop" ]; then echo "develop branch"; fi
-    ##build:
-      ##commands:
-        ##- *enter command*
 frontend:
   phases:
     preBuild:
