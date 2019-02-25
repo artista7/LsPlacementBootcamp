@@ -4,17 +4,17 @@ backend:
     preBuild:
       commands:
         - cd packages/awsls
-        - export STACKINFO="$(envCache --get stackInfo)"
-        - if [ "${AWS_BRANCH}" = "feature/amplifyBackendBuild" ]; then amplifyPush --environment local; fi
-        - if [ "${AWS_BRANCH}" = "develop" ]; then amplifyPush --environment local; fi
-        - if [ "${AWS_BRANCH}" = "qa" ]; then amplifyPush --environment qa; fi
-        - if [ "${AWS_BRANCH}" = "master" ]; then amplifyPush --environment prod; fi
-        - echo STACKINFO;
+        #- if [ "${AWS_BRANCH}" = "feature/amplifyBackendBuild" ]; then amplifyPush --environment local; fi
+        ##- if [ "${AWS_BRANCH}" = "develop" ]; then amplifyPush --environment local; fi
+        ##- if [ "${AWS_BRANCH}" = "qa" ]; then amplifyPush --environment qa; fi
+        ##- if [ "${AWS_BRANCH}" = "master" ]; then amplifyPush --environment prod; fi
     build:
       commands:
-        - if [ "${AWS_BRANCH}" = "develop" ]; then echo "develop branch"; fi
-        - if [ "${AWS_BRANCH}" = "qa" ]; then echo "qa branch"; fi
-        - if [ "${AWS_BRANCH}" = "master" ]; then echo "master branch"; fi
+        ##- export STACKINFO="$(envCache --get stackInfo)"
+        - if [ "${AWS_BRANCH}" = "feature/amplifyBackendBuild" ]; then amplifyPush --environment local; fi
+        #- if [ "${AWS_BRANCH}" = "feature/amplifyBackendBuild" ]; then envCache --set stackInfo "$(amplify env get --json --name local)"; fi
+        ##- if [ "${AWS_BRANCH}" = "qa" ]; then echo "qa branch"; fi
+        ##- if [ "${AWS_BRANCH}" = "master" ]; then echo "master branch"; fi
 frontend:
   phases:
     preBuild:
