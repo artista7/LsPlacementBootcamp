@@ -34,6 +34,7 @@ class CustomSignUp extends React.Component {
     }
 
     signUp(username, password, email, phone_number, group, collegePasscode) {
+        var phone_number = "+91" + phone_number;
         Auth.signUp({
             username,
             password,
@@ -131,7 +132,7 @@ class CustomSignUp extends React.Component {
                                         <ErrorMessage name="password">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
                                         <input type="email" className="fadeIn third" name="email" onChange={handleChange} placeholder="email" autoComplete="new-password" />
                                         <ErrorMessage name="email">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
-                                        <input type="tel" className="fadeIn third" name="phone_number" onChange={handleChange} placeholder="phone number (+919999966666)" autoComplete="new-password" />
+                                        <input type="tel" className="fadeIn third" name="phone_number" onChange={handleChange} placeholder="phone number" autoComplete="new-password" />
                                         <ErrorMessage name="phone_number">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
                                         <input type="text" className="fadeIn third" name="validationData.collegePasscode" onChange={handleChange} placeholder="college passcode" autoComplete="new-password" />
                                         {/* <ErrorMessage name="collegepasscode">{msg => <div className="errorText">{msg}</div>}</ErrorMessage> */}
