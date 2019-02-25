@@ -66,8 +66,8 @@
 				"Runtime": "nodejs8.10",
 				"Timeout": "25",
 				"Code": {
-					"S3Bucket": "learningsage-20190226015318-deployment",
-					"S3Key": "amplify-builds/cognitoLambda-1551127034-latest-build.zip"
+					"S3Bucket": "learningsage-20190226015440-deployment",
+					"S3Key": "amplify-builds/cognitoLambda-1551129025-latest-build.zip"
 				}
 			}
 		},
