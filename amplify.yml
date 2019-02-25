@@ -5,10 +5,10 @@ backend:
       commands:
         - cd packages/awsls
         - export STACKINFO="$(envCache --get stackInfo)"
-        - if [ "${AWS_BRANCH}" = "feature/amplifyBackendBuild" ]; then amplifyPush --environment local
-        - if [ "${AWS_BRANCH}" = "develop" ]; then amplifyPush --environment local
-        - if [ "${AWS_BRANCH}" = "qa" ]; then amplifyPush --environment qa
-        - if [ "${AWS_BRANCH}" = "master" ]; then amplifyPush --environment prod
+        - if [ "${AWS_BRANCH}" = "feature/amplifyBackendBuild" ]; then amplifyPush --environment local; fi
+        - if [ "${AWS_BRANCH}" = "develop" ]; then amplifyPush --environment local; fi
+        - if [ "${AWS_BRANCH}" = "qa" ]; then amplifyPush --environment qa; fi
+        - if [ "${AWS_BRANCH}" = "master" ]; then amplifyPush --environment prod; fi
         - echo STACKINFO;
     build:
       commands:
