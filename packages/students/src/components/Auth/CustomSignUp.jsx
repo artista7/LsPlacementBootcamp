@@ -8,7 +8,7 @@ import { Formik, ErrorMessage, Form } from 'formik';
 import _ from "lodash";
 import Loader from 'react-loader-spinner';
 import { NotificationManager } from 'react-notifications';
-
+import countryDialCodes from '../../constants/countryDialCodes';
 // create a component
 class CustomSignUp extends React.Component {
     constructor(props, context) {
@@ -33,8 +33,8 @@ class CustomSignUp extends React.Component {
         })
     }
 
-    signUp(username, password, email, phone_number, group, collegePasscode) {
-        var phone_number = "+91" + phone_number;
+    signUp(username, password, email, phone_number, group, countryCode, collegePasscode) {
+        var phone_number = countryCode + phone_number;
         Auth.signUp({
             username,
             password,
@@ -86,15 +86,10 @@ class CustomSignUp extends React.Component {
             <React.Fragment>
                 {this.props.authState == "signUp" && <Formik
                     enableReinitialize
-                    initialValues={{ username: "", password: "", email: "", phone_number: "", group: "student", validationData: {} }}
+                    initialValues={{ username: "", password: "", email: "", phone_number: "", group: "student", collegePasscode: "", countryCode: countryDialCodes[0] }}
                     onSubmit={(values, actions) => {
-                        if (values.validationData.collegePasscode == undefined || _.isEmpty(values.validationData.collegePasscode)) {
-                            NotificationManager.warning('College passcode is required', '', 2000);
-                        }
-                        else {
-                            this.setIsLoading(true);
-                            this.signUp(values.username, values.password, values.email, values.phone_number, values.group, values.validationData.collegePasscode);
-                        }
+                        this.setIsLoading(true);
+                        this.signUp(values.username, values.password, values.email, values.phone_number, values.group, values.countryCode, values.collegePasscode);
                         //NOTE need to call this on signUp complete
                         actions.setSubmitting(false);
                     }}
@@ -111,9 +106,9 @@ class CustomSignUp extends React.Component {
                         if (_.isEmpty(values.phone_number)) {
                             errors.phone_number = 'phone_number is required';
                         }
-                        // if (values.validationData.collegePasscode == undefined || _.isEmpty(values.validationData.collegePasscode)) {
-                        //     errors.collegepasscode = 'collegePasscode is required';
-                        // }
+                        if (_.isEmpty(values.collegePasscode)) {
+                            errors.collegePasscode = 'collegePasscode is required';
+                        }
                         return errors;
                     }}>
                     {props => {
@@ -132,10 +127,24 @@ class CustomSignUp extends React.Component {
                                         <ErrorMessage name="password">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
                                         <input type="email" className="fadeIn third" name="email" onChange={handleChange} placeholder="email" autoComplete="new-password" />
                                         <ErrorMessage name="email">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
-                                        <input type="tel" className="fadeIn third" name="phone_number" onChange={handleChange} placeholder="phone number" autoComplete="new-password" />
-                                        <ErrorMessage name="phone_number">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
-                                        <input type="text" className="fadeIn third" name="validationData.collegePasscode" onChange={handleChange} placeholder="college passcode" autoComplete="new-password" />
-                                        {/* <ErrorMessage name="collegepasscode">{msg => <div className="errorText">{msg}</div>}</ErrorMessage> */}
+
+                                        <div>
+                                            <select
+                                                className="fadeIn third"
+                                                style={{ width: "12%", border: "2px solid #f6f6f6", borderRadius: "5px 5px 5px 5px", height: "58px", color: "#0d0d0d" }}
+                                                name="countryCode"
+                                                value={values.countryCode}
+                                                onChange={handleChange}>
+                                                {countryDialCodes.map(countryDialCode => (
+                                                    <option key={countryDialCode} value={countryDialCode}>{countryDialCode}</option>
+                                                ))}
+                                            </select>
+
+                                            <input style={{ width: "70%" }} type="tel" className="fadeIn third" name="phone_number" onChange={handleChange} placeholder="phone number" autoComplete="new-password" />
+                                            <ErrorMessage name="phone_number">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
+                                        </div>
+                                        <input type="text" className="fadeIn third" name="collegePasscode" onChange={handleChange} placeholder="college passcode" autoComplete="new-password" />
+                                        <ErrorMessage name="collegePasscode">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
 
                                         <input type="submit" disabled={isSubmitting} className="fadeIn fourth" value="Sign Up" />
 
