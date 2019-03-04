@@ -131,7 +131,7 @@ class CustomSignUp extends React.Component {
                                         <div>
                                             <select
                                                 className="fadeIn third"
-                                                style={{ width: "12%", border: "2px solid #f6f6f6", borderRadius: "5px 5px 5px 5px", height: "58px", color: "#0d0d0d" }}
+                                                style={{ width: "13%", border: "2px solid #f6f6f6", backgroundColor: "#f6f6f6 !important", borderRadius: "5px 5px 5px 5px", height: "58px", color: "#0d0d0d" }}
                                                 name="countryCode"
                                                 value={values.countryCode}
                                                 onChange={handleChange}>
