@@ -16,16 +16,14 @@ class LandingPage extends Component {
                         <a className="js-scroll-trigger" id="logo" style={{ color: "white", fontWeight: "bold", fontSize: "18px" }} href="">
                             <img style={{ height: "50px", marginRight: "5px" }} src={logo} alt="Learning-sage" />
                             Learning-Sage
-                        </a>
-                        <button className="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                            {/* <span className="navbar-toggler-icon"></span> */}
-                            <a className="js-scroll-trigger" id="logo" style={{ color: "#F05F40", fontWeight: "bold", fontSize: "18px" }} href="">Learning-Sage</a>
+                            </a>
+                        <button className="navbar-toggler navbar-toggler-right collapsed" type="button" id="navbarToggleButton">
+                            <span className="navbar-toggler-icon"></span>
                         </button>
-                        <div className="collapse navbar-collapse" id="navbarResponsive">
-                            <ul className="navbar-nav ml-auto">
+                        <div className="navbar-collapse collapse" id="navbarResponsive">
+                            <ul className="nav navbar-nav ml-auto">
                                 <li className="nav-item">
                                     <Link className="nav-link js-scroll-trigger" to="/login">Login</Link>
-                                    {/* <a className="nav-link js-scroll-trigger" href="">Login</a> */}
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link js-scroll-trigger" href="#services">Services</a>
