@@ -14,7 +14,7 @@ module.exports = function preSignUp(event, context, callback) {
         },
         ExpressionAttributeNames: { "#n": "name" },
         ProjectionExpression: '#n, collegePasscode',
-        FilterExpression: 'contains (collegePasscode, :sp)',
+        FilterExpression: 'collegePasscode = :sp',
         TableName: CollegeTableName
     };
 

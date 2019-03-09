@@ -20,12 +20,12 @@ class CustomConfirmSignUp extends React.Component {
 
         this.confirmSignUp = this.confirmSignUp.bind(this);
         this.openSignInPage = this.openSignInPage.bind(this);
-        this.resendCode = this.resendCode.bind(this);
+        this.resendOtp = this.resendOtp.bind(this);
         this.setIsLoading = this.setIsLoading.bind(this);
     }
 
-    confirmSignUp(username, code) {
-        Auth.confirmSignUp(username, code, {
+    confirmSignUp(username, otp) {
+        Auth.confirmSignUp(username, otp, {
             // Optional. Force user confirmation irrespective of existing alias. By default set to True.
             forceAliasCreation: true
         }).then(data => {
@@ -44,11 +44,11 @@ class CustomConfirmSignUp extends React.Component {
         this.props.onStateChange('signIn', {});
     }
 
-    resendCode(username) {
+    resendOtp(username) {
         Auth.resendSignUp(username).then(() => {
-            NotificationManager.success('Code Resent');
+            NotificationManager.success('OTP Resent');
         }).catch(e => {
-            NotificationManager.error('Error sending code');
+            NotificationManager.error('Error sending OTP');
         });
     }
 
@@ -63,10 +63,10 @@ class CustomConfirmSignUp extends React.Component {
             <React.Fragment>
                 {this.props.authState == "confirmSignUp" && <Formik
                     enableReinitialize
-                    initialValues={{ username: "", code: "" }}
+                    initialValues={{ username: "", otp: "" }}
                     onSubmit={(values, actions) => {
                         this.setIsLoading(true);
-                        this.confirmSignUp(values.username, values.code);
+                        this.confirmSignUp(values.username, values.otp);
                         //NOTE need to call this on confirmSignUp complete
                         actions.setSubmitting(false);
                     }}
@@ -74,8 +74,8 @@ class CustomConfirmSignUp extends React.Component {
                         let errors = {};
                         if (_.isEmpty(values.username))
                             errors.username = 'username is required';
-                        if (_.isEmpty(values.code)) {
-                            errors.code = 'code is required';
+                        if (_.isEmpty(values.otp)) {
+                            errors.otp = 'OTP is required';
                         }
                         return errors;
                     }}>
@@ -91,12 +91,12 @@ class CustomConfirmSignUp extends React.Component {
                                     <div id="formContent">
                                         <input type="text" className="fadeIn second" name="username" onChange={handleChange} placeholder="username" autoComplete="new-password" />
                                         <ErrorMessage name="username">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
-                                        <input type="password" className="fadeIn third" name="code" onChange={handleChange} placeholder="code" autoComplete="new-password" />
-                                        <ErrorMessage name="code">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
+                                        <input type="password" className="fadeIn third" name="otp" onChange={handleChange} placeholder="otp" autoComplete="new-password" />
+                                        <ErrorMessage name="otp">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
                                         <p style={{ paddingLeft: "40px", "textAlign": "left" }}>
-                                            Didn't get Code? <a style={{ display: "inline-block" }} onClick={() => this.resendCode(values.username)} href="#">Resend it</a>
+                                            Didn't get otp? <a style={{ display: "inline-block" }} onClick={() => this.resendOtp(values.username)} href="#">Resend it</a>
                                         </p>
-                                        {/* <input type="button" disabled={isSubmitting} className="fadeIn fourth" value="Resend Code" /> */}
+                                        {/* <input type="button" disabled={isSubmitting} className="fadeIn fourth" value="Resend Otp" /> */}
 
                                         <input type="submit" disabled={isSubmitting} className="fadeIn fourth" value="Confirm Sign Up" />
 

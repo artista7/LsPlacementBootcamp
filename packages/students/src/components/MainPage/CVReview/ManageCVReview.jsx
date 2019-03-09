@@ -41,7 +41,7 @@ class ManageCVReview extends React.Component {
 
     handleFileUpload(event) {
         var selectedFile = event.target.files[0];
-        if (selectedFile.size && selectedFile.size < 5242880) {
+        if (selectedFile.size && selectedFile.size < 1048576) {
             this.setState({
                 loaded: 0,
                 cvReview: Object.assign({}, this.state.cvReview, { fileName: selectedFile.name != undefined ? selectedFile.name : "" }),
@@ -49,7 +49,7 @@ class ManageCVReview extends React.Component {
             });
         }
         else {
-            NotificationManager.warning('File size exceeds 5Mb', '', 2000);
+            NotificationManager.warning('File size exceeds 1Mb', '', 2000);
         }
     }
 
