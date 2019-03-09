@@ -6,5 +6,6 @@
             "authcognitols",
             "Outputs.UserPoolId"
         ]
-    }
+    },
+    "APIKeyExpirationEpoch": "-1"
 }

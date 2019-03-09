@@ -67,7 +67,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "learningsage-20190225235015-deployment",
-					"S3Key": "amplify-builds/cognitoLambda-1551737586-latest-build.zip"
+					"S3Key": "amplify-builds/cognitoLambda-1552161620-latest-build.zip"
 				}
 			}
 		},
