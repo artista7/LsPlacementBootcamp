@@ -5,6 +5,7 @@ import ravi from '../../assets/img/team/Ravi.jpg';
 import shubham from '../../assets/img/team/Shubham.jpeg';
 import './navBarScroll';
 import brochure from '../../assets/Learning-sage.pdf';
+import logo from '../../assets/img/Logo/logo2.svg';
 
 class LandingPage extends Component {
     render() {
@@ -12,16 +13,17 @@ class LandingPage extends Component {
             <div>
                 <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
                     <div className="container">
-                        <a className="js-scroll-trigger" id="logo" style={{ color: "white", fontWeight: "bold", fontSize: "18px" }} href="#page-top">Learning-Sage</a>
-                        <button className="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                            {/* <span className="navbar-toggler-icon"></span> */}
-                            <a className="js-scroll-trigger" id="logo" style={{ color: "#F05F40", fontWeight: "bold", fontSize: "18px" }} href="#page-top">Learning-Sage</a>
+                        <a className="js-scroll-trigger" id="logo" style={{ color: "white", fontWeight: "bold", fontSize: "18px" }} href="">
+                            <img style={{ height: "50px", marginRight: "5px" }} src={logo} alt="Learning-sage" />
+                            Learning-Sage
+                            </a>
+                        <button className="navbar-toggler navbar-toggler-right collapsed" type="button" id="navbarToggleButton">
+                            <span className="navbar-toggler-icon"></span>
                         </button>
-                        <div className="collapse navbar-collapse" id="navbarResponsive">
-                            <ul className="navbar-nav ml-auto">
+                        <div className="navbar-collapse collapse" id="navbarResponsive">
+                            <ul className="nav navbar-nav ml-auto">
                                 <li className="nav-item">
                                     <Link className="nav-link js-scroll-trigger" to="/login">Login</Link>
-                                    {/* <a className="nav-link js-scroll-trigger" href="">Login</a> */}
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link js-scroll-trigger" href="#services">Services</a>
