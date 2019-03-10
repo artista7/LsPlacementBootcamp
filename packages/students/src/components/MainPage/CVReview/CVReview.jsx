@@ -17,14 +17,21 @@ const CVReview = ({ cvReview, cvUrl, handleFileUpload, isS3Uploading, numPages, 
             <div className="row">
                 {/* Left panel - Form */}
                 <div className="col-sm-12 col-lg-6">
-                    <div style={{ textAlign: "center" }}>
-                        <Loader
-                            type="Rings"
-                            color={cvReview.status == CVReviewStatus.draft ? "rgb(204,80,74)" : cvReview.status == CVReviewStatus.submitted ? "#D4AC0D" : cvReview.status == CVReviewStatus.underReview ? "#2980B9" : cvReview.status == CVReviewStatus.complete ? "#196F3D" : "black"}
-                            height={40}
-                            width={40}
-                        />
-                        {/* <span>{cvReview.status}</span> */}
+                    {/* Status */}
+                    <div style={{ textAlign: "right" }}>
+                        <div style={{ display: "inline-block", textAlign: "center" }}>
+                            <p style={{ margin: 0, fontWeight: 500, fontSize: "14px" }}>Status</p>
+                            <p style={{ margin: 0, fontSize: "12px" }}>{cvReview.status}</p>
+                        </div>
+                        {/* <div style={{ display: "inline-block" }}>
+                            <Loader
+                                type="Rings"
+                                color={cvReview.status == CVReviewStatus.draft ? "rgb(204,80,74)" : cvReview.status == CVReviewStatus.submitted ? "#D4AC0D" : cvReview.status == CVReviewStatus.underReview ? "#2980B9" : cvReview.status == CVReviewStatus.complete ? "#196F3D" : "black"}
+                                height={40}
+                                width={40}
+                            />
+                        </div> */}
+
                     </div>
                     {/* Showing form in draft or submitted state only */}
                     {cvReview.status == CVReviewStatus.draft && <div>
