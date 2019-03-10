@@ -2,34 +2,76 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import {
+    SelectionState,
+    PagingState,
+    IntegratedPaging,
+    SortingState,
+    IntegratedSorting,
+    IntegratedSelection,
+    DataTypeProvider
+} from '@devexpress/dx-react-grid';
+import {
+    Grid,
+    Table,
+    TableHeaderRow,
+    TableSelection,
+    PagingPanel,
+} from '@devexpress/dx-react-grid-bootstrap4';
+
+const TableComponent = ({ ...restProps }) => (
+    <Table.Table
+        {...restProps}
+        className="table-striped"
+    />
+);
+
+const TableRow = ({ row, history, ...restProps }) => {
+    return (
+        <Table.Row
+            {...restProps}
+            // eslint-disable-next-line no-alert
+            onClick={() => {
+                history.push('/cvReview/' + row.id);
+            }}
+            style={{
+                cursor: 'pointer',
+                textAlign: "left"
+            }}
+        />
+    )
+};
+
 
 // create a component
-const CVReviewTable = ({ cvReviewList }) => {
+const CVReviewTable = ({ cvReviewList, history }) => {
     return (
         <React.Fragment>
-            <table className="table table-hover myCard hCenter" style={{ marginTop: "25px", fontFamily: "Helvetica Neue" }}>
-                <thead>
-                    <tr>
-                        <th>Link</th>
-                        <th>Status</th>
-                        {/* <th>Created By</th> */}
-                        {/* <th>Created At</th> */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {cvReviewList.map(cvReview => {
-                        return (
-                            <tr key={cvReview.id}>
-                                <td><Link to={'/cvReview/' + cvReview.id}>View</Link></td>
-                                <td>{cvReview.status}</td>
-                                {/* <td>{cvReview.createdBy}</td> */}
-                                {/* <td>{new Date(cvReview.createdAt).toLocaleString()}</td> */}
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
-            <p className="hCenter" style={{ fontSize: "14px" }}>Submitted Reviews</p>
+            <div className="card">
+                <Grid
+                    rows={cvReviewList}
+                    columns={[
+                        // { text: 'id', title: 'Link' },
+                        { name: 'status', title: 'Status' },
+                    ]}>
+                    <SortingState
+                        defaultSorting={[{ columnName: 'status', direction: 'asc' }]}
+                    />
+                    <PagingState
+                        defaultCurrentPage={0}
+                        pageSize={10}
+                    />
+                    <IntegratedSorting />
+                    <IntegratedPaging />
+                    <Table
+                        tableComponent={TableComponent}
+                        rowComponent={props => <TableRow history={history} {...props} />}
+                    />
+                    <TableHeaderRow showSortingControls />
+                    <PagingPanel />
+                </Grid>
+            </div>
+            <p className="hCenter" style={{ fontSize: "14px" }}>CV Reviews</p>
         </React.Fragment>
     );
 };

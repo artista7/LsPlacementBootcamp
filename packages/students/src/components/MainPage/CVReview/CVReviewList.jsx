@@ -30,7 +30,7 @@ class CVReviewList extends React.Component {
     }
 
     render() {
-        const { cvReviewList } = this.props;
+        const { cvReviewList, history } = this.props;
         return (
             <div style={{ textAlign: "center" }}>
                 <input
@@ -38,7 +38,9 @@ class CVReviewList extends React.Component {
                     value="Create Cv Review"
                     className="btn btn-primary hCenter"
                     onClick={() => this.redirectToRoute('/cvReview')}></input>
-                {cvReviewList.length > 0 && <CVReviewTable cvReviewList={cvReviewList}></CVReviewTable>}
+
+                {cvReviewList.length > 0 && <CVReviewTable history={history} cvReviewList={cvReviewList}></CVReviewTable>}
+
             </div>
         );
     }
