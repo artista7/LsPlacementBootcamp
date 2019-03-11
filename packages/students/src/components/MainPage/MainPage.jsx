@@ -37,14 +37,6 @@ class MainPage extends React.Component {
         this.state = {
             expanded: false,
             isInitializing: false,
-            pageTitle: {
-                'home': 'Home',
-                'cvReviews': 'CV Review(s)',
-                'devices': ['Devices'],
-                'reports': ['Reports'],
-                // 'settings/policies': ['Settings', 'Policies'],
-                // 'settings/network': ['Settings', 'Network']
-            },
             selectedModule: 'home'
         };
 
@@ -169,7 +161,7 @@ class MainPage extends React.Component {
     }
 
     render() {
-        const { expanded, pageTitle, selectedModule } = this.state;
+        const { expanded, selectedModule } = this.state;
         return (
             <div>
                 {this.state.isInitializing && <div className="pageCenter"><Loader
@@ -178,7 +170,6 @@ class MainPage extends React.Component {
                 /></div>}
                 <Sidebar onModuleSelect={this.onModuleSelect} onToggle={this.onToggle} selectedModule={selectedModule}></Sidebar>
                 <Main expanded={expanded} style={{ height: "100vh", overflowY: "scroll" }}>
-                    {selectedModule != "home" && <Breadcrumbs pageTitle={pageTitle} selectedModule={selectedModule}></Breadcrumbs>}
                     <Switch>
                         <Route path="/" exact component={props => <HomePage {...props}></HomePage>} />
                         <Route exact path="/cvReviews" component={props => <CVReviewList {...props}></CVReviewList>} />
