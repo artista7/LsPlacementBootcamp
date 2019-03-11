@@ -3,6 +3,7 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { queries } from 'awsls';
 import { mutations } from 'awsls';
 import { NotificationManager } from 'react-notifications';
+import * as constants from '../constants/constants';
 
 export function _createCvReview(cvReview) {
     return function (dispatch) {
@@ -20,10 +21,18 @@ export function _createCvReviewSuccess(cvReview) {
     return { type: types.CREATE_CVREVIEW_SUCCESS, cvReview };
 }
 
-export function _listCvReviews(username) {
+export function _listCvReviews(group, username) {
+    const filterObj = group == constants.groups.student ? {
+        filter: {
+            createdBy: {
+                eq: username
+            }
+        }
+    } : {};
+    debugger;
     return function (dispatch) {
-        return API.graphql(graphqlOperation(queries.listCvReviews)).then(response => {
-            dispatch(_listCvReviewsSuccess(response.data.listCvReviews.items.filter(cvReview => cvReview.createdBy == username)));
+        return API.graphql(graphqlOperation(queries.listCvReviews, filterObj)).then(response => {
+            dispatch(_listCvReviewsSuccess(response.data.listCvReviews.items));
         }).catch(response => {
             NotificationManager.error('Error loading reviews', '', 2000);
             console.log(response);

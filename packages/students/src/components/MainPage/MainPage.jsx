@@ -75,14 +75,14 @@ class MainPage extends React.Component {
     }
 
     loadUserAppModuleAccess() {
-        var userInfo = this.props.state.userInfo;
-        var group = userInfo.group;
+        var group = this.props.state.userInfo.group;
         this.props.appModuleAccessActions._loadAppModuleAccess(group);
     }
 
     loadUserCvReviews(username) {
+        var group = this.props.state.userInfo.group;
         //WORK - cvReview of current user should be loaded
-        this.props.cvReviewActions._listCvReviews(username).then(data => {
+        this.props.cvReviewActions._listCvReviews(group, username).then(data => {
             this.setInitializing(false);
         }).catch(error => {
             this.setInitializing(false);
