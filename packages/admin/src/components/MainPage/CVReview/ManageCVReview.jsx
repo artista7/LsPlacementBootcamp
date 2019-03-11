@@ -59,7 +59,7 @@ class ManageCVReview extends React.Component {
             });
         }
         catch (err) {
-            alert("debugger" + err);
+            alert(err);
         }
     }
 

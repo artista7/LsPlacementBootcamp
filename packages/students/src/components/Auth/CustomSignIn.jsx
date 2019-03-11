@@ -50,7 +50,6 @@ class CustomSignIn extends React.Component {
             const user = await Auth.signIn(username, password, validationData);
             if (user.challengeName === 'SMS_MFA' ||
                 user.challengeName === 'SOFTWARE_TOKEN_MFA') {
-                debugger;
                 this.setIsLoading(false);
                 // You need to get the code from the UI inputs
                 // and then trigger the following function with a button click
@@ -62,7 +61,6 @@ class CustomSignIn extends React.Component {
                 //     mfaType // MFA Type e.g. SMS, TOTP.
                 // );
             } else if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
-                debugger;
                 this.setIsLoading(false);
                 //const { requiredAttributes } = user.challengeParam; // the array of required attributes, e.g ['email', 'phone_number']
                 // You need to get the new password and required attributes from the UI inputs
@@ -79,7 +77,6 @@ class CustomSignIn extends React.Component {
                 //     }
                 // );
             } else if (user.challengeName === 'MFA_SETUP') {
-                debugger;
                 this.setIsLoading(false);
                 // This happens when the MFA method is TOTP
                 // The user needs to setup the TOTP before using it
