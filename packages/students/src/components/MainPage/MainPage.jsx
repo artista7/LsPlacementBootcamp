@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import * as userInfoActions from '../../actions/userInfoActions';
 import * as cvReviewActions from '../../actions/cvReviewActions';
 import * as pricingPlanActions from '../../actions/pricingPlanActions';
+import * as appModuleAccessActions from '../../actions/appModuleAccessActions';
 import { Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -35,6 +36,7 @@ class MainPage extends React.Component {
         super(props, context);
 
         this.state = {
+            accessibleAppModules: [],
             expanded: false,
             isInitializing: false,
             selectedModule: 'home'
@@ -43,8 +45,10 @@ class MainPage extends React.Component {
         this.onModuleSelect = this.onModuleSelect.bind(this);
         this.onToggle = this.onToggle.bind(this);
         this.loadPricingPlans = this.loadPricingPlans.bind(this);
+        this.loadUserAppModuleAccess = this.loadUserAppModuleAccess.bind(this);
         this.loadUserCvReviews = this.loadUserCvReviews.bind(this);
-        this.loadUserInfo = this.loadUserInfo.bind(this);
+        this.loadUserData = this.loadUserData.bind(this);
+        this.setAccessibleAppModules = this.setAccessibleAppModules.bind(this);
         this.setInitializing = this.setInitializing.bind(this);
         this.setSelectedModule = this.setSelectedModule.bind(this);
         this.signOut = this.signOut.bind(this);
@@ -70,6 +74,12 @@ class MainPage extends React.Component {
         this.props.pricingPlanActions._listPricingPlans();
     }
 
+    loadUserAppModuleAccess() {
+        var userInfo = this.props.state.userInfo;
+        var group = userInfo.group;
+        this.props.appModuleAccessActions._loadAppModuleAccess(group);
+    }
+
     loadUserCvReviews(username) {
         //WORK - cvReview of current user should be loaded
         this.props.cvReviewActions._listCvReviews(username).then(data => {
@@ -79,17 +89,26 @@ class MainPage extends React.Component {
         });
     }
 
-    loadUserInfo() {
+    async loadUserData() {
+        var username;
         //get current username
-        Auth.currentUserInfo().then(data => {
-            let username = data.username;
-            //loading userinfo
-            this.props.userInfoActions._loadUserInfo(username);
-            //loading user's reviews
-            this.loadUserCvReviews(username);
+        await Auth.currentUserInfo().then(data => {
+            username = data.username;
         }).catch(err => {
             NotificationManager.error('Error fetching user data', '', 2000);
         });
+        //loading userinfo
+        await this.props.userInfoActions._loadUserInfo(username);
+        //load appModuleAccess based on userinfo
+        this.loadUserAppModuleAccess();
+        //loading user's reviews
+        this.loadUserCvReviews(username);
+    }
+
+    setAccessibleAppModules(accessibleAppModules) {
+        this.setState({
+            accessibleAppModules: accessibleAppModules
+        })
     }
 
     setInitializing(bool) {
@@ -126,7 +145,7 @@ class MainPage extends React.Component {
         //adding current loggedin user data to redux state, this take time - some operations requiring user data might get affected
         this.setInitializing(true);
         this.loadPricingPlans();
-        this.loadUserInfo();
+        this.loadUserData();
     }
 
     componentDidMount() {
@@ -136,6 +155,10 @@ class MainPage extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        //when accessibleAppModules are available
+        if (prevProps.state.accessibleAppModules != this.props.state.accessibleAppModules) {
+            this.setAccessibleAppModules(this.props.state.accessibleAppModules);
+        }
         //if current path is different from previous, update selected icon
         if (prevProps.location.pathname != this.props.location.pathname) {
             var selectedModule = this.props.history.location.pathname;
@@ -149,6 +172,10 @@ class MainPage extends React.Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         //preventing re-render of child components on redux state change
+        //component update on accessible app modules change
+        if (nextProps.state.accessibleAppModules != this.props.accessibleAppModules) {
+            return true;
+        }
         //component update on state changed
         if (JSON.stringify(this.state) != JSON.stringify(nextState)) {
             return true;
@@ -164,11 +191,12 @@ class MainPage extends React.Component {
         const { expanded, selectedModule } = this.state;
         return (
             <div>
+                {/* <div>{JSON.stringify(this.state)}</div> */}
                 {this.state.isInitializing && <div className="pageCenter"><Loader
                     type="Triangle"
                     color="rgb(204,80,74)"
                 /></div>}
-                <Sidebar onModuleSelect={this.onModuleSelect} onToggle={this.onToggle} selectedModule={selectedModule}></Sidebar>
+                <Sidebar accessibleAppModules={this.state.accessibleAppModules} onModuleSelect={this.onModuleSelect} onToggle={this.onToggle} selectedModule={selectedModule}></Sidebar>
                 <Main expanded={expanded} style={{ height: "100vh", overflowY: "scroll" }}>
                     <Switch>
                         <Route path="/" exact component={props => <HomePage {...props}></HomePage>} />
@@ -192,6 +220,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        appModuleAccessActions: bindActionCreators(appModuleAccessActions, dispatch),
         cvReviewActions: bindActionCreators(cvReviewActions, dispatch),
         pricingPlanActions: bindActionCreators(pricingPlanActions, dispatch),
         userInfoActions: bindActionCreators(userInfoActions, dispatch),
