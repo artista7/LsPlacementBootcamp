@@ -42,6 +42,18 @@ const TableRow = ({ row, history, ...restProps }) => {
     )
 };
 
+const DateTypeProvider = props => (
+    <DataTypeProvider
+        formatterComponent={DateFormatter}
+        {...props}
+    />
+);
+
+const DateFormatter = ({ value }) => {
+    var date = new Date(value);
+    return date.toLocaleString();
+
+};
 
 // create a component
 const CVReviewTable = ({ cvReviewList, history }) => {
@@ -51,11 +63,17 @@ const CVReviewTable = ({ cvReviewList, history }) => {
                 <Grid
                     rows={cvReviewList}
                     columns={[
-                        // { text: 'id', title: 'Link' },
                         { name: 'status', title: 'Status' },
+                        { name: 'createdBy', title: 'Created By' },
+                        { name: 'createdAt', title: 'Created At' },
+                        { name: 'lastUpdatedBy', title: 'Updated By' },
+                        { name: 'updatedAt', title: 'Last Updated At' },
                     ]}>
+                    <DateTypeProvider
+                        for={['createdAt', 'updatedAt']}
+                    />
                     <SortingState
-                        defaultSorting={[{ columnName: 'status', direction: 'asc' }]}
+                        defaultSorting={[{ columnName: 'createdAt', direction: 'desc' }]}
                     />
                     <PagingState
                         defaultCurrentPage={0}
