@@ -133,7 +133,6 @@ class MainPage extends React.Component {
         });
     }
 
-
     signOut() {
         Auth.signOut().then(data => {
         }).catch(err => {
@@ -171,7 +170,6 @@ class MainPage extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        debugger;
         //preventing re-render of child components on redux state change
         //component update on accessible app modules change
         if (nextProps.state.accessibleAppModules != this.props.state.accessibleAppModules) {

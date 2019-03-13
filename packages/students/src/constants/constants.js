@@ -6,10 +6,10 @@ export const appModuleIcons = {
 };
 export const CVReviewStatus = { draft: "draft", submitted: "submitted", underReview: "underReview", reviewCompleted: "reviewCompleted" };
 export const groups = {
-    admin: 'admin',
-    college: 'college',
-    company: 'company',
-    student: 'student'
+    ADMIN: 'admin',
+    COLLEGE: 'college',
+    COMPANY: 'company',
+    STUDENT: 'student'
 }
 export const SIGN_OUT = 'signout';
 /*

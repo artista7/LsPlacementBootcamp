@@ -22,7 +22,7 @@ export function _createCvReviewSuccess(cvReview) {
 }
 
 export function _listCvReviews(group, username) {
-    const filterObj = group == constants.groups.student ? {
+    const filterObj = group == constants.groups.STUDENT ? {
         filter: {
             createdBy: {
                 eq: username
