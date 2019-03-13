@@ -17,12 +17,14 @@ type College @model{
 
 type CvReview @model {
   comments: String
+  createdAt: String
   createdBy: String!
   fileName: String
   id: ID!
   lastUpdatedBy: String
   reviewedBy: String
   status: CvReviewStatus
+  updatedAt: String
 }
 
 enum CvReviewStatus{
