@@ -29,8 +29,10 @@ class ManageCVReview extends React.Component {
 
         this.handleFileUpload = this.handleFileUpload.bind(this);
         this.isSubmitAllowed = this.isSubmitAllowed.bind(this);
+        this.onCommentsSubmit = this.onCommentsSubmit.bind(this);
         this.onDocumentLoad = this.onDocumentLoad.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.pickCvForReview = this.pickCvForReview.bind(this);
         this.redirectToRoute = this.redirectToRoute.bind(this);
         this.setCvReview = this.setCvReview.bind(this);
         this.setCvUrl = this.setCvUrl.bind(this);
@@ -62,6 +64,27 @@ class ManageCVReview extends React.Component {
         }
         catch{
             return false;
+        }
+    }
+
+    onCommentsSubmit(values, action) {
+        try {
+            this.setIsS3Uploading(true);
+            let updateCvReviewInput = Object.assign({}, values, {
+                lastUpdatedBy: this.props.userInfo.username,
+                reviewedBy: this.props.userInfo.username,
+                status: CVReviewStatus.reviewCompleted
+            });
+            this.props.cvReviewActions._updateCvReview(updateCvReviewInput).then(Response => {
+                this.setIsS3Uploading(false);
+                this.redirectToRoute('/cvReviews');
+                NotificationManager.success('CV review submitted', '', 2000);
+            }).catch(error => {
+                this.setIsS3Uploading(false);
+            });
+        }
+        catch (err) {
+            alert(err);
         }
     }
 
@@ -118,6 +141,19 @@ class ManageCVReview extends React.Component {
         catch (err) {
             alert(err);
         }
+    }
+
+    pickCvForReview() {
+        let updateCvReviewInput = Object.assign({}, this.state.cvReview, {
+            lastUpdatedBy: this.props.userInfo.username,
+            reviewedBy: this.props.userInfo.username,
+            status: "underReview"
+        });
+        this.props.cvReviewActions._updateCvReview(updateCvReviewInput).then(response => {
+            NotificationManager.success('CV picked for review', '', 2000);
+        }).catch(err => {
+
+        });
     }
 
     redirectToRoute(route) {
@@ -197,12 +233,15 @@ class ManageCVReview extends React.Component {
             <CVReview
                 cvReview={this.state.cvReview}
                 cvUrl={this.state.cvUrl}
+                group={this.props.userInfo.group}
                 handleFileUpload={this.handleFileUpload}
                 isS3Uploading={this.state.isS3Uploading}
                 numPages={this.state.numPages}
+                onCommentsSubmit={this.onCommentsSubmit}
                 onDocumentLoad={this.onDocumentLoad}
                 onSubmit={this.onSubmit}
                 pageNumber={this.state.pageNumber}
+                pickCvForReview={this.pickCvForReview}
                 redirectToRoute={this.redirectToRoute}
                 selectedFile={this.state.selectedFile}
                 shufflePage={this.shufflePage}>

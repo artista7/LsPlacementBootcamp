@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { CVReviewStatus } from '../../../constants/constants';
 import './CVReview.css';
+import * as constants from '../../../constants/constants';
 /*Loader */
 import Loader from 'react-loader-spinner';
 import { Formik, ErrorMessage, Form } from 'formik';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 // create a component
-const CVReview = ({ cvReview, cvUrl, handleFileUpload, isS3Uploading, numPages, onDocumentLoad, onSubmit, pageNumber, redirectToRoute, selectedFile, shufflePage }) => {
+const CVReview = ({ cvReview, cvUrl, group, handleFileUpload, isS3Uploading, numPages, onCommentsSubmit, onDocumentLoad, onSubmit, pageNumber, pickCvForReview, redirectToRoute, selectedFile, shufflePage }) => {
     return (
         <div>
             <div className="row">
@@ -33,7 +34,7 @@ const CVReview = ({ cvReview, cvUrl, handleFileUpload, isS3Uploading, numPages, 
                         </div> */}
 
                     </div>
-                    {/* Showing form in draft or submitted state only */}
+                    {/* Showing cv upload form in draft state only */}
                     {cvReview.status == CVReviewStatus.draft && <div>
                         <p>Upload CV:</p>
                         <Formik
@@ -70,20 +71,50 @@ const CVReview = ({ cvReview, cvUrl, handleFileUpload, isS3Uploading, numPages, 
                         </Formik>
                     </div>}
 
-                    {/* Showing comments in completed review */}
-                    {cvReview.status == CVReviewStatus.reviewCompleted && <div style={{ textAlign: "center" }}>
-                        <textarea
-                            disabled
-                            name="comments"
-                            value={cvReview.comments != null ? cvReview.comments : ""}
-                            rows="4"
-                            cols="50"
-                            style={{ width: "100%" }}></textarea>
-                    </div>}
-
-                    {cvReview.status != CVReviewStatus.draft && <div className="mt-3" style={{ textAlign: "center" }}>
-                        <button className="btn btn-primary" onClick={() => redirectToRoute('/cvReviews')}>Back</button>
-                    </div>}
+                    {/* Showing comments text area in underReview/submit state*/}
+                    <div>
+                        <Formik
+                            enableReinitialize
+                            initialValues={cvReview}
+                            validate={(values) => {
+                                let errors = {};
+                                if (values.comments == null) {
+                                    errors.comments = "Add a comment!";
+                                }
+                                return errors;
+                            }}
+                            onSubmit={onCommentsSubmit}>
+                            {props => {
+                                const { values, touched, errors, dirty, isSubmitting, handleChange, handleBlur, handleReset } = props;
+                                return (
+                                    <Form>
+                                        {((cvReview.status == CVReviewStatus.underReview && group == constants.groups.ADMIN) || cvReview.status == CVReviewStatus.reviewCompleted) &&
+                                            <React.Fragment>
+                                                <p>Review CV:</p>
+                                                <textarea
+                                                    name="comments"
+                                                    onChange={handleChange}
+                                                    value={values.comments != null ? values.comments : ""}
+                                                    rows="4"
+                                                    cols="50"
+                                                    style={{ width: "100%" }}>
+                                                </textarea>
+                                                <ErrorMessage name="comments">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
+                                            </React.Fragment>
+                                        }
+                                        {/* <div id="debug">
+                                            {JSON.stringify(values)}
+                                        </div> */}
+                                        {<div className="mt-3" style={{ textAlign: "center" }}>
+                                            {group == constants.groups.ADMIN && (cvReview.status == CVReviewStatus.underReview || cvReview.status == CVReviewStatus.reviewCompleted) && <button type="submit" disabled={isSubmitting} className="btn btn-primary">Submit</button>}
+                                            {group == constants.groups.ADMIN && cvReview.status == CVReviewStatus.submitted && <button className="btn btn-primary" onClick={pickCvForReview}>Pick for Review</button>}
+                                            {cvReview.status != CVReviewStatus.draft && <button className="btn btn-primary" style={{ marginLeft: "20px" }} onClick={() => redirectToRoute('/cvReviews')}>Back</button>}
+                                        </div>}
+                                    </Form>
+                                );
+                            }}
+                        </Formik>
+                    </div>
                 </div>
                 {/* Right panel - CV View */}
                 <div className="col-sm-12 col-lg-6" style={{ borderLeft: "1px #e6e6e6 solid", overflowY: "scroll", height: "calc(100vh - 60px)" }}>
@@ -119,9 +150,11 @@ CVReview.propTypes = {
     handleFileUpload: PropTypes.func.isRequired,
     isS3Uploading: PropTypes.bool.isRequired,
     numPages: PropTypes.number,
+    onCommentsSubmit: PropTypes.func,
     onDocumentLoad: PropTypes.func,
     onSubmit: PropTypes.func.isRequired,
     pageNumber: PropTypes.number,
+    pickCvForReview: PropTypes.func,
     redirectToRoute: PropTypes.func.isRequired,
     selectedFile: PropTypes.object,
     shufflePage: PropTypes.func.isRequired,
