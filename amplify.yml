@@ -20,7 +20,7 @@ frontend:
         - npm install -g npm
         - npm install --global lerna
         - lerna bootstrap
-        - cd ../students
+        - cd ../learningSage
         - npm install
     # IMPORTANT - Please verify your build commands
     build:
@@ -28,7 +28,7 @@ frontend:
         - npm run build
   artifacts:
     # IMPORTANT - Please verify your build output directory
-    baseDirectory: packages/students/build
+    baseDirectory: packages/learningSage/build
     files:
       - '**/*'
     discard-paths: yes

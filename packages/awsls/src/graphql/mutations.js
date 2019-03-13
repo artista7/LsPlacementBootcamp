@@ -73,36 +73,42 @@ export const deleteCollege = `mutation DeleteCollege($input: DeleteCollegeInput!
 export const createCvReview = `mutation CreateCvReview($input: CreateCvReviewInput!) {
   createCvReview(input: $input) {
     comments
+    createdAt
     createdBy
     fileName
     id
     lastUpdatedBy
     reviewedBy
     status
+    updatedAt
   }
 }
 `;
 export const updateCvReview = `mutation UpdateCvReview($input: UpdateCvReviewInput!) {
   updateCvReview(input: $input) {
     comments
+    createdAt
     createdBy
     fileName
     id
     lastUpdatedBy
     reviewedBy
     status
+    updatedAt
   }
 }
 `;
 export const deleteCvReview = `mutation DeleteCvReview($input: DeleteCvReviewInput!) {
   deleteCvReview(input: $input) {
     comments
+    createdAt
     createdBy
     fileName
     id
     lastUpdatedBy
     reviewedBy
     status
+    updatedAt
   }
 }
 `;

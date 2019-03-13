@@ -71,12 +71,14 @@ export const listColleges = `query ListColleges(
 export const getCvReview = `query GetCvReview($id: ID!) {
   getCvReview(id: $id) {
     comments
+    createdAt
     createdBy
     fileName
     id
     lastUpdatedBy
     reviewedBy
     status
+    updatedAt
   }
 }
 `;
@@ -88,12 +90,14 @@ export const listCvReviews = `query ListCvReviews(
   listCvReviews(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       comments
+      createdAt
       createdBy
       fileName
       id
       lastUpdatedBy
       reviewedBy
       status
+      updatedAt
     }
     nextToken
   }
