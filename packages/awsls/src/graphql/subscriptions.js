@@ -73,36 +73,42 @@ export const onDeleteCollege = `subscription OnDeleteCollege {
 export const onCreateCvReview = `subscription OnCreateCvReview {
   onCreateCvReview {
     comments
+    createdAt
     createdBy
     fileName
     id
     lastUpdatedBy
     reviewedBy
     status
+    updatedAt
   }
 }
 `;
 export const onUpdateCvReview = `subscription OnUpdateCvReview {
   onUpdateCvReview {
     comments
+    createdAt
     createdBy
     fileName
     id
     lastUpdatedBy
     reviewedBy
     status
+    updatedAt
   }
 }
 `;
 export const onDeleteCvReview = `subscription OnDeleteCvReview {
   onDeleteCvReview {
     comments
+    createdAt
     createdBy
     fileName
     id
     lastUpdatedBy
     reviewedBy
     status
+    updatedAt
   }
 }
 `;
