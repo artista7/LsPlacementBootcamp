@@ -28,7 +28,7 @@ exports.handler = function (event, context, callback) {
           PutRequest: {
             Item: {
               "id": { "S": uuidv4() },
-              "name": { "S": "profile" }
+              "name": { "S": "home" }
             }
           }
         },
@@ -36,7 +36,7 @@ exports.handler = function (event, context, callback) {
           PutRequest: {
             Item: {
               "id": { "S": uuidv4() },
-              "name": { "S": "cvreview" }
+              "name": { "S": "cvreviews" }
             }
           }
         },
@@ -52,7 +52,7 @@ exports.handler = function (event, context, callback) {
           PutRequest: {
             Item: {
               "id": { "S": uuidv4() },
-              "name": { "S": "logout" }
+              "name": { "S": "signout" }
             }
           }
         }
@@ -63,7 +63,7 @@ exports.handler = function (event, context, callback) {
             Item: {
               "id": { "S": uuidv4() },
               "group": { "S": "student" },
-              "appModules": { "S": "profile,cvreview,logout" }
+              "appModules": { "S": "home,cvreviews,signout" }
             }
           }
         },
@@ -72,7 +72,7 @@ exports.handler = function (event, context, callback) {
             Item: {
               "id": { "S": uuidv4() },
               "group": { "S": "admin" },
-              "appModules": { "S": "cvreview,settings,logout" }
+              "appModules": { "S": "cvreviews,settings,signout" }
             }
           }
         }

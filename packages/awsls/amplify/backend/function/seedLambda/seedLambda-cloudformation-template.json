@@ -67,7 +67,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "learningsage-20190225235015-deployment",
-					"S3Key": "amplify-builds/seedLambda-1551121317-latest-build.zip"
+					"S3Key": "amplify-builds/seedLambda-1552313330-latest-build.zip"
 				}
 			}
 		},
