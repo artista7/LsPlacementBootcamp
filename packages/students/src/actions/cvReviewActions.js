@@ -29,7 +29,6 @@ export function _listCvReviews(group, username) {
             }
         }
     } : {};
-    debugger;
     return function (dispatch) {
         return API.graphql(graphqlOperation(queries.listCvReviews, filterObj)).then(response => {
             dispatch(_listCvReviewsSuccess(response.data.listCvReviews.items));

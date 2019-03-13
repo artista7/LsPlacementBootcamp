@@ -46,7 +46,7 @@ class MainPage extends React.Component {
         this.onToggle = this.onToggle.bind(this);
         this.loadPricingPlans = this.loadPricingPlans.bind(this);
         this.loadUserAppModuleAccess = this.loadUserAppModuleAccess.bind(this);
-        this.loadUserCvReviews = this.loadUserCvReviews.bind(this);
+        this.loadCvReviews = this.loadCvReviews.bind(this);
         this.loadUserData = this.loadUserData.bind(this);
         this.setAccessibleAppModules = this.setAccessibleAppModules.bind(this);
         this.setInitializing = this.setInitializing.bind(this);
@@ -79,7 +79,7 @@ class MainPage extends React.Component {
         this.props.appModuleAccessActions._loadAppModuleAccess(group);
     }
 
-    loadUserCvReviews(username) {
+    loadCvReviews(username) {
         var group = this.props.state.userInfo.group;
         //WORK - cvReview of current user should be loaded
         this.props.cvReviewActions._listCvReviews(group, username).then(data => {
@@ -91,18 +91,18 @@ class MainPage extends React.Component {
 
     async loadUserData() {
         var username;
-        //get current username
+        //1. get current username
         await Auth.currentUserInfo().then(data => {
             username = data.username;
         }).catch(err => {
             NotificationManager.error('Error fetching user data', '', 2000);
         });
-        //loading userinfo
+        //2. loading userinfo
         await this.props.userInfoActions._loadUserInfo(username);
-        //load appModuleAccess based on userinfo
+        //3. load appModuleAccess based on userinfo
         this.loadUserAppModuleAccess();
-        //loading user's reviews
-        this.loadUserCvReviews(username);
+        //4. loading cv reviews based on user group
+        this.loadCvReviews(username);
     }
 
     setAccessibleAppModules(accessibleAppModules) {
@@ -171,9 +171,10 @@ class MainPage extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
+        debugger;
         //preventing re-render of child components on redux state change
         //component update on accessible app modules change
-        if (nextProps.state.accessibleAppModules != this.props.accessibleAppModules) {
+        if (nextProps.state.accessibleAppModules != this.props.state.accessibleAppModules) {
             return true;
         }
         //component update on state changed
@@ -203,7 +204,7 @@ class MainPage extends React.Component {
                         <Route exact path="/cvReviews" component={props => <CVReviewList {...props}></CVReviewList>} />
                         <Route exact path="/cvReview" component={props => <ManageCVReview {...props}></ManageCVReview>} />
                         <Route exact path="/cvReview/:id" component={props => <ManageCVReview {...props}></ManageCVReview>} />
-                        <Route path="/settings/*" component={props => <div>settings</div>} />
+                        <Route path="/settings" component={props => <div>settings</div>} />
                         <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
                     </Switch>
                 </Main>
