@@ -59,7 +59,7 @@ class MainPage extends React.Component {
         if (selected == constants.SIGN_OUT) {
             this.signOut();
         }
-        //else if clicked icon is different, change selected icon and redirect to intended route
+        //else if clicked icon is different, redirect to intended route
         const to = '/' + selected;
         if (this.props.location.pathname !== to) {
             this.props.history.push(to);
@@ -122,8 +122,8 @@ class MainPage extends React.Component {
         if (selectedModule == "" || selectedModule == "/") {
             selectedIcon = 'home';
         }
-        else if (selectedModule.indexOf("cvReview") != -1) {
-            selectedIcon = 'cvReviews';
+        else if (selectedModule.toLowerCase().indexOf("cvreview") != -1) {
+            selectedIcon = 'cvreviews';
         }
         else {
             selectedIcon = selectedModule.substring(1);
@@ -197,14 +197,22 @@ class MainPage extends React.Component {
                 /></div>}
                 <Sidebar accessibleAppModules={this.state.accessibleAppModules} onModuleSelect={this.onModuleSelect} onToggle={this.onToggle} selectedModule={selectedModule}></Sidebar>
                 <Main expanded={expanded} style={{ height: "100vh", overflowY: "scroll" }}>
-                    <Switch>
+                    {/* Routing for students */}
+                    {this.props.state.userInfo.group == constants.groups.STUDENT && <Switch>
                         <Route path="/" exact component={props => <HomePage {...props}></HomePage>} />
-                        <Route exact path="/cvReviews" component={props => <CVReviewList {...props}></CVReviewList>} />
-                        <Route exact path="/cvReview" component={props => <ManageCVReview {...props}></ManageCVReview>} />
-                        <Route exact path="/cvReview/:id" component={props => <ManageCVReview {...props}></ManageCVReview>} />
-                        <Route path="/settings" component={props => <div>settings</div>} />
+                        <Route exact path="/cvreviews" component={props => <CVReviewList {...props}></CVReviewList>} />
+                        <Route exact path="/cvreview" component={props => <ManageCVReview {...props}></ManageCVReview>} />
+                        <Route exact path="/cvreview/:id" component={props => <ManageCVReview {...props}></ManageCVReview>} />
                         <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
-                    </Switch>
+                    </Switch>}
+                    {/* Routing for admins */}
+                    {this.props.state.userInfo.group == constants.groups.ADMIN && <Switch>
+                        <Route exact path="/cvreviews" component={props => <CVReviewList {...props}></CVReviewList>} />
+                        <Route exact path="/cvreview" component={props => <ManageCVReview {...props}></ManageCVReview>} />
+                        <Route exact path="/cvreview/:id" component={props => <ManageCVReview {...props}></ManageCVReview>} />
+                        <Route path="/settings" component={props => <div>settings</div>} />
+                        <Route path="*" render={() => (<Redirect to={{ pathname: "/cvreviews" }}></Redirect>)}></Route>
+                    </Switch>}
                 </Main>
             </div>
         );
