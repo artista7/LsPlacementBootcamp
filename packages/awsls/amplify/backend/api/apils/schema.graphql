@@ -53,7 +53,7 @@ type User @model {
   email: AWSEmail
   group: String
   id: ID!
-  phone_number: AWSPhone
+  phone_number: String
   pricingPlanId: String
   username: String
 }
