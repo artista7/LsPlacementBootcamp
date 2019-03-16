@@ -23,15 +23,18 @@ export function _createCvReviewSuccess(cvReview) {
 }
 
 export function _listCvReviews(group, username) {
-    const filterObj = group == constants.groups.STUDENT ? {
+    const queryObj = group == constants.groups.STUDENT ? {
         filter: {
             createdBy: {
                 eq: username
             }
-        }
-    } : {};
+        },
+        limit: 1000
+    } : {
+            limit: 1000
+        };
     return function (dispatch) {
-        return API.graphql(graphqlOperation(queries.listCvReviews, filterObj)).then(response => {
+        return API.graphql(graphqlOperation(queries.listCvReviews, queryObj)).then(response => {
             dispatch(_listCvReviewsSuccess(response.data.listCvReviews.items));
         }).catch(response => {
             NotificationManager.error('Error loading reviews', '', 2000);

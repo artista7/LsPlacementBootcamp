@@ -4,16 +4,17 @@ import { mutations } from 'awsls';
 import * as types from "./actionTypes";
 
 export function _loadAppModuleAccess(group) {
-    var filterObj = {
+    var queryObj = {
         filter: {
             group: {
                 eq: group
             }
-        }
+        },
+        limit: 1000
     }
 
     return function (dispatch) {
-        return API.graphql(graphqlOperation(queries.listAppModuleAccesss, filterObj)).then(response => {
+        return API.graphql(graphqlOperation(queries.listAppModuleAccesss, queryObj)).then(response => {
             var accessibleAppModules = response.data.listAppModuleAccesss.items.length > 0 ? response.data.listAppModuleAccesss.items[0].appModules.split(',') : [];
             dispatch(_loadAppModuleAccessSuccess(accessibleAppModules));
         }).catch(response => {
