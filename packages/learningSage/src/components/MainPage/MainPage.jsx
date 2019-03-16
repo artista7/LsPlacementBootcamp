@@ -19,7 +19,7 @@ import Loader from 'react-loader-spinner';
 import * as constants from '../../constants/constants';
 /*Child components */
 import HomePage from './HomePage/ManageHomePage';
-import CVReviewList from './CVReview/CVReviewList';
+import ManageCvReviewList from './CVReview/ManageCVReviewList';
 import ManageCVReview from './CVReview/ManageCVReview';
 
 const Main = styled.main`
@@ -200,14 +200,14 @@ class MainPage extends React.Component {
                     {/* Routing for students */}
                     {this.props.state.userInfo.group == constants.groups.STUDENT && <Switch>
                         <Route path="/" exact component={props => <HomePage {...props}></HomePage>} />
-                        <Route exact path="/cvreviews" component={props => <CVReviewList {...props}></CVReviewList>} />
+                        <Route exact path="/cvreviews" component={props => <ManageCvReviewList {...props}></ManageCvReviewList>} />
                         <Route exact path="/cvreview" component={props => <ManageCVReview {...props}></ManageCVReview>} />
                         <Route exact path="/cvreview/:id" component={props => <ManageCVReview {...props}></ManageCVReview>} />
                         <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
                     </Switch>}
                     {/* Routing for admins */}
                     {this.props.state.userInfo.group == constants.groups.ADMIN && <Switch>
-                        <Route exact path="/cvreviews" component={props => <CVReviewList {...props}></CVReviewList>} />
+                        <Route exact path="/cvreviews" component={props => <ManageCvReviewList {...props}></ManageCvReviewList>} />
                         <Route exact path="/cvreview" component={props => <ManageCVReview {...props}></ManageCVReview>} />
                         <Route exact path="/cvreview/:id" component={props => <ManageCVReview {...props}></ManageCVReview>} />
                         <Route path="/settings" component={props => <div>settings</div>} />
