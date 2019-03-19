@@ -17,7 +17,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm install -g npm
+        # - npm install -g npm
         - npm install --global lerna
         - lerna bootstrap
         - cd ../learningSage
