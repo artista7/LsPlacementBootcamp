@@ -285,7 +285,7 @@ class MainPage extends React.Component {
                         <Route exact path="/cvreviews" component={props => <ManageCvReviewList {...props}></ManageCvReviewList>} />
                         <Route exact path="/cvreview" component={props => <ManageCVReview {...props}></ManageCVReview>} />
                         <Route exact path="/cvreview/:id" component={props => <ManageCVReview {...props}></ManageCVReview>} />
-                        <Route path="/settings" component={props => <div>settings</div>} />
+                        <Route path="/settings" component={props => <div>settings!</div>} />
                         <Route path="*" render={() => (<Redirect to={{ pathname: "/cvreviews" }}></Redirect>)}></Route>
                     </Switch>}
                 </Main>
