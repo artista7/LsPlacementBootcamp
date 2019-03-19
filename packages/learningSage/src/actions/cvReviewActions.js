@@ -14,6 +14,7 @@ export function _createCvReview(cvReview) {
         }).catch(response => {
             NotificationManager.error('Error submitting review', '', 2000);
             console.log(response);
+            throw (response.errors);
         })
     }
 }
@@ -35,6 +36,7 @@ export function _listCvReviews(group, username) {
         }).catch(response => {
             NotificationManager.error('Error loading reviews', '', 2000);
             console.log(response);
+            throw (response.errors);
         })
     }
 }
@@ -45,6 +47,7 @@ export function _updateCvReview(cvReview) {
         }).catch(response => {
             NotificationManager.error('Error submitting review', '', 2000);
             console.log(response);
+            throw (response.errors);
         })
     }
 }

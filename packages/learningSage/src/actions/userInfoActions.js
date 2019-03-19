@@ -9,6 +9,7 @@ export function _loadUserInfo(username) {
             dispatch(_loadUserInfoSuccess(response.data.getUser));
         }).catch(response => {
             console.log(response);
+            throw (response.errors);
         });
     }
 }
@@ -26,6 +27,7 @@ export function _updateUser(userInfo) {
             dispatch(_updateUserSuccess(response.data.updateUser));
         }).catch(response => {
             console.log(response);
+            throw (response.errors);
         })
     }
 }
