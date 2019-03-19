@@ -10,6 +10,9 @@ export default function cvReviewReducer(state = initialState.cvReviews, action) 
             return action.cvReviews;
 
         case types.UPDATE_CVREVIEW_SUCCESS:
+            if (action.cvReview.hasOwnProperty('__typename')) {
+                delete action.cvReview.__typename;
+            }
             return Object.assign([], [...state.filter(cvReview => cvReview.id != action.cvReview.id), action.cvReview])
 
         default:
