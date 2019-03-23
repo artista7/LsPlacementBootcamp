@@ -5,6 +5,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import './App.css';
 import LandingPage from './components/LandingPage/LandingPage';
 import LoginPage from './components/Auth/Login';
+import InternshipPage from './components/Company/Timeline';
 import MainPage from './components/MainPage/MainPage';
 import history from './history';
 /* Configuring Amplify*/
@@ -48,6 +49,7 @@ class App extends Component {
             {authState != "signedIn" && <Switch>
               <Route exact path="/" component={LandingPage}></Route>
               <Route exact path="/login" render={({ history }) => (<LoginPage history={history} updateStateVariable={this.updateStateVariable}></LoginPage>)}></Route>
+              <Route exact path="/internship" render={({ history }) => (<InternshipPage history={history} updateStateVariable={this.updateStateVariable}></InternshipPage>)}></Route>
               <Route path="*" render={() => (<Redirect to={{ pathname: "/" }}></Redirect>)}></Route>
             </Switch>}
             {authState == "signedIn" && <Switch>

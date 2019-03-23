@@ -8,6 +8,7 @@ export function _listPricingPlans() {
             dispatch(_listPricingPlansSuccess(response.data.listPricingPlans.items));
         }).catch(response => {
             console.log(response);
+            throw (response.errors);
         })
     }
 }

@@ -1,69 +1,36 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import './LandingPage.css';
-import ravi from '../../assets/img/team/Ravi.jpg';
-import shubham from '../../assets/img/team/Shubham.jpeg';
-import './navBarScroll';
-import brochure from '../../assets/Learning-sage.pdf';
-import logo from '../../assets/img/Logo/logo2.svg';
+//import libraries
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-class LandingPage extends Component {
+// create a component
+class InternshipPage extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+    }
     render() {
         return (
-            <div>
-                <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <React.Fragment>
+                <section className="bg-dark text-white" style={{ backgroundColor: "white" }} id="Learn-Earn-Intern" style={{ paddingTop: "40px" }}>
                     <div className="container">
-                        <a className="js-scroll-trigger" id="logo" style={{ color: "white", fontWeight: "bold", fontSize: "18px" }} href="">
-                            <img style={{ height: "50px", marginRight: "5px" }} src={logo} alt="Learning-sage" />
-                            Learning-Sage
-                            </a>
-                        <button className="navbar-toggler navbar-toggler-right collapsed" type="button" id="navbarToggleButton">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <div className="navbar-collapse collapse" id="navbarResponsive">
-                            <ul className="nav navbar-nav ml-auto">
-                                <li className="nav-item">
-                                    <Link className="nav-link js-scroll-trigger" to="/login">Login</Link>
-                                </li>
-                                {/* <li className="nav-item">
-                                    <a className="nav-link js-scroll-trigger" href="#services">Services</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link js-scroll-trigger" href="#about">About us</a>
-                                </li> */}
-                                <li className="nav-item">
-                                    <Link className="nav-link js-scroll-trigger" to="/internship">Internship</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link js-scroll-trigger" href="#contact">Contact us</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-
-                <header className="masthead text-center text-white d-flex">
-                    <div className="container my-auto">
                         <div className="row">
-                            <div className="col-lg-10 mx-auto">
-                                <h1 className="text-uppercase">
-                                    <strong>Helping Institutes achieve 100% placements</strong>
-                                </h1>
-                                <hr />
-                                <div className="col-lg-8 mx-auto">
-                                    <p className="mb-5">We help students transition from student life to professional life by imparting necessary education to bridge industry/college skill gap</p>
-                                    <a className="btn btn-primary btn-xl js-scroll-trigger" href="#services">Find Out More</a>
+                            <div className="col-lg-8 mx-auto text-center">
+                                <h2 className="section-heading">Learn-Earn-Intern</h2>
+                                <hr className="light my-4" />
+                                <div className="row">
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                </header>
+                </section>
 
                 <section id="services">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-12 text-center">
-                                <h2 className="section-heading">Our Services</h2>
+                                <h2 className="section-heading">Learn-Earn-Intern</h2>
                                 <hr className="my-4" />
                             </div>
                         </div>
@@ -117,7 +84,7 @@ class LandingPage extends Component {
                     <div className="container" style={{ marginTop: "45px" }}>
                         <div className="row">
                             <div className="col-lg-12 text-center">
-                                <a className="btn btn-primary btn-xl js-scroll-trigger" href={brochure} download>Download Brochure</a>
+                                <a className="btn btn-primary btn-xl js-scroll-trigger" href='#' download>Download Brochure</a>
                             </div>
                         </div>
                     </div>
@@ -132,7 +99,6 @@ class LandingPage extends Component {
                                 <div className="row">
                                     <div className="col-sm-4">
                                         <div className="service-box mt-5 mx-auto">
-                                            <img src={ravi} height="230" width="223px" style={{ borderRadius: "1.5%" }} alt="Ravi Ranjan is missing"></img>
                                             <div style={{ marginTop: "10px", fontSize: "25px" }}>Ravi Ranjan</div>
                                             <div style={{ marginTop: "5px", fontSize: "15px" }}>Co-Founder</div>
                                             <p style={{ marginTop: "5px", fontSize: "15px" }}>An IITD Alumnus & a big-data expert, he is currently pursuing his MBA from IIM A</p>
@@ -142,7 +108,6 @@ class LandingPage extends Component {
                                     <div className="col-sm-4"></div>
                                     <div className="col-sm-4">
                                         <div className="service-box mt-5 mx-auto">
-                                            <img src={shubham} height="230" width="223px" style={{ borderRadius: "1.5%" }} alt="Shubham is missing"></img>
                                             <div style={{ marginTop: "10px", fontSize: "25px" }}>Shubham Gupta</div>
                                             <div style={{ marginTop: "5px", fontSize: "15px" }}>Co-Founder</div>
                                             <p style={{ marginTop: "5px", fontSize: "15px" }}>An IITD Alumnus & an ex-citi employee, he is a businessman with technical inclinations</p>
@@ -185,13 +150,23 @@ class LandingPage extends Component {
                         </div>
                     </div>
                 </section>
-            </div >
+            </React.Fragment>
         );
     }
 }
 
-LandingPage.propTypes = {
+function mapStateToProps(state, ownProps) {
+    return {
+        state: state
+    };
+}
 
+function mapDispatchToProps(dispatch) {
+    return {
+        //actions: bindActionCreators(actions, dispatch)
+    };
+}
+InternshipPage.propTypes = {
 };
-
-export default LandingPage;
+//make this component available to the app
+export default connect(mapStateToProps, mapDispatchToProps)(InternshipPage);
