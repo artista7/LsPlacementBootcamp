@@ -5,6 +5,7 @@ import * as cvReviewActions from '../../../actions/cvReviewActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import CVReviewList from './CVReviewList';
+import * as constants from '../../../constants/constants';
 
 // create a component
 class ManageCvReviewList extends React.Component {
@@ -32,12 +33,13 @@ class ManageCvReviewList extends React.Component {
     render() {
         const { cvReviewList, history } = this.props;
         return (
-            <div style={{ textAlign: "center" }}>
-                <input
+            <div style={{ textAlign: "center", paddingTop: '10px' }}>
+                {/* not showing create cv review to admin as of now */}
+                {!(this.props.userInfo.group != undefined && this.props.userInfo.group == constants.groups.ADMIN) && <input
                     type="submit"
                     value="Create Cv Review"
                     className="btn btn-primary hCenter"
-                    onClick={() => this.redirectToRoute('/cvReview')}></input>
+                    onClick={() => this.redirectToRoute('/cvReview')}></input>}
 
                 {cvReviewList.length > 0 && <CVReviewList history={history} cvReviewList={cvReviewList}></CVReviewList>}
 
@@ -48,7 +50,8 @@ class ManageCvReviewList extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        cvReviewList: state.cvReviews || []
+        cvReviewList: state.cvReviews || [],
+        userInfo: state.userInfo
     };
 }
 

@@ -21,6 +21,9 @@ import * as constants from '../../constants/constants';
 import HomePage from './HomePage/ManageHomePage';
 import ManageCvReviewList from './CVReview/ManageCVReviewList';
 import ManageCVReview from './CVReview/ManageCVReview';
+//Subscription related
+import { API, graphqlOperation } from 'aws-amplify';
+import { subscriptions } from 'awsls';
 
 const Main = styled.main`
     position: relative;
@@ -37,9 +40,11 @@ class MainPage extends React.Component {
 
         this.state = {
             accessibleAppModules: [],
+            createCvReviewSubscription: null,
             expanded: false,
             isInitializing: false,
-            selectedModule: 'home'
+            selectedModule: 'home',
+            updateCvReviewSubscription: null
         };
 
         this.onModuleSelect = this.onModuleSelect.bind(this);
@@ -48,10 +53,14 @@ class MainPage extends React.Component {
         this.loadUserAppModuleAccess = this.loadUserAppModuleAccess.bind(this);
         this.loadCvReviews = this.loadCvReviews.bind(this);
         this.loadUserData = this.loadUserData.bind(this);
+        this.onCreateCvReviewSubscription = this.onCreateCvReviewSubscription.bind(this);
+        this.onUpdateCvReviewSubscription = this.onUpdateCvReviewSubscription.bind(this);
         this.setAccessibleAppModules = this.setAccessibleAppModules.bind(this);
         this.setInitializing = this.setInitializing.bind(this);
         this.setSelectedModule = this.setSelectedModule.bind(this);
         this.signOut = this.signOut.bind(this);
+        this.unsubscribeOnCreateCvReview = this.unsubscribeOnCreateCvReview.bind(this);
+        this.unsubscribeOnUpdateCvReview = this.unsubscribeOnUpdateCvReview.bind(this);
     }
 
     onModuleSelect(selected) {
@@ -103,6 +112,56 @@ class MainPage extends React.Component {
         this.loadUserAppModuleAccess();
         //4. loading cv reviews based on user group
         this.loadCvReviews(username);
+        //5. Start cvreview subscriptions
+        this.onCreateCvReviewSubscription(this.props.state.userInfo.group, username);
+        this.onUpdateCvReviewSubscription(this.props.state.userInfo.group, username);
+    }
+
+    onCreateCvReviewSubscription(group, username) {
+        console.log('starting onCreateCvReviewSubscription');
+        var that = this;
+        this.state.createCvReviewSubscription = API.graphql(
+            graphqlOperation(subscriptions.onCreateCvReview)
+        ).subscribe({
+            next: (data) => {
+                if (group == constants.groups.ADMIN || username == data.value.data.onCreateCvReview.createdBy) {
+                    var cvReview = data.value.data.onCreateCvReview;
+                    that.props.cvReviewActions._createCvReviewSuccess(cvReview);
+                }
+                else {
+                    console.log("cvreview not meant for you", data.value.data.onCreateCvReview);
+                }
+            },
+            error: err => {
+                console.log('error in onCreateCvReviewSubscription', err);
+                this.state.createCvReviewSubscription.unsubscribe(); //just for safe side
+                that.onCreateCvReviewSubscription(that.props.state.userInfo.group, that.props.state.userInfo.username);
+            }
+        });
+    }
+
+    onUpdateCvReviewSubscription(group, username) {
+        var that = this;
+        console.log('starting onUpdateCvReviewSubscription');
+        this.state.updateCvReviewSubscription = API.graphql(
+            graphqlOperation(subscriptions.onUpdateCvReview)
+        ).subscribe({
+            next: (data) => {
+                if (group == constants.groups.ADMIN || username == data.value.data.onUpdateCvReview.createdBy) {
+                    var cvReview = data.value.data.onUpdateCvReview;
+                    that.props.cvReviewActions._updateCvReviewSuccess(cvReview);
+                }
+                else {
+                    debugger;
+                    console.log("cvreview not meant for you", data.value.data.onCreateCvReview);
+                }
+            },
+            error: err => {
+                console.log('error in onUpdateCvReviewSubscription', err);
+                this.state.updateCvReviewSubscription.unsubscribe(); //just for safe side
+                that.onUpdateCvReviewSubscription(that.props.state.userInfo.group, that.props.state.userInfo.username);
+            }
+        });
     }
 
     setAccessibleAppModules(accessibleAppModules) {
@@ -140,6 +199,20 @@ class MainPage extends React.Component {
         });
     }
 
+    unsubscribeOnCreateCvReview() {
+        if (this.state.createCvReviewSubscription != null) {
+            console.log('ending create cvReview subscription');
+            this.state.createCvReviewSubscription.unsubscribe();
+        }
+    }
+
+    unsubscribeOnUpdateCvReview() {
+        if (this.state.updateCvReviewSubscription != null) {
+            console.log('ending update cvReview subscription');
+            this.state.updateCvReviewSubscription.unsubscribe();
+        }
+    }
+
     componentWillMount() {
         //adding current loggedin user data to redux state, this take time - some operations requiring user data might get affected
         this.setInitializing(true);
@@ -167,6 +240,8 @@ class MainPage extends React.Component {
 
     componentWillUnmount() {
         this.props.updateStateVariable();
+        this.unsubscribeOnCreateCvReview();
+        this.unsubscribeOnUpdateCvReview();
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -210,7 +285,7 @@ class MainPage extends React.Component {
                         <Route exact path="/cvreviews" component={props => <ManageCvReviewList {...props}></ManageCvReviewList>} />
                         <Route exact path="/cvreview" component={props => <ManageCVReview {...props}></ManageCVReview>} />
                         <Route exact path="/cvreview/:id" component={props => <ManageCVReview {...props}></ManageCVReview>} />
-                        <Route path="/settings" component={props => <div>settings</div>} />
+                        <Route path="/settings" component={props => <div>settings!</div>} />
                         <Route path="*" render={() => (<Redirect to={{ pathname: "/cvreviews" }}></Redirect>)}></Route>
                     </Switch>}
                 </Main>

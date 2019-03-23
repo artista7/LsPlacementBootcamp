@@ -150,3 +150,25 @@ input[type=text]:placeholder {
   margin-bottom: 0
 }
 
+/*prevent random background color in grid filter*/
+.form-control:focus{
+  border-color: white;
+  box-shadow: none
+}
+
+.btn-outline-secondary{
+  background-color: #f6f6f6;
+}
+
+.page-link{
+  color: rgb(204, 80, 74);
+}
+
+.page-link:focus{
+  box-shadow: none;
+}
+
+.page-item.active .page-link{
+  background-color: rgb(204, 80, 74);
+  border-color: transparent;
+}

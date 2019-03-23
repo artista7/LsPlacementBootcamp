@@ -19,6 +19,7 @@ export function _loadAppModuleAccess(group) {
             dispatch(_loadAppModuleAccessSuccess(accessibleAppModules));
         }).catch(response => {
             console.log(response);
+            throw (response.errors);
         });
     }
 }
