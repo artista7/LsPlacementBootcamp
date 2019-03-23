@@ -32,7 +32,7 @@ class LandingPage extends Component {
                                     <a className="nav-link js-scroll-trigger" href="#about">About us</a>
                                 </li> */}
                                 <li className="nav-item">
-                                    <a className="nav-link js-scroll-trigger" href="/internship">Internship</a>
+                                    <Link className="nav-link js-scroll-trigger" to="/internship">Internship</Link>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link js-scroll-trigger" href="#contact">Contact us</a>

@@ -11,6 +11,7 @@ const InternTimeline = () => {
                 <h1 className="text-center">Learn-Earn-Intern</h1>
                 {/* <p>Real-life projects aimed to <span style={{ color: "#F05F40" }}>teach you</span></p> */}
                 <p>A <span style={{ color: "#F05F40" }}>Learning-sage</span> Initiative</p>
+                <a className="btn btn-primary btn-xl js-scroll-trigger" href='https://goo.gl/forms/U4HvG1OdFdohPa1d2' target="_blank_">Apply</a>
             </header>
             <div className="container-fluid">
                 <div className="row example-centered">
