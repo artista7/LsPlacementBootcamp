@@ -122,6 +122,19 @@ const InternTimeline = () => {
                         </div>
                     </div>
                 </div>
+
+                <div>
+                    <div id="formContent" style={{ display: "inline-block", color: "black", marginBottom: "25px", maxWidth: "600px" }}>
+                        <p style={{ paddingLeft: "40px" }}>
+                            Design project
+                    </p>
+
+                        <div id="formFooter" style={{ textAlign: "left" }}>
+                            <div><span style={{ color: "black", fontWeight: 'bold' }}>Aim</span> - To design and prototype web/mobile applications with best UX</div>
+                            <div><span style={{ color: "black", fontWeight: 'bold' }}>Tech</span> - Sketch, Invision,etc</div>
+                        </div>
+                    </div>
+                </div>
                 {/* <p>A <span style={{ color: "#F05F40" }}>Learning-sage</span> Initiative</p> */}
             </div>
 
