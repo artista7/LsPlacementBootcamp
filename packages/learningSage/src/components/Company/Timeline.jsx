@@ -9,7 +9,8 @@ const InternTimeline = () => {
         <React.Fragment>
             <header className="example-header">
                 <h1 className="text-center">Learn-Earn-Intern</h1>
-                <p>Real-life projects aimed to <span style={{ color: "#F05F40" }}>teach you</span></p>
+                {/* <p>Real-life projects aimed to <span style={{ color: "#F05F40" }}>teach you</span></p> */}
+                <p>A <span style={{ color: "#F05F40" }}>Learning-sage</span> Initiative</p>
             </header>
             <div className="container-fluid">
                 <div className="row example-centered">
@@ -78,7 +79,7 @@ const InternTimeline = () => {
 
                         <div id="formFooter" style={{ textAlign: "left" }}>
                             <div><span style={{ color: "black", fontWeight: 'bold' }}>Aim</span> - Develop a document parser to be integrated in live application</div>
-                            <div><span style={{ color: "black", fontWeight: 'bold' }}>Tech</span> - python, xgboost,etc</div>
+                            <div><span style={{ color: "black", fontWeight: 'bold' }}>Tech</span> - python, xgboost, Neural Networks, RNN, NLTK</div>
                         </div>
                     </div>
                 </div>
@@ -120,9 +121,10 @@ const InternTimeline = () => {
                         </div>
                     </div>
                 </div>
+                {/* <p>A <span style={{ color: "#F05F40" }}>Learning-sage</span> Initiative</p> */}
             </div>
 
-            <div style={{ paddingTop: "60px", textAlign: "center" }}>
+            {/* <div style={{ paddingTop: "60px", textAlign: "center" }}>
                 <h3 className="text-center">We invest in you</h3>
                 <div id="formContent" style={{ display: "inline-block", color: "black", marginBottom: "25px", maxWidth: "800px" }}>
                     <p style={{ paddingLeft: "40px" }}>What we get in return</p>
@@ -136,7 +138,7 @@ const InternTimeline = () => {
                     </div>
                 </div>
                 <p>A <span style={{ color: "#F05F40" }}>Learning-sage</span> Initiative</p>
-            </div>
+            </div> */}
         </React.Fragment>
     );
 };
