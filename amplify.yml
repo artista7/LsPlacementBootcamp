@@ -6,7 +6,8 @@ backend:
         - cd packages/awsls
     build:
       commands:
-        #- export STACKINFO="$(envCache --get stackInfo)"
+        - if [ "${AWS_BRANCH}" = "develop" ]; then envCache --set stackInfo "$(amplify env get --json --name dev)"; fi
+        - export STACKINFO="$(envCache --get stackInfo)"
         - if [ "${AWS_BRANCH}" = "develop" ]; then amplifyPush --environment dev; fi
         - if [ "${AWS_BRANCH}" = "develop" ]; then envCache --set stackInfo "$(amplify env get --json --name dev)"; fi
         - if [ "${AWS_BRANCH}" = "qa" ]; then amplifyPush --environment qa; fi
