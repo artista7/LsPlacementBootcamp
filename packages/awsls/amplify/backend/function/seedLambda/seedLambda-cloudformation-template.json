@@ -66,8 +66,8 @@
 				"Runtime": "nodejs8.10",
 				"Timeout": "25",
 				"Code": {
-					"S3Bucket": "learningsage-20190225235015-deployment",
-					"S3Key": "amplify-builds/seedLambda-1553669996-latest-build.zip"
+					"S3Bucket": "learningsage-20190327183219-deployment",
+					"S3Key": "amplify-builds/seedLambda-1553691814-latest-build.zip"
 				}
 			}
 		},
