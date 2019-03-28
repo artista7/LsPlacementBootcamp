@@ -1,0 +1,49 @@
+{
+    "Records": [
+        {
+            "eventID": "a047648bb56a1464878c3361163c2ad6",
+            "eventName": "INSERT",
+            "eventVersion": "1.1",
+            "eventSource": "aws:dynamodb",
+            "awsRegion": "us-east-1",
+            "dynamodb": {
+                "ApproximateCreationDateTime": 1553774701,
+                "Keys": {
+                    "id": {
+                        "S": "37315209-cc73-4e1b-b57a-f3d237cc192b"
+                    }
+                },
+                "NewImage": {
+                    "createdAt": {
+                        "S": "2019-03-28T12:05:00.515Z"
+                    },
+                    "lastUpdatedBy": {
+                        "S": "test"
+                    },
+                    "fileName": {
+                        "S": "1553774558277_Kunal_Maurya_CV_updated.pdf"
+                    },
+                    "createdBy": {
+                        "S": "test"
+                    },
+                    "__typename": {
+                        "S": "CvReview"
+                    },
+                    "id": {
+                        "S": "37315209-cc73-4e1b-b57a-f3d237cc192b"
+                    },
+                    "status": {
+                        "S": "submitted"
+                    },
+                    "updatedAt": {
+                        "S": "2019-03-28T12:05:00.515Z"
+                    }
+                },
+                "SequenceNumber": "4043100000000009475786496",
+                "SizeBytes": 254,
+                "StreamViewType": "NEW_AND_OLD_IMAGES"
+            },
+            "eventSourceARN": "arn:aws:dynamodb:us-east-1:227484579606:table/CvReview-k6sw6ggwefhnlhjgzp5gtyq4m4-dev/stream/2019-03-27T13:11:37.721"
+        }
+    ]
+}

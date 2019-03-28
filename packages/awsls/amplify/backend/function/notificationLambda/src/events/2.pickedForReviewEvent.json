@@ -1,0 +1,78 @@
+{
+    "Records": [
+        {
+            "eventID": "ecca597506f3ef7f41626773a40eaaf1",
+            "eventName": "MODIFY",
+            "eventVersion": "1.1",
+            "eventSource": "aws:dynamodb",
+            "awsRegion": "us-east-1",
+            "dynamodb": {
+                "ApproximateCreationDateTime": 1553774938,
+                "Keys": {
+                    "id": {
+                        "S": "73c1ebc7-48a6-45ce-b7bd-ee8a227cd73a"
+                    }
+                },
+                "NewImage": {
+                    "createdAt": {
+                        "S": "2019-03-28T11:54:53.380Z"
+                    },
+                    "lastUpdatedBy": {
+                        "S": "shubham"
+                    },
+                    "fileName": {
+                        "S": "1553773949315_vivekverma_resume.pdf"
+                    },
+                    "createdBy": {
+                        "S": "test"
+                    },
+                    "__typename": {
+                        "S": "CvReview"
+                    },
+                    "id": {
+                        "S": "73c1ebc7-48a6-45ce-b7bd-ee8a227cd73a"
+                    },
+                    "reviewedBy": {
+                        "S": "shubham"
+                    },
+                    "status": {
+                        "S": "underReview"
+                    },
+                    "updatedAt": {
+                        "S": "2019-03-28T12:08:58.672Z"
+                    }
+                },
+                "OldImage": {
+                    "createdAt": {
+                        "S": "2019-03-28T11:54:53.380Z"
+                    },
+                    "lastUpdatedBy": {
+                        "S": "test"
+                    },
+                    "fileName": {
+                        "S": "1553773949315_vivekverma_resume.pdf"
+                    },
+                    "createdBy": {
+                        "S": "test"
+                    },
+                    "__typename": {
+                        "S": "CvReview"
+                    },
+                    "id": {
+                        "S": "73c1ebc7-48a6-45ce-b7bd-ee8a227cd73a"
+                    },
+                    "status": {
+                        "S": "submitted"
+                    },
+                    "updatedAt": {
+                        "S": "2019-03-28T11:54:53.380Z"
+                    }
+                },
+                "SequenceNumber": "4120600000000004490444817",
+                "SizeBytes": 480,
+                "StreamViewType": "NEW_AND_OLD_IMAGES"
+            },
+            "eventSourceARN": "arn:aws:dynamodb:us-east-1:227484579606:table/CvReview-k6sw6ggwefhnlhjgzp5gtyq4m4-dev/stream/2019-03-27T13:11:37.721"
+        }
+    ]
+}

@@ -1,0 +1,84 @@
+{
+    "Records": [
+        {
+            "eventID": "dd349fc2fd654c49df9ace1678f4f93b",
+            "eventName": "MODIFY",
+            "eventVersion": "1.1",
+            "eventSource": "aws:dynamodb",
+            "awsRegion": "us-east-1",
+            "dynamodb": {
+                "ApproximateCreationDateTime": 1553774516,
+                "Keys": {
+                    "id": {
+                        "S": "b3c6c855-0bfb-48d0-b023-8a676da47e51"
+                    }
+                },
+                "NewImage": {
+                    "createdAt": {
+                        "S": "2019-03-28T11:56:31.443Z"
+                    },
+                    "lastUpdatedBy": {
+                        "S": "shubham"
+                    },
+                    "fileName": {
+                        "S": "1553774048379_vivekverma_resume.pdf"
+                    },
+                    "comments": {
+                        "S": "test"
+                    },
+                    "createdBy": {
+                        "S": "test"
+                    },
+                    "__typename": {
+                        "S": "CvReview"
+                    },
+                    "id": {
+                        "S": "b3c6c855-0bfb-48d0-b023-8a676da47e51"
+                    },
+                    "reviewedBy": {
+                        "S": "shubham"
+                    },
+                    "status": {
+                        "S": "reviewCompleted"
+                    },
+                    "updatedAt": {
+                        "S": "2019-03-28T12:01:56.479Z"
+                    }
+                },
+                "OldImage": {
+                    "createdAt": {
+                        "S": "2019-03-28T11:56:31.443Z"
+                    },
+                    "lastUpdatedBy": {
+                        "S": "shubham"
+                    },
+                    "fileName": {
+                        "S": "1553774048379_vivekverma_resume.pdf"
+                    },
+                    "createdBy": {
+                        "S": "test"
+                    },
+                    "__typename": {
+                        "S": "CvReview"
+                    },
+                    "id": {
+                        "S": "b3c6c855-0bfb-48d0-b023-8a676da47e51"
+                    },
+                    "reviewedBy": {
+                        "S": "shubham"
+                    },
+                    "status": {
+                        "S": "underReview"
+                    },
+                    "updatedAt": {
+                        "S": "2019-03-28T11:57:24.665Z"
+                    }
+                },
+                "SequenceNumber": "4120500000000004490243212",
+                "SizeBytes": 518,
+                "StreamViewType": "NEW_AND_OLD_IMAGES"
+            },
+            "eventSourceARN": "arn:aws:dynamodb:us-east-1:227484579606:table/CvReview-k6sw6ggwefhnlhjgzp5gtyq4m4-dev/stream/2019-03-27T13:11:37.721"
+        }
+    ]
+}
