@@ -186,7 +186,9 @@ Resources:
         
       
       AutoVerifiedAttributes: !Ref autoVerifiedAttributes
-      
+      # LambdaConfig:
+      #   PreSignUp: !Join ['-',[seedLambda, !Ref env]]
+      #   PostConfirmation: !Join ['-',[cognitoLambda, !Ref env]]
             
       Policies:
         PasswordPolicy:
