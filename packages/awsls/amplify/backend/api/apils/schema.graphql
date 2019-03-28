@@ -33,6 +33,16 @@ enum CvReviewStatus{
   reviewCompleted
 }
 
+type Notification @model{
+  createdAt: String
+  desc: String
+  data: AWSJSON
+  eventID: String
+  eventName: String
+  id: ID!
+  targetGroup: String
+}
+
 type PricingPlan @model{
   cvReviewsAllowed: Int
   id: ID!

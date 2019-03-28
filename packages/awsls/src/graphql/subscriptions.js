@@ -112,6 +112,42 @@ export const onDeleteCvReview = `subscription OnDeleteCvReview {
   }
 }
 `;
+export const onCreateNotification = `subscription OnCreateNotification {
+  onCreateNotification {
+    createdAt
+    desc
+    data
+    eventID
+    eventName
+    id
+    targetGroup
+  }
+}
+`;
+export const onUpdateNotification = `subscription OnUpdateNotification {
+  onUpdateNotification {
+    createdAt
+    desc
+    data
+    eventID
+    eventName
+    id
+    targetGroup
+  }
+}
+`;
+export const onDeleteNotification = `subscription OnDeleteNotification {
+  onDeleteNotification {
+    createdAt
+    desc
+    data
+    eventID
+    eventName
+    id
+    targetGroup
+  }
+}
+`;
 export const onCreatePricingPlan = `subscription OnCreatePricingPlan {
   onCreatePricingPlan {
     cvReviewsAllowed

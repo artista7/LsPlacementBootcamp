@@ -112,6 +112,42 @@ export const deleteCvReview = `mutation DeleteCvReview($input: DeleteCvReviewInp
   }
 }
 `;
+export const createNotification = `mutation CreateNotification($input: CreateNotificationInput!) {
+  createNotification(input: $input) {
+    createdAt
+    desc
+    data
+    eventID
+    eventName
+    id
+    targetGroup
+  }
+}
+`;
+export const updateNotification = `mutation UpdateNotification($input: UpdateNotificationInput!) {
+  updateNotification(input: $input) {
+    createdAt
+    desc
+    data
+    eventID
+    eventName
+    id
+    targetGroup
+  }
+}
+`;
+export const deleteNotification = `mutation DeleteNotification($input: DeleteNotificationInput!) {
+  deleteNotification(input: $input) {
+    createdAt
+    desc
+    data
+    eventID
+    eventName
+    id
+    targetGroup
+  }
+}
+`;
 export const createPricingPlan = `mutation CreatePricingPlan($input: CreatePricingPlanInput!) {
   createPricingPlan(input: $input) {
     cvReviewsAllowed

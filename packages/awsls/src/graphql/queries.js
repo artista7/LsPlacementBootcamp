@@ -103,6 +103,37 @@ export const listCvReviews = `query ListCvReviews(
   }
 }
 `;
+export const getNotification = `query GetNotification($id: ID!) {
+  getNotification(id: $id) {
+    createdAt
+    desc
+    data
+    eventID
+    eventName
+    id
+    targetGroup
+  }
+}
+`;
+export const listNotifications = `query ListNotifications(
+  $filter: ModelNotificationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listNotifications(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      createdAt
+      desc
+      data
+      eventID
+      eventName
+      id
+      targetGroup
+    }
+    nextToken
+  }
+}
+`;
 export const getPricingPlan = `query GetPricingPlan($id: ID!) {
   getPricingPlan(id: $id) {
     cvReviewsAllowed
