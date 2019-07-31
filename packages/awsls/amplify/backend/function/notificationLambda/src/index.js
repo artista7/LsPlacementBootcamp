@@ -1,9 +1,14 @@
+// Transpile all code following this line with babel and use 'env' (aka ES6) preset.
+require('babel-register')({
+  presets: ['env']
+})
+
 const aws = require('aws-sdk');
 const uuidv4 = require('uuid/v4');
 const ddb = new aws.DynamoDB({ apiVersion: '2012-10-08' });
 const graphqlApiId = process.env.GraphQLApiId;
 const env = process.env.ENV;
-
+//import { queries, subscriptions, mutations, awsConfig } from '../../../../../index';
 // function formatImage(image) {
 //   return {
 //     createdAt: image.createdAt != undefined ? image.createdAt.S : new Date().toISOString(),

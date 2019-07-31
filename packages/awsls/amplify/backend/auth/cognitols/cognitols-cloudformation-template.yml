@@ -183,7 +183,7 @@ Resources:
           Name: phone_number
           Required: true
           Mutable: true
-        
+
       
       AutoVerifiedAttributes: !Ref autoVerifiedAttributes
       # LambdaConfig:

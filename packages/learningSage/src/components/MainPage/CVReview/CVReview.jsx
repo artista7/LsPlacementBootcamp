@@ -53,7 +53,7 @@ const CVReview = ({ cvReview, cvUrl, group, handleFileUpload, isS3Uploading, num
                                 return (
                                     <Form>
                                         <div className="custom-file mb-3">
-                                            <input type="file" className="custom-file-input" id="fileName" name="fileName" accept="application/pdf" onChange={e => { handleFileUpload(e) }} />
+                                            <input type="file" className="custom-file-input" id="fileName" name="fileName" accept="application/pdf" onChange={e => { this.handleFileUpload(e) }} />
                                             <label className="custom-file-label" htmlFor="fileName">{selectedFile != undefined ? selectedFile.name : "Choose file"}</label>
                                             <ErrorMessage name="fileName">{msg => <div className="errorText">{msg}</div>}</ErrorMessage>
                                         </div>
